@@ -8,21 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  
  
 @Controller
-@RequestMapping("/")
-public class AppController {
+@RequestMapping("/approver")
+public class ApproverController {
  
-    @RequestMapping(value = { "/"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/","/home"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
-        return "home";
+        return "approverHome";
     }
  
     @RequestMapping(value = { "/pendingRequest"}, method = RequestMethod.GET)
     public String productsPage(ModelMap model) {
-        return "pendingRequest";
-    }
- 
-    @RequestMapping(value = { "/contactus"}, method = RequestMethod.GET)
-    public String contactUsPage(ModelMap model) {
-        return "contactus";
+        return "approvePendingRequest";
     }
 }
