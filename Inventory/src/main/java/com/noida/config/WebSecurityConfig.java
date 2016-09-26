@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -16,15 +16,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	DataSource dataSource;
-	
+	/*@Autowired
+	UserDetailsService userDetailsService;
+*/	
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		
 	  auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery(
-			"select username,password, enabled from users where username=?")
-		.authoritiesByUsernameQuery(
-			"select username, role from user_roles where username=?");
+		.usersByUsernameQuery("select username,password, enabled from users where username=?")
+		.authoritiesByUsernameQuery("select username, role from user_roles where username=?")
+		.passwordEncoder(new BCryptPasswordEncoder());
 	}	
 	
 	@Override
@@ -48,4 +48,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		  .csrf();
 	}
 	
+	public static void main(String args[]) throws Exception {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		System.out.println("admin: "+encoder.encode("admin"));
+		System.out.println("user: "+encoder.encode("user"));
+		System.out.println("issuer: "+encoder.encode("issuer"));
+		System.out.println("approver: "+encoder.encode("approver"));
+	}
 }
