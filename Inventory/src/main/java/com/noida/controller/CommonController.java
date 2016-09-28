@@ -24,13 +24,13 @@ public class CommonController {
     	for(GrantedAuthority gAuth: auth.getAuthorities())
     	{
     		if("ROLE_USER".equals(gAuth.getAuthority()))
-    			return "userHome";
+    			return "myRequest";
     		else if("ROLE_ISSUER".equals(gAuth.getAuthority()))
-    			return "issuerHome";
+    			return "approvedRequest";
     		else if("ROLE_APPROVER".equals(gAuth.getAuthority()))
-    			return "approverHome";
+    			return "approvePendingRequest";
     		else if("ROLE_ADMIN".equals(gAuth.getAuthority()))
-    			return "adminHome";
+    			return "requests";
     		
     	}
     	return "403";

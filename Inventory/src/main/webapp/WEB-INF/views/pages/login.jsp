@@ -8,33 +8,30 @@
 <head>
 <link href="<c:url value="css/app.css" />" rel="stylesheet"
 	type="text/css">
-<title>Spring Security Example</title>
+<title>IT Inventory Management System</title>
 </head>
-<body class="security-app">
-	<form action="/login" method="post">
+<body>
 
-		<div class="lc-block">
-			<div>
-				<input type="text" class="style-4" name="username"
-					placeholder="User Name" />
-			</div>
-			<div>
-				<input type="password" class="style-4" name="password"
-					placeholder="Password" />
-			</div>
-			<div>
-				<input type="submit" value="Sign In" class="button red small" />
-			</div>
-			<c:if test="${param.error ne null}">
+<div class="pane-content bg-alt">
+			
+               <!--  <div class="bs-example" > -->
+    <form action="/login" method="post" style="width:40%; padding-left:15%;padding-top:10%">
+        <div class="form-group">
+            <label for="inputUsername">UserName</label>
+            <input type="text" class="form-control" id="inputUsername" name="username" placeholder="UserName">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary" >Login</button>
+        <c:if test="${param.error ne null}">
 				<div class="alert-danger">Invalid username and password.</div>
 			</c:if>
-			<c:if test="${param.logout ne null}">
-				<div class="alert-normal">You have been logged out.</div>
-			</c:if>
-		</div>
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
-	</form>
+    </form>
+</div>
 
 </body>
 </html>

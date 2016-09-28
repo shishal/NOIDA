@@ -14,7 +14,8 @@
    </definition>
    <definition name="login-definition"
        template="/WEB-INF/views/tiles/layouts/loginLayout.jsp">  
-       <put-attribute name="title" value="" />  
+       <put-attribute name="title" value="" /> 
+       <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" /> 
        <put-attribute name="body" value="" />  
        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
    </definition>  
@@ -47,7 +48,41 @@
        <put-attribute name="title" value="Approved Request" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/approvedRequest.jsp" />  
    </definition>  
-       
+   <!-- Product Page -->
+   <definition name="requests" extends="base-definition">  
+       <put-attribute name="title" value="Requests" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/requests.jsp" />  
+   </definition>  
+   <!-- Product Page -->
+   <definition name="po" extends="base-definition">  
+       <put-attribute name="title" value="Purchase Order" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/po.jsp" />  
+   </definition> 
+   <!-- Product Page -->
+   <definition name="amc" extends="base-definition">  
+       <put-attribute name="title" value="AMC" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/amc.jsp" />  
+   </definition> 
+   <!-- Product Page -->
+   <definition name="user" extends="base-definition">  
+       <put-attribute name="title" value="Users" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/user.jsp" />  
+   </definition> 
+   <!-- Product Page -->
+   <definition name="department" extends="base-definition">  
+       <put-attribute name="title" value="Departments" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/department.jsp" />  
+   </definition>    
+   <!-- Product Page -->
+   <definition name="asset" extends="base-definition">  
+       <put-attribute name="title" value="Assets" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/asset.jsp" />  
+   </definition> 
+   <!-- Product Page -->
+   <definition name="assetType" extends="base-definition">  
+       <put-attribute name="title" value="Asset Type" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/assetType.jsp" />  
+   </definition> 
    <!-- Contact-us Page -->
    <definition name="setup" extends="base-definition">  
        <put-attribute name="title" value="Set Up" />  
@@ -60,7 +95,7 @@
    </definition>
    <!-- Contact-us Page -->
    <definition name="approvePendingRequest" extends="base-definition">  
-       <put-attribute name="title" value="Set Up" />  
+       <put-attribute name="title" value="New Requests" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/approvePendingRequest.jsp" />
    </definition>
     <definition name="403" extends="base-definition">  

@@ -1,241 +1,179 @@
-html{
-	background-color:#2F2F2F;
+
+.title-header {
+    font-family: verdana;
+    font-size: 200%;
 }
 
-body{
-	height: 100%;
-	background-color:rgb(245, 245, 245);
+.app-page-header {
+	background-color:#c9eaf9;
 }
 
-
-#header {
-    margin-left:15%;
-    top: 0px;
-    width: 85%;
-	/*height: 20%;*/
-	position: fixed;
-	font-family: 'bgMed',arial,helvetica,sans-serif;
-    font-size: 0.6em;
-    color: #fff;
-    z-index: 15;
-    text-transform: uppercase;
-    background-color: #272727;
-    border-bottom: 2px solid hsl(180,70%,55%);
-    padding-top:20px;
-    text-align:center;
+.app-page-footer {
+	background-color:#c9eaf9;
 }
 
-#footer {
-	margin-left:15%;
-    left: 0px;
-    bottom: 0px;
-    width: 85%;
-	height: 5%;
-	position: fixed;
-	font-family: 'bgMed',arial,helvetica,sans-serif;
-    font-size: 0.6em;
-    color: #fff;
-    z-index: 15;
-    text-transform: uppercase;
-    background-color: #272727;
-	padding-top:20px;   
-    text-align:center;
-}
-
-
-#sidemenu {
-    width: 15%;
-    padding-top: 22px;
-    background-color:#2B2B2B;
-    height: 100%;
-    overflow: auto;
-    float: left;
-    z-index: 20;
-    position: fixed;
-    left: 0px;
-    margin-top:
-}
-
-#sidemenu #menu {
-    color: #fff;
-    text-align: right;
-    list-style-type: none;
-    margin-right: 40px;
-    float: right;
-}
-
-#sidemenu #menu li {
-    /*width: 150px;*/
-    height: 35px;
-    font-size: 1.2em;
-    padding-right:5px;
-}
-
-#sidemenu #menu li a {
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #fff;
-}
-
-#sidemenu #menu li:active{
-	border-left: 5px solid hsl(180,70%,55%);
-}
-
-#sidemenu #menu li:hover {
-    background-color: #635555;
-    border-left: 5px solid hsl(180,70%,55%);
-}
-
-.logo{
-	float:left;
-	width: 100px;
-    height: 65px;
-}
-
-#site-content {
-    width: 80%;
-    height: 100%;
-    overflow: auto;
-    float: left;
-    z-index: 20;
-    position: fixed;
-    min-height: 600px;
-    margin-top:10%;
-    margin-bottom:10%;
-    margin-left:20%;
-    padding-left:10px;
-}
+.pane-content{
+        font-size: 13px;
+        height:600px
+    }
+    .pane-content.bg-alt{
+        background:#f5f5f5;
+    }
     
-body.security-app {
-    text-align: center;
-    overflow: hidden;
-    height: 100%;
-    width:100%;
-    background:#edecec;
+.fixed-panel {
+  min-height: 600;
+  overflow-y: scroll;
 }
 
-
-.lc-block {
-    padding: 35px 55px 35px;
-    background: #fff;
-    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-    border-radius: 2px;
-    width: 30%;
-    display: inline-block;
-    position: relative;
-    animation-name: fadeInUp;
-    animation-duration: 300ms;
-    animation-fill-mode: both;
-    z-index: 10;
-    margin-top:5%;
-    vertical-align:middle;
-    
+.table-header {
+	background-color: #343434;
+	color: white;
 }
 
-body.security-app:before {
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #D40047;
-    content: "";
-    z-index: 0;
-}
+/* remove outer padding */
+	.main .row{
+		padding: 0px;
+		margin: 0px;
+	}
 
-body.security-app:after {
-    content: "";
-    vertical-align: middle;
-    display: inline-block;
-    width: 1px;
-    height: 100%;
-}
+	/*Remove rounded coners*/
 
-h2 {
-    /*color: white;*/
-}
+	nav.sidebar.navbar {
+		border-radius: 0px;
+	}
 
-h1{
-	color:crimson;
-}
+	nav.sidebar, .main{
+		-webkit-transition: margin 200ms ease-out;
+	    -moz-transition: margin 200ms ease-out;
+	    -o-transition: margin 200ms ease-out;
+	    transition: margin 200ms ease-out;
+	}
 
-input[type="text"], input[type="password"]  {
-    display: block;
-    margin: 0;
-    width: 100%;
-    font-family: "Open Sans", sans-serif;
-    font-size: 18px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    -webkit-border-radius: none;
-    -moz-border-radius: none;
-    -ms-border-radius: none;
-    -o-border-radius: none;
-    border-radius: none;
-    padding: 10px;
-  border: none;
-  border-bottom: solid 2px #c9c9c9;
-  transition: border 0.3s;
-}
+	/* Add gap to nav and right windows.*/
+	.main{
+		padding: 10px 10px 0 10px;
+	}
 
-.button{
-display:inline-block;
-text-transform:uppercase;
-padding:1em 1.5em 0.75em;
-border-radius:2px;
-font-weight:bold;
-border:none;color:#fff !important;
-text-decoration:none;
-font-family:'Open Sans Condensed',sans-serif;
-font-size:14px;
-line-height:1;
-cursor:pointer;
-margin-right:10px;
-margin-top:20px;
-}
-.button:hover{opacity:0.9}
-.button.green{
-background-color:#a5d16d;
-box-shadow:0 0 5px #a4cf6c inset, 0 1px 1px #eee
-}
-.button.red{
-background-color:#f4836a;
-box-shadow:0 0 5px #ef7f65 inset, 0 1px 1px #eee
-}
-.button.small{font-size:11px}
-.button.big{
-font-size:18px;padding:1.2em 2.5em 1em
-}
-.details{
-	position: relative;
-    text-align: center;
-    width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
-}
-.alert-danger {
-    padding: 15px;
-    font-size: 16px;
-    background-color: #f2dede;
-    border-color: #f2dede;
-    color: #f44336;
-    margin: 18px;
-    border: 1px solid transparent;
-    border-radius: 2px;
-}
-.alert-normal{
-	padding: 15px;
-    font-size: 16px;
-    margin: 18px;
-    border: 1px solid transparent;
-    border-radius: 2px;
-    background-color: #d9edf7;
-    border-color: #d9edf7;
-    color: #2196f3;
-    
-    
-}
+	/* .....NavBar: Icon only with coloring/layout.....*/
+
+	/*small/medium side display*/
+	@media (min-width: 768px) {
+
+		/*Allow main to be next to Nav*/
+		.main{
+			position: absolute;
+			width: calc(100% - 40px); /*keeps 100% minus nav size*/
+			margin-left: 40px;
+			float: right;
+		}
+
+		/*lets nav bar to be showed on mouseover*/
+		nav.sidebar:hover + .main{
+			margin-left: 200px;
+		}
+
+		/*Center Brand*/
+		nav.sidebar.navbar.sidebar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+			margin-left: 0px;
+		}
+		/*Center Brand*/
+		nav.sidebar .navbar-brand, nav.sidebar .navbar-header{
+			text-align: center;
+			width: 100%;
+			margin-left: 0px;
+		}
+
+		/*Center Icons*/
+		nav.sidebar a{
+			padding-right: 13px;
+		}
+
+		/*adds border top to first nav box */
+		nav.sidebar .navbar-nav > li:first-child{
+			border-top: 1px #e5e5e5 solid;
+		}
+
+		/*adds border to bottom nav boxes*/
+		nav.sidebar .navbar-nav > li{
+			border-bottom: 1px #e5e5e5 solid;
+		}
+
+		/* Colors/style dropdown box*/
+		nav.sidebar .navbar-nav .open .dropdown-menu {
+			position: static;
+			float: none;
+			width: auto;
+			margin-top: 0;
+			background-color: transparent;
+			border: 0;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+		}
+
+		/*allows nav box to use 100% width*/
+		nav.sidebar .navbar-collapse, nav.sidebar .container-fluid{
+			padding: 0 0px 0 0px;
+		}
+
+		/*colors dropdown box text */
+		.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+			color: #777;
+		}
+
+		/*gives sidebar width/height*/
+		nav.sidebar{
+			width: 200px;
+			height: 100%;
+			margin-left: -160px;
+			float: left;
+			z-index: 8000;
+			margin-bottom: 0px;
+		}
+
+		/*give sidebar 100% width;*/
+		nav.sidebar li {
+			width: 100%;
+		}
+
+		/* Move nav to full on mouse over*/
+		nav.sidebar:hover{
+			margin-left: 0px;
+		}
+		/*for hiden things when navbar hidden*/
+		.forAnimate{
+			opacity: 0;
+		}
+	}
+
+	/* .....NavBar: Fully showing nav bar..... */
+
+	@media (min-width: 1330px) {
+
+		/*Allow main to be next to Nav*/
+		.main{
+			width: calc(100% - 200px); /*keeps 100% minus nav size*/
+			margin-left: 200px;
+		}
+
+		/*Show all nav*/
+		nav.sidebar{
+			margin-left: 0px;
+			float: left;
+		}
+		/*Show hidden items on nav*/
+		nav.sidebar .forAnimate{
+			opacity: 1;
+		}
+	}
+
+	nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
+		color: #CCC;
+		background-color: transparent;
+	}
+
+	nav:hover .forAnimate{
+		opacity: 1;
+	}
+	section{
+		padding-left: 15px;
+	}

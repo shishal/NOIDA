@@ -13,11 +13,16 @@ public class ApproverController {
  
     @RequestMapping(value = { "/","/home"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
-        return "approverHome";
+        return "approvePendingRequest";
     }
  
     @RequestMapping(value = { "/pendingRequest"}, method = RequestMethod.GET)
     public String productsPage(ModelMap model) {
         return "approvePendingRequest";
+    }
+    
+    @RequestMapping(value = { "/requests"}, method = RequestMethod.GET)
+    public String requestsPage(ModelMap model) {
+        return "requests";
     }
 }
