@@ -83,6 +83,14 @@
        <put-attribute name="title" value="Asset Type" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/assetType.jsp" />  
    </definition> 
+   <definition name="raiseRequest" extends="base-definition">  
+       <put-attribute name="title" value="Raise New Request" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/raiseNewRequest.jsp" />  
+   </definition> 
+   <definition name="myAsset" extends="base-definition">  
+       <put-attribute name="title" value="My Assigned Assets" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/myAsset.jsp" />  
+   </definition>
    <!-- Contact-us Page -->
    <definition name="setup" extends="base-definition">  
        <put-attribute name="title" value="Set Up" />  

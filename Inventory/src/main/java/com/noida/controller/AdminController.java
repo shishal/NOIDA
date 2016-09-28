@@ -13,7 +13,7 @@ public class AdminController {
  
     @RequestMapping(value = { "/","/home"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
-        return "adminHome";
+        return "approvePendingRequest";
     }
  
     @RequestMapping(value = { "/setup"}, method = RequestMethod.GET)

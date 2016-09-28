@@ -13,7 +13,7 @@ public class IssuerController {
  
     @RequestMapping(value = { "/","/home"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
-        return "issuerHome";
+        return "approvedRequest";
     }
  
     @RequestMapping(value = { "/approvedRequest"}, method = RequestMethod.GET)

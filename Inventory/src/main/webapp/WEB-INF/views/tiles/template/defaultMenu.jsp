@@ -17,21 +17,25 @@
 		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<sec:authorize access="hasRole('USER')">
-				<li class="active"><a href="${pageContext.request.contextPath}/user/myRequest">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/user/home">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
 				</sec:authorize>
-				<sec:authorize access="hasRole('APPROVER')">
-				<li class="active"><a href="${pageContext.request.contextPath}/approver/pendingRequest">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+				<sec:authorize access="hasAnyRole('APPROVER','ADMIN')">
+				<li class="active"><a href="${pageContext.request.contextPath}/approver/home">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ISSUER')">
-				<li class="active"><a href="${pageContext.request.contextPath}/issuer/approvedRequest">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/issuer/home">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
 				</sec:authorize>
-				<sec:authorize access="hasRole('APPROVER')">
-				<li ><a href="${pageContext.request.contextPath}/user/myRequest">Raise Request<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+				<sec:authorize access="hasAnyRole('APPROVER','ADMIN','USER','ISSUER')">
+				<li ><a href="${pageContext.request.contextPath}/user/raiseRequest">Raise Request<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 				</sec:authorize>
-				<sec:authorize access="hasRole('APPROVER')">
+				<sec:authorize access="hasAnyRole('APPROVER','ADMIN','USER','ISSUER')">
+				<li ><a href="${pageContext.request.contextPath}/user/myAsset">My Assets<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAnyRole('APPROVER','ADMIN')">
 				<li ><a href="${pageContext.request.contextPath}/approver/requests">Requests<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
 				</sec:authorize>
-			<%-- 	<sec:authorize access="hasRole('ADMIN')">
+			 	<sec:authorize access="hasRole('ADMIN')">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
 					<ul class="dropdown-menu forAnimate" role="menu">
@@ -47,7 +51,7 @@
 						<li><a href="#">One more separated link</a></li> -->
 					</ul>
 				</li>
-				</sec:authorize> --%>
+				</sec:authorize> 
 			</ul>
 		</div>
 	</div>
