@@ -1,3 +1,15 @@
+.form-inline > * {
+    margin:1% !important;
+}
+
+.page-normal-font {
+	font-size: 13px;
+}
+
+.app-modal-header {
+	color: white;
+	background-color: #343434;
+}
 
 .title-header {
     font-family: verdana;

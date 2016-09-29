@@ -24,7 +24,7 @@
 					<td>MacBook Air</td>
 					<td>Ravi</td>
 					<td>Pending</td>
-					<td><button type="button" class="btn btn-primary" onclick="">Issue</button></td>
+					<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#actionIssuerPopOver">Issue</button></td>
 				</tr>
 				<tr>
 					<th scope="row">2</th>
@@ -33,9 +33,43 @@
 					<td>Samsung Color</td>
 					<td>R K Gupta</td>
 					<td>Approved</td>
-					<td><button type="button" class="btn btn-primary" onclick="">Issue</button></td>
+					<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#actionIssuerPopOver">Issue</button></td>
 				</tr>
 			</tbody>
 		</table>
+		
+		<div class="modal fade" id="actionIssuerPopOver" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+       
+       		<div class="modal-header app-modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Action</h4>
+      </div>
+      
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form role="form">
+                <div class="form-group">
+                    <label for="inputBarCode">Enter BarCode</label>
+                      <input type="text" class="form-control"
+                      id="inputBarCode" placeholder="BarCode"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputRemarks">Enter Remarks</label>
+                      <input type="text" class="form-control"
+                      id="inputRemarks" placeholder="Remarks"/>
+                  </div>
+                </form>
+                <br>
+                <button type="button" class="btn btn-primary">Issue</button>
+                 <button type="button" class="btn btn-primary">Cancel</button>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
 <!-- 	</div>
 </div> -->

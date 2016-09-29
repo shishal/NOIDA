@@ -20,4 +20,9 @@ public class AdminController {
     public String contactUsPage(ModelMap model) {
         return "setup";
     }
+    
+    @RequestMapping(value = { "/po"}, method = RequestMethod.GET)
+    public String purchaseOrder(ModelMap model) {
+        return "po";
+    }
 }
