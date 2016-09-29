@@ -4,9 +4,11 @@
 	<div class="row">
 		<div class="col-md-6"><h4 style="padding-left:2%;padding-top:2%">Search Filter</h4></div>
 		<div class="col-md-6 text-right" style="padding-right:2%;padding-top:2%">
-		<a href="#"><span style="font-size:16px;" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>
-		<a href="#"><span style="font-size:16px;" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
-		<a href="#"><span style="font-size:16px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
+		<a href="#"><span style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>
+		&nbsp;&nbsp;
+		<a href="#"><span style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
+		&nbsp;&nbsp;
+		<a href="#"><span style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
 		<!-- <button type="button" id="addPO" data-toggle="tooltip" title="Add New PO" class="glyphicon glyphicon-plus"></button> -->
 		<!-- <button type="button" id="deletePO" data-toggle="tooltip" title="Edit PO" class="glyphicon glyphicon-edit"></button>
 		<button type="button" id="deletePO" data-toggle="tooltip" title="Delete PO" class="glyphicon glyphicon-trash"></button> -->
