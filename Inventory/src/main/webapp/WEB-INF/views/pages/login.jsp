@@ -6,8 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="<c:url value="css/app.css" />" rel="stylesheet"
-	type="text/css">
 <title>IT Inventory Management System</title>
 </head>
 <body>
