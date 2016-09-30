@@ -114,6 +114,11 @@
 		<put-attribute name="title" value="Login" />
 		<put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />
 	</definition>
+	<!-- Login Page -->
+	<definition name="logout" extends="login-definition">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />
+	</definition>
 
 	<!-- Error Page -->
 	<definition name="403" extends="base-definition">
