@@ -12,26 +12,29 @@
 </head>
 <body>
 
-<div class="pane-content bg-alt">
-			
-               <!--  <div class="bs-example" > -->
-    <form action="/login" method="post" style="width:40%; padding-left:15%;padding-top:10%">
-        <div class="form-group">
-            <label for="inputUsername">UserName</label>
-            <input type="text" class="form-control" id="inputUsername" name="username" placeholder="UserName">
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary" >Login</button>
-        <c:if test="${param.error ne null}">
+	<div class="pane-content bg-alt">
+
+		<!--  <div class="bs-example" > -->
+		<form action="/login" method="post"
+			style="width: 40%; padding-left: 15%; padding-top: 10%">
+			<div class="form-group">
+				<label for="inputUsername">UserName</label> <input type="text"
+					class="form-control" id="inputUsername" name="username"
+					placeholder="UserName">
+			</div>
+			<div class="form-group">
+				<label for="inputPassword">Password</label> <input type="password"
+					class="form-control" id="inputPassword" name="password"
+					placeholder="Password">
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+			<c:if test="${param.error ne null}">
 				<div class="alert-danger">Invalid username and password.</div>
 			</c:if>
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-    </form>
-</div>
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+	</div>
 
 </body>
 </html>

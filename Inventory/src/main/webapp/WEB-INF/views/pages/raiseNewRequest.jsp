@@ -1,4 +1,4 @@
-<form style="width: 60%; padding-left: 10%; padding-top:5%;">
+<form style="width: 60%; padding-left: 10%; padding-top: 5%;">
 	<div class="form-group">
 		<label for="selectItemType">Asset Type</label> <select
 			class="form-control" id="selectItemType">

@@ -69,26 +69,5 @@
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>
-	<%-- <!-- <header id="header"> -->
-		<tiles:insertAttribute name="header" />
-	<!-- </header> -->
-
-	<div class="row">
-		<div class="col-xs-3">
-			<!-- <section id="sidemenu"> -->
-				<tiles:insertAttribute name="menu" />
-			<!-- </section> -->
-		</div>
-		<div class="col-xs-9">
-               <!--  <div class="bs-example" > -->
-			<!-- <section id="site-content"> -->
-				<tiles:insertAttribute name="body" />
-			<!-- </section> -->
-			<!-- </div> -->
-		</div>
-	</div>
-	<footer id="footer">
-		<tiles:insertAttribute name="footer" />
-	</footer> --%>
 </body>
 </html>
