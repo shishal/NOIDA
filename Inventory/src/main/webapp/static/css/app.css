@@ -1,3 +1,9 @@
+.panel-heading {
+    color: white;
+    background-color: #343434;
+    border-color: #343434;
+}
+
 .form-inline > * {
     margin:1% !important;
 }

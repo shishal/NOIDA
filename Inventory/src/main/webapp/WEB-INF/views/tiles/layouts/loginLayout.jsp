@@ -57,7 +57,7 @@
 			</div>
 		</div>
 
-		<div class="panel-footer">
+		<div class="panel-footer" style="background-color: #343434; color: white;">
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>

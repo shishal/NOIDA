@@ -16,7 +16,7 @@
 
 		<!--  <div class="bs-example" > -->
 		<form action="/login" method="post"
-			style="width: 40%; padding-left: 15%; padding-top: 10%">
+			style="font-size: 20px; width: 40%; padding-left: 15%; padding-top: 10%">
 			<div class="form-group">
 				<label for="inputUsername">UserName</label> <input type="text"
 					class="form-control" id="inputUsername" name="username"

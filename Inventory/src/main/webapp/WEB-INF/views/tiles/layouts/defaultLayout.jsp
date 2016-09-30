@@ -43,8 +43,8 @@
 <body>
 
 	<!-- <div class="container"> -->
-	<div class="panel panel-default " style="margin: 0%">
-		<div class="panel-heading title-header">
+	<div class="panel panel-default " style="margin: 0%;">
+		<div class="panel-heading title-header" >
 			<tiles:insertAttribute name="header" />
 		</div>
 		<div class="panel-body">
@@ -65,7 +65,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel-footer">
+		<div class="panel-footer" style="background-color: #343434; color: white;">
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>

@@ -1,7 +1,14 @@
-<img src="${pageContext.request.contextPath}/static/img/noida-logo.gif"
-	class="img-rounded" alt="Cinque Terre" width="480" height="70">
-&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; IT Inventory
-Management System
+<div class="row" style="background-color: #343434; color: white;">
+	<div class="col-md-6">
+		<img
+			src="${pageContext.request.contextPath}/static/img/noida-logo.gif"
+			class="img-rounded" alt="Cinque Terre" width="480" height="70">
+	</div>
+	<div class="col-md-6">
+		<h2>IT Inventory Management System</h2>
+	</div>
+
+</div>
 
 <div class="modal fade page-normal-font" id="requestDetails"
 	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

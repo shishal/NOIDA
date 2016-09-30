@@ -23,6 +23,11 @@ public class UserController {
 	public String raiseRequest(ModelMap model) {
 		return "raiseRequest";
 	}
+	
+	@RequestMapping(value = { "/raiseRepairRequest" }, method = RequestMethod.GET)
+	public String raiseRepairRequest(ModelMap model) {
+		return "raiseRepairRequest";
+	}
 
 	@RequestMapping(value = { "/myAsset" }, method = RequestMethod.GET)
 	public String myAssets(ModelMap model) {

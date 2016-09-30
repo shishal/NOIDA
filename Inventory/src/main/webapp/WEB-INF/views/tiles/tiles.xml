@@ -94,6 +94,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/raiseNewRequest.jsp" />
 	</definition>
+	<definition name="raiseRepairRequest" extends="base-definition">
+		<put-attribute name="title" value="Raise Repair Request" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/raiseRepairRequest.jsp" />
+	</definition>
 	<definition name="myAsset" extends="base-definition">
 		<put-attribute name="title" value="My Assigned Assets" />
 		<put-attribute name="body" value="/WEB-INF/views/pages/myAsset.jsp" />

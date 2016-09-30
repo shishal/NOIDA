@@ -7,6 +7,8 @@
 		<a href="#"><span title="Export" style="font-size: 20px;"
 			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
 		&nbsp;&nbsp;
+		<a href="#"><span title="Print" style="font-size: 20px;"
+			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
 	</div>
 </div>
 <table class="table table-bordered">

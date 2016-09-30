@@ -11,6 +11,9 @@
 		<a href="#"><span title="Export" style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
 		&nbsp;&nbsp;
 		<a href="#"><span title="Delete selected AssetType" style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
+		&nbsp;&nbsp;
+		<a href="#"><span title="Print" style="font-size: 20px;"
+			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
 		<!-- <button type="button" id="addPO" data-toggle="tooltip" title="Add New PO" class="glyphicon glyphicon-plus"></button> -->
 		<!-- <button type="button" id="deletePO" data-toggle="tooltip" title="Edit PO" class="glyphicon glyphicon-edit"></button>
 		<button type="button" id="deletePO" data-toggle="tooltip" title="Delete PO" class="glyphicon glyphicon-trash"></button> -->

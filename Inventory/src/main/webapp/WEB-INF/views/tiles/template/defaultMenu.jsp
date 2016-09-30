@@ -39,14 +39,27 @@
 				</sec:authorize>
 				<sec:authorize
 					access="hasAnyRole('APPROVER','ADMIN','USER','ISSUER')">
-					<li><a
+					<%-- <li><a
 						href="${pageContext.request.contextPath}/user/raiseRequest">Raise
 							Request<span style="font-size: 20px;"
 							class="pull-right hidden-xs showopacity glyphicon glyphicon-pencil"></span>
-					</a></li>
+					</a></li> --%>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Raise Request <span class="caret"></span><span
+							style="font-size: 20px;"
+							class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+						<ul class="dropdown-menu forAnimate" role="menu">
+							<li><a href="${pageContext.request.contextPath}/user/raiseRequest">New
+									Request<span style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>
+							</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/raiseRepairRequest">Repair
+									Request<span style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>
+							</a></li>
+						</ul></li>
 				</sec:authorize>
-				<sec:authorize
-					access="hasAnyRole('APPROVER','ADMIN','ISSUER')">
+				<sec:authorize access="hasAnyRole('APPROVER','ADMIN','ISSUER')">
 					<li><a
 						href="${pageContext.request.contextPath}/user/myRequest">My
 							Requests<span style="font-size: 20px;"
@@ -74,47 +87,48 @@
 							class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
 						<ul class="dropdown-menu forAnimate" role="menu">
 							<li><a href="${pageContext.request.contextPath}/admin/po">Purchase
-									Order<span
-							style="font-size: 16px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+									Order<span style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>
+							</a></li>
 							<li><a href="${pageContext.request.contextPath}/admin/amc">AMC<span
-							style="font-size: 16px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+									style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
 							<li><a href="${pageContext.request.contextPath}/admin/asset">Asset<span
-							style="font-size: 16px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+									style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/admin/assetType">Asset
-									Type<span
-							style="font-size: 16px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+									Type<span style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>
+							</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/admin/assetSubType">Asset
-									SubType<span
-							style="font-size: 16px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+									SubType<span style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>
+							</a></li>
 							<li><a href="${pageContext.request.contextPath}/admin/user">User<span
-							style="font-size: 16px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+									style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/admin/department">Department<span
-							style="font-size: 16px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+									style="font-size: 16px;"
+									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
 							<!-- <li class="divider"></li>
 						<li><a href="#">Separated link</a></li>
 						<li class="divider"></li>
 						<li><a href="#">One more separated link</a></li> -->
 						</ul></li>
 				</sec:authorize>
-				<li><a href="#" onclick="appLogout();">Logout<span style="font-size: 20px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span>
-					</a></li>
+				<li><a href="#" onclick="appLogout();">Logout<span
+						style="font-size: 20px;"
+						class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span>
+				</a></li>
 			</ul>
 		</div>
 	</div>
 </nav>
 
 <form action="/logout" class="hidden" method="post">
-	<input type="submit" id="applicationlogout" value="Logout" /> 
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="submit" id="applicationlogout" value="Logout" /> <input
+		type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
