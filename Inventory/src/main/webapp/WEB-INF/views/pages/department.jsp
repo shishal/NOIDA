@@ -8,6 +8,8 @@
 		&nbsp;&nbsp;
 		<a href="#"><span title="Edit selected Department" style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
 		&nbsp;&nbsp;
+		<a href="#"><span title="Export" style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
+		&nbsp;&nbsp;
 		<a href="#"><span title="Delete selected Department" style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
 		<!-- <button type="button" id="addPO" data-toggle="tooltip" title="Add New PO" class="glyphicon glyphicon-plus"></button> -->
 		<!-- <button type="button" id="deletePO" data-toggle="tooltip" title="Edit PO" class="glyphicon glyphicon-edit"></button>

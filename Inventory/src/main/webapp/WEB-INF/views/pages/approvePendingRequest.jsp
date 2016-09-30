@@ -1,6 +1,13 @@
-
-<div style="padding-left: 1%; padding-top: 0.5%">
-	<h3>New Requests</h3>
+<div class="row">
+	<div class="col-md-6">
+		<h3 style="padding-left: 2%; padding-top: 2%">Pending Requests</h3>
+	</div>
+	<div class="col-md-6 text-right"
+		style="padding-right: 2%; padding-top: 2%">
+		<a href="#"><span title="Export" style="font-size: 20px;"
+			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
+		&nbsp;&nbsp;
+	</div>
 </div>
 <table class="table table-bordered">
 	<thead class="thead-inverse table-header" style="">

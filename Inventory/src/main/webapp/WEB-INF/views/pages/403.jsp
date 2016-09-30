@@ -5,21 +5,16 @@
 <head>
 <link href="css/app.css"rel="stylesheet"
 	type="text/css"></link>
-<title>Spring Security Example - ProgrammingFree</title>
+<title>Access Denied</title>
 </head>
 <body class="security-app">
-	<div class="details">
-	<h2>Spring Security - JDBC Authentication</h2>
-		<a href="http://www.programming-free.com/2015/09/spring-security-jdbc-authentication.html" class="button green small">Tutorial</a> 
-		<a href="https://github.com/priyadb/SpringSecurityJdbcApp/archive/master.zip"
-			class="button red small">Download</a>
-	</div>
+	<h2>Authentication Failed</h2>
 	<div class="lc-block">		
 		<div class="alert-danger">
 			<h3>You do not have permission to access this page!</h3>	
 		</div>
 		<form action="/logout" method="post">
-			<input type="submit" class="button red big" value="Logout" /> <input
+			<input type="submit" class="btn btn-primary" value="Logout" /> <input
 				type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</form>		
 	</div>	

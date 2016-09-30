@@ -35,4 +35,9 @@ public class CommonController {
 		return "403";
 
 	}
+	
+	@RequestMapping(value = { "/403" }, method = RequestMethod.GET)
+	public String accessDeniedPage(ModelMap model) {
+		return "403";
+	}
 }

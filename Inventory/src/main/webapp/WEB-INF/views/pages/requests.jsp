@@ -1,7 +1,15 @@
 
-<!-- <div class="pane-content bg-alt">
-	<div class="bs-example"> -->
-<h4 style="padding-left: 2%; padding-top: 2%">Search Filter</h4>
+<div class="row">
+	<div class="col-md-6">
+		<h4 style="padding-left: 2%; padding-top: 2%">Search Filter</h4>
+	</div>
+	<div class="col-md-6 text-right"
+		style="padding-right: 2%; padding-top: 2%">
+		<a href="#"><span title="Export" style="font-size: 20px;"
+			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
+		&nbsp;&nbsp;
+	</div>
+</div>
 <form class="form-inline" style="padding-left: 2%">
 	<div class="form-group">
 		<label for="requestNumber">Req No</label> <input type="text"

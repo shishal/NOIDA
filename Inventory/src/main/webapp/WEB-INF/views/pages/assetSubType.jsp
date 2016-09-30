@@ -11,6 +11,9 @@
 		&nbsp;&nbsp; <a href="#"><span title="Edit selected AssetSubType"
 			style="font-size: 20px;"
 			class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
+		&nbsp;&nbsp; <a href="#"><span title="Export"
+			style="font-size: 20px;"
+			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
 		&nbsp;&nbsp; <a href="#"><span
 			title="Delete selected AssetSubType" style="font-size: 20px;"
 			class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
