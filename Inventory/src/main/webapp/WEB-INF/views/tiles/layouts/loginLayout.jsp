@@ -48,12 +48,12 @@
 		<div class="panel-body">
 			<!--Row with two columns divided in 1:3 ratio-->
 			<div class="row">
-				<div class="col-xs-12 pane-content bg-alt">
-					<!-- <div class="pane-content bg-alt">
-						<div class="bs-example"> -->
+				<div class="col-xs-12">
+					<div class="pane-content bg-alt">
+						<div class="bs-example">
 							<tiles:insertAttribute name="body" />
-						<!-- </div>
-					</div> -->
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
