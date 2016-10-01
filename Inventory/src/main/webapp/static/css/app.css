@@ -32,10 +32,10 @@
 
 .pane-content{
         font-size: 15px;
-        height:600px
+        height:100%
     }
     .pane-content.bg-alt{
-        background:#f5f5f5;
+        background:#d9edf7;
     }
     
 .fixed-panel {

@@ -50,18 +50,18 @@
 		<div class="panel-body">
 			<!--Row with two columns divided in 1:3 ratio-->
 			<div class="row">
-				<div class="col-xs-3">
-					<div class="pane-content">
+				<div class="col-xs-3 pane-content">
+					<!-- <div class="pane-content"> -->
 						<tiles:insertAttribute name="menu" />
-					</div>
+					<!-- </div> -->
 
 				</div>
-				<div class="col-xs-9">
-					<div class="pane-content bg-alt">
-						<div class="bs-example">
+				<div class="col-xs-9 pane-content bg-alt">
+					<!-- <div class="pane-content bg-alt"> -->
+						<!-- <div class="bs-example"> -->
 							<tiles:insertAttribute name="body" />
-						</div>
-					</div>
+						<!-- </div>
+					</div> -->
 				</div>
 			</div>
 		</div>

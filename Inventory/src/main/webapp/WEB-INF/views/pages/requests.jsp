@@ -64,6 +64,8 @@
 	</div>
 	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<div class="table-responsive">
 <table class="table table-bordered">
 	<thead class="thead-inverse table-header" style="">
 		<tr>
@@ -95,4 +97,4 @@
 			<td>Approved</td>
 		</tr>
 	</tbody>
-</table>
+</table></div>

@@ -12,6 +12,7 @@
 		&nbsp;&nbsp;
 	</div>
 </div>
+<div class="table-responsive">
 <table class="table table-bordered">
 	<thead class="thead-inverse table-header" style="">
 		<tr>
@@ -41,4 +42,4 @@
 			<td>Approved</td>
 		</tr>
 	</tbody>
-</table>
+</table></div>

@@ -12,6 +12,7 @@
 			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
 	</div>
 </div>
+<div class="table-responsive">
 <table class="table table-bordered">
 	<thead class="thead-inverse table-header" style="">
 		<tr>
@@ -47,6 +48,7 @@
 		</tr>
 	</tbody>
 </table>
+</div>
 
 <div class="modal fade" id="actionIssuerPopOver" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

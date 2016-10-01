@@ -2,9 +2,9 @@
 	<div class="col-md-6">
 		<img
 			src="${pageContext.request.contextPath}/static/img/noida-logo.gif"
-			class="img-rounded" alt="Cinque Terre" width="480" height="70">
+			class="img-rounded" alt="Cinque Terre" width="70%" height="10%">
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6 text-right">
 		<h2>IT Inventory Management System</h2>
 	</div>
 

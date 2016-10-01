@@ -4,9 +4,13 @@
 	<div class="row">
 		<div class="col-md-6"><h4 style="padding-left:2%;padding-top:2%">Search Filter</h4></div>
 		<div class="col-md-6 text-right" style="padding-right:2%;padding-top:2%">
-		<a href="#"><span title="Add New Department" style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>
+		<a href="#"><span title="Add New Department" style="font-size:20px;" 
+		data-toggle="modal" data-target="#addNewDepartment"
+		class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>
 		&nbsp;&nbsp;
-		<a href="#"><span title="Edit selected Department" style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
+		<a href="#"><span title="Edit selected Department" style="font-size:20px;" 
+		data-toggle="modal" data-target="#addNewDepartment"
+		class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
 		&nbsp;&nbsp;
 		<a href="#"><span title="Export" style="font-size:20px;" class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
 		&nbsp;&nbsp;
@@ -44,6 +48,8 @@
 </div>
     <button type="submit" class="btn btn-primary">Search</button>
   </form>
+  
+  <div class="table-responsive">
 		<table class="table table-bordered">
 			<thead class="thead-inverse table-header" style="">
 				<tr>
@@ -65,3 +71,50 @@
 				</tr>
 			</tbody>
 		</table>
+</div>
+
+<div class="modal fade page-normal-font" id="addNewDepartment" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header app-modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Enter Department Details</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body">
+
+				<form role="form">
+					<div class="form-group">
+						<label for="inputAssetType">Department: </label> <input
+							type="text" class="form-control" value="Laptop"
+							id="inputAssetType" />
+					</div>
+					<div class="form-group">
+						<label for="inputDate">Date</label>&nbsp;
+						<div id="inputDate" class="input-group date"
+							data-provide="datepicker">
+							<input type="text" class="form-control">
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-th"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputDesc">Address:</label> <input type="text"
+							class="form-control" value="" id="inputDesc" />
+					</div>
+					<div class="form-group">
+						<label for="inputDesc">Description: </label> <input type="text"
+							class="form-control" value="" id="inputDesc" />
+					</div>
+				</form>
+				<button type="submit" class="btn btn-primary">Save</button>
+			</div>
+
+		</div>
+	</div>
+</div>	
+		

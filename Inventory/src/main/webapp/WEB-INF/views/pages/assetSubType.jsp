@@ -6,10 +6,12 @@
 	<div class="col-md-6 text-right"
 		style="padding-right: 2%; padding-top: 2%">
 		<a href="#"><span title="Add New AssetSubType"
-			style="font-size: 20px;"
+			style="font-size: 20px;" data-toggle="modal"
+			data-target="#addNewAssetSubType"
 			class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>
 		&nbsp;&nbsp; <a href="#"><span title="Edit selected AssetSubType"
-			style="font-size: 20px;"
+			style="font-size: 20px;" data-toggle="modal"
+			data-target="#addNewAssetSubType"
 			class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
 		&nbsp;&nbsp; <a href="#"><span title="Export"
 			style="font-size: 20px;"
@@ -17,8 +19,8 @@
 		&nbsp;&nbsp; <a href="#"><span
 			title="Delete selected AssetSubType" style="font-size: 20px;"
 			class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
-			&nbsp;&nbsp;
-		<a href="#"><span title="Print" style="font-size: 20px;"
+		&nbsp;&nbsp; <a href="#"><span title="Print"
+			style="font-size: 20px;"
 			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
 		<!-- <button type="button" id="addPO" data-toggle="tooltip" title="Add New PO" class="glyphicon glyphicon-plus"></button> -->
 		<!-- <button type="button" id="deletePO" data-toggle="tooltip" title="Edit PO" class="glyphicon glyphicon-edit"></button>
@@ -55,6 +57,8 @@
 	</div>
 	<button type="submit" class="btn btn-primary">Search</button>
 </form>
+
+<div class="table-responsive">
 <table class="table table-bordered">
 	<thead class="thead-inverse table-header" style="">
 		<tr>
@@ -82,4 +86,55 @@
 		</tr>
 	</tbody>
 </table>
+</div>
+<div class="modal fade page-normal-font" id="addNewAssetSubType"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header app-modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Enter Asset SubType Details</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body">
+
+				<form role="form">
+					<div class="form-group">
+						<label for="inputAssetType">Asset SubType: </label> <input
+							type="text" class="form-control" value="Laptop"
+							id="inputAssetType" />
+					</div>
+					<div class="form-group">
+						<label for="selectItemType">Asset Type: </label> <select
+							class="form-control" id="selectItemType">
+							<option>Laptop</option>
+							<option>Desktop</option>
+							<option>Printer</option>
+							<option>PenDrive</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="inputDate">Date</label>&nbsp;
+						<div id="inputDate" class="input-group date"
+							data-provide="datepicker">
+							<input type="text" class="form-control">
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-th"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputDesc">Description: </label> <input type="text"
+							class="form-control" value="i7 core 2 duo" id="inputDesc" />
+					</div>
+				</form>
+				<button type="submit" class="btn btn-primary">Save</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 
