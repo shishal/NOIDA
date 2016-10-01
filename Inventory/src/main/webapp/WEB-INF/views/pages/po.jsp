@@ -59,7 +59,7 @@
 	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <div class="table-responsive">
-	<table class="table table-hover table-bordered">
+	<table id="poTable" class="table table-bordered">
 		<thead class="table-header" style="">
 			<tr>
 				<th>#</th>
@@ -69,14 +69,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="clickable-row">
+			<tr class="clickable-row active" onclick="alerttest();">
 				<th scope="row">1</th>
 				<td><button type="button" class="btn btn-link"
 						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
 				<td>Samsung</td>
 				<td>20-June-2016</td>
 			</tr>
-			<tr>
+			<tr class="clickable-row" onclick="alerttest();">
 				<th scope="row">2</th>
 				<td><button type="button" class="btn btn-link"
 						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
@@ -98,7 +98,7 @@
 			</div>
 
 			<!-- Modal Body -->
-			<div class="modal-body">
+			<div class="modal-body app-modal-content bg-alt">
 
 				<form role="form">
 					<div class="form-group">
@@ -131,7 +131,7 @@
 <div class="modal fade page-normal-font" id="addNewPO" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content">
+		<div class="modal-content ">
 
 			<div class="modal-header app-modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -139,7 +139,7 @@
 			</div>
 
 			<!-- Modal Body -->
-			<div class="modal-body">
+			<div class="modal-body app-modal-content bg-alt">
 
 				<form role="form">
 					<div class="form-group">

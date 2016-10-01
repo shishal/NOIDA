@@ -29,8 +29,9 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"  
+ 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
+ 	crossorigin="anonymous"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
@@ -47,12 +48,12 @@
 		<div class="panel-body">
 			<!--Row with two columns divided in 1:3 ratio-->
 			<div class="row">
-				<div class="col-xs-12">
-					<div class="pane-content bg-alt">
-						<div class="bs-example">
+				<div class="col-xs-12 pane-content bg-alt">
+					<!-- <div class="pane-content bg-alt">
+						<div class="bs-example"> -->
 							<tiles:insertAttribute name="body" />
-						</div>
-					</div>
+						<!-- </div>
+					</div> -->
 				</div>
 			</div>
 		</div>

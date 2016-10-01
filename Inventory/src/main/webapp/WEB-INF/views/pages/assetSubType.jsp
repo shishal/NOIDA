@@ -99,7 +99,7 @@
 			</div>
 
 			<!-- Modal Body -->
-			<div class="modal-body">
+			<div class="modal-body app-modal-content bg-alt">
 
 				<form role="form">
 					<div class="form-group">

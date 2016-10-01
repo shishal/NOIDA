@@ -17,9 +17,17 @@
 	background-color: #343434;
 }
 
+.app-modal-content{
+        font-size: 15px;
+    }
+    .app-modal-content.bg-alt{
+        background:#d9edf7;
+    }
+
 .title-header {
     font-family: verdana;
     font-size: 200%;
+    background-color: #343434;
 }
 
 .app-page-header {
@@ -46,6 +54,10 @@
 .table-header {
 	background-color: #343434;
 	color: white;
+}
+
+.table>tbody>tr.active {
+    background-color:red;
 }
 
 /* remove outer padding */

@@ -24,8 +24,26 @@ $(document).ready(function() {
 
 function appLogout() {
 	document.getElementById("applicationlogout").click();
-}
+};
 
-/*$('#myTable').on('click', '.clickable-row', function(event) {
+$('#poTable tbody tr').live('click', function(event) {
+	alert();
 	  $(this).addClass('active').siblings().removeClass('active');
-	});*/
+	});
+
+$(".clickable-row").click(function(){
+	alert();
+    if($(this).hasClass("highlight"))
+        $(this).removeClass('highlight');
+    else
+        $(this).addClass('highlight').siblings().removeClass('highlight');
+});
+
+
+function alerttest() {
+	alert("hi");
+	if($(this).hasClass("highlight"))
+        $(this).removeClass('highlight');
+    else
+        $(this).addClass('highlight').siblings().removeClass('highlight');
+}

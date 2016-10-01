@@ -100,7 +100,7 @@
       </div>
        
             <!-- Modal Body -->
-            <div class="modal-body">
+            <div class="modal-body app-modal-content bg-alt">
                 
                 <form role="form">
                   <div class="form-group">
@@ -134,7 +134,7 @@
 <div class="modal fade page-normal-font" id="addNewUser" tabindex="-1" role="dialog" 
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content app-modal-content bg-alt">
         
         	<div class="modal-header app-modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
