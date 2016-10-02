@@ -28,6 +28,7 @@
 		<button type="button" id="deletePO" data-toggle="tooltip" title="Delete PO" class="glyphicon glyphicon-trash"></button> -->
 	</div>
 </div>
+<div>
 <form class="form-inline" style="padding-left: 2%">
 	<div class="form-group">
 		<label for="poNumber">PO Number</label> <input type="text"
@@ -58,6 +59,7 @@
 	</div>
 	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 <div class="table-responsive">
 	<table id="poTable" class="table table-bordered">
 		<thead class="table-header" style="">
@@ -69,14 +71,140 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="clickable-row active" onclick="alerttest();">
+			<tr onclick="tableRowSelection(this);">
 				<th scope="row">1</th>
 				<td><button type="button" class="btn btn-link"
 						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
 				<td>Samsung</td>
 				<td>20-June-2016</td>
 			</tr>
-			<tr class="clickable-row" onclick="alerttest();">
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">2</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">DEF123</button></td>
+				<td>HP</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
+				<th scope="row">1</th>
+				<td><button type="button" class="btn btn-link"
+						data-toggle="modal" data-target="#poDetails">ABC123</button></td>
+				<td>Samsung</td>
+				<td>20-June-2016</td>
+			</tr>
+			<tr onclick="tableRowSelection(this);">
 				<th scope="row">2</th>
 				<td><button type="button" class="btn btn-link"
 						data-toggle="modal" data-target="#poDetails">DEF123</button></td>

@@ -26,24 +26,9 @@ function appLogout() {
 	document.getElementById("applicationlogout").click();
 };
 
-$('#poTable tbody tr').on('click', function(event) {
-	alert();
-	  $(this).addClass('active').siblings().removeClass('active');
-	});
-
-$(".clickable-row").click(function(){
-	alert();
-    if($(this).hasClass("highlight"))
-        $(this).removeClass('highlight');
+function tableRowSelection(id) {
+	if($(id).hasClass("active"))
+        $(id).removeClass('active');
     else
-        $(this).addClass('highlight').siblings().removeClass('highlight');
-});
-
-
-function alerttest() {
-	alert("hi");
-	if($(this).hasClass("highlight"))
-        $(this).removeClass('highlight');
-    else
-        $(this).addClass('highlight').siblings().removeClass('highlight');
+        $(id).addClass('active').siblings().removeClass('active');
 }
