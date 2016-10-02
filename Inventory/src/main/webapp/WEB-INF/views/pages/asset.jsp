@@ -92,7 +92,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
+			<tr onclick="tableRowSelection(this);">
 				<th scope="row">1</th>
 				<td><button type="button" class="btn btn-link"
 						data-toggle="modal" data-target="#assetDetails">ABC123</button></td>
@@ -102,7 +102,7 @@
 				<td>def123</td>
 				<td>R K Gupta</td>
 			</tr>
-			<tr>
+			<tr onclick="tableRowSelection(this);">
 				<th scope="row">2</th>
 				<td><button type="button" class="btn btn-link"
 						data-toggle="modal" data-target="#assetDetails">ABC123</button></td>
