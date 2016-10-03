@@ -12,7 +12,7 @@ public class AssetMainType {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String mainType;
-	private String desc;
+	private String description;
 	
 	public int getId() {
 		return id;
@@ -30,22 +30,22 @@ public class AssetMainType {
 		this.mainType = mainType;
 	}
 	
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 	
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDesc(String description) {
+		this.description = description;
 	}
 	
-	public AssetMainType(String mainType, String desc) {
+	public AssetMainType(String mainType, String description) {
 		super();
 		this.mainType = mainType;
-		this.desc = desc;
+		this.description = description;
 	}
 	@Override
 	public String toString() {
-		return "AssetMainType [id=" + id + ", mainType=" + mainType + ", desc=" + desc + "]";
+		return "AssetMainType [id=" + id + ", mainType=" + mainType + ", description=" + description + "]";
 	}
 
 	public AssetMainType() {

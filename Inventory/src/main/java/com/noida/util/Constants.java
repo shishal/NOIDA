@@ -7,4 +7,5 @@ public class Constants {
 	// Constants (not user configurable)
 	public static final String PATH_CONFFILE = "config/config.properties";
 	public static final int SUCCESS = 1;
+	public static final int FAIL = 0;
 	}

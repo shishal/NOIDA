@@ -90,7 +90,7 @@
 
 				<form role="form" id="assetTypeForm">
 					<div class="form-group">
-						<label for="inputAssetType">Asset Type: </label> <input name="assetType"
+						<label for="inputAssetType">Asset Type: </label> <input name="name"
 							type="text" class="form-control" value="Laptop"
 							id="inputAssetType" />
 					</div>
@@ -105,7 +105,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputDesc">Description: </label> <input type="text" name="assetDesc"
+						<label for="inputDesc">Description: </label> <input type="text" name="desc"
 							class="form-control" value="i7 core 2 duo" id="inputDesc" />
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
