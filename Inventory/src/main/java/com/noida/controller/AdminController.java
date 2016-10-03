@@ -1,5 +1,6 @@
 package com.noida.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.MultiValueMap;
@@ -15,6 +16,7 @@ import com.noida.exception.InventoryException;
 import com.noida.manager.AssetTypeManager;
 import com.noida.model.AssetMainType;
 import com.noida.util.Constants;
+import com.noida.util.Message;
 import com.noida.util.Util;
 
 @Controller
@@ -55,6 +57,8 @@ public class AdminController {
 
 	@RequestMapping(value = { "/assetType" }, method = RequestMethod.GET)
 	public String assetType(ModelMap model) {
+		List<AssetMainType> assetTypeList = assetTypeMgr.getAllAssetType();
+		model.put("assetTypeList", assetTypeList);
 		return "assetType";
 	}
 

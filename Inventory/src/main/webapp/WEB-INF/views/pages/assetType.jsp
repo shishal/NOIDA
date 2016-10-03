@@ -1,4 +1,5 @@
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <div class="pane-content bg-alt">
 	<div class="bs-example"> -->
 	<div class="row">
@@ -49,7 +50,7 @@
     <button type="submit" class="btn btn-primary">Search</button>
   </form>
   <div class="table-responsive">
-		<table class="table table-bordered">
+		<table class="table table-bordered" id="assetTypeTable">
 			<thead class="thead-inverse table-header" style="">
 				<tr>
 					<th>#</th>
@@ -59,18 +60,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Laptop</td>
-					<td>20-June-2016</td>
-					<td>Laptop Details</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Laptop</td>
-					<td>20-June-2016</td>
-					<td>Laptop Details</td>
-				</tr>
+				<c:forEach items="${assetTypeList}" var="assetType" varStatus="row"> 
+					<tr>
+						<th scope="row">${row.index +1}</th>
+						<td>${assetType.mainType}</td>
+						<td>20-June-2016</td>
+						<td>${assetType.description}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -91,22 +88,12 @@
 				<form role="form" id="assetTypeForm">
 					<div class="form-group">
 						<label for="inputAssetType">Asset Type: </label> <input name="name"
-							type="text" class="form-control" value="Laptop"
+							type="text" class="form-control" placeholder="Asset Type"
 							id="inputAssetType" />
 					</div>
 					<div class="form-group">
-						<label for="inputDate">Date</label>&nbsp;
-						<div id="inputDate" class="input-group date"
-							data-provide="datepicker">
-							<input type="text" class="form-control">
-							<div class="input-group-addon">
-								<span class="glyphicon glyphicon-th"></span>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
 						<label for="inputDesc">Description: </label> <input type="text" name="desc"
-							class="form-control" value="i7 core 2 duo" id="inputDesc" />
+							class="form-control" placeholder="Description" id="inputDesc" />
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
@@ -119,12 +106,23 @@
 </div>
 <script>
 $(function(){
+	$('#assetTypeTable').DataTable();
 	$('#saveBtn').click(function(){
-		/* $.post('createAssetType',function(){
-			alert('Success');
-		}) */
-		$.post( "createAssetType", $( "#assetTypeForm" ).serialize() );
-	})
-})
+		$.ajax({
+			type: "POST",
+			url: "createAssetType",
+			data: $( "#assetTypeForm" ).serialize(),
+			success: function(data){
+				if(data.status==1){
+						alert('<spring:message code="asset.type.create.success" />');//code to show error msg n close popup
+					}else if(data.status == 0){
+						alert(data.message);//code to show error
+					}else{
+						alert('Unknow error');	
+					}
+			}//success end
+		});//ajax end
+	});//onclik end
+});//onload end
 </script>
 		
