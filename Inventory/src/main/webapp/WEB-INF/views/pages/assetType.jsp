@@ -26,8 +26,8 @@
 	</div>
   <form class="form-inline" style="padding-left:2%">
         <div class="form-group">
-  <label for="inputAssetType">Asset Type</label>
-      <input type="text" class="form-control" id="inputAssetType">
+  <label for="assetType">Asset Type</label>
+      <input type="text" class="form-control" id="assetType">
  </div>
 
  
@@ -61,7 +61,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${assetTypeList}" var="assetType" varStatus="row"> 
-					<tr>
+					<tr onclick="tableRowSelection(this);">
 						<th scope="row">${row.index +1}</th>
 						<td>${assetType.mainType}</td>
 						<td>20-June-2016</td>
@@ -97,14 +97,38 @@
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
+					<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+					<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 				</form>
 				<button type="button" class="btn btn-primary" id="saveBtn">Save</button>
+				<button type="button" class="btn btn-primary" onclick="resetForm()" id="closeBtn" data-dismiss="modal">Close</button>
 			</div>
 
 		</div>
 	</div>
 </div>
 <script>
+
+$('#addNewAssetType').on('shown.bs.modal', function (e) {
+	resetModalForm();
+	resetModalAlerts();
+});
+
+$('#addNewAssetType').on('hidden.bs.modal', function (e) {
+	resetModalForm();
+	resetModalAlerts();
+});
+
+function resetModalForm() {
+	$('#inputAssetType').val('').end();
+	$('#inputDesc').val('');
+}
+
+function resetModalAlerts() {
+	$('#successMessage').hide();
+	$('#errorMessage').hide();
+}
+
 $(function(){
 	$('#assetTypeTable').DataTable();
 	$('#saveBtn').click(function(){
@@ -114,11 +138,12 @@ $(function(){
 			data: $( "#assetTypeForm" ).serialize(),
 			success: function(data){
 				if(data.status==1){
-						alert('<spring:message code="asset.type.create.success" />');//code to show error msg n close popup
+						showSuccessMessage('<spring:message code="asset.type.create.success" />');
+						resetModalForm();
 					}else if(data.status == 0){
-						alert(data.message);//code to show error
+						showErrorMessage(data.message);//code to show error
 					}else{
-						alert('Unknow error');	
+						showErrorMessage('Unknow error');	
 					}
 			}//success end
 		});//ajax end
