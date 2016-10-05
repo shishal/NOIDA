@@ -15,6 +15,8 @@ public class PO {
 	private String company;
 	private Date poDate;
 	private String description;
+	private Date createdTime;
+	private Date updatedTime;
 	
 	public int getId() {
 		return id;
@@ -47,7 +49,23 @@ public class PO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
 	public PO(String company, Date poDate, String description) {
 		super();
 		this.company = company;
@@ -55,8 +73,18 @@ public class PO {
 		this.description = description;
 	}
 	
+	public PO(String company, Date poDate, String description, Date createdTime, Date updatedTime) {
+		super();
+		this.company = company;
+		this.poDate = poDate;
+		this.description = description;
+		this.createdTime = createdTime;
+		this.updatedTime = updatedTime;
+	}
+
 	@Override
 	public String toString() {
-		return "PO [id=" + id + ", company=" + company + ", poDate=" + poDate + ", description=" + description + "]";
+		return "PO [id=" + id + ", company=" + company + ", poDate=" + poDate + ", description=" + description
+				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
 	}
 }

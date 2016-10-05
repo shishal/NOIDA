@@ -1,5 +1,7 @@
 package com.noida.model;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,8 @@ public class AssetMainType {
 	private int id;
 	private String mainType;
 	private String description;
+	private Date createdTime;
+	private Date updatedTime;
 	
 	public int getId() {
 		return id;
@@ -37,19 +41,28 @@ public class AssetMainType {
 	public void setDesc(String description) {
 		this.description = description;
 	}
-	
+
+	public AssetMainType(String mainType, String description, Date createdTime, Date updatedTime) {
+		super();
+		this.mainType = mainType;
+		this.description = description;
+		this.createdTime = createdTime;
+		this.updatedTime = updatedTime;
+	}
+
 	public AssetMainType(String mainType, String description) {
 		super();
 		this.mainType = mainType;
 		this.description = description;
 	}
+
 	@Override
 	public String toString() {
-		return "AssetMainType [id=" + id + ", mainType=" + mainType + ", description=" + description + "]";
+		return "AssetMainType [id=" + id + ", mainType=" + mainType + ", description=" + description + ", createdTime="
+				+ createdTime + ", updatedTime=" + updatedTime + "]";
 	}
 
 	public AssetMainType() {
 		super();
 	}
-	
 }

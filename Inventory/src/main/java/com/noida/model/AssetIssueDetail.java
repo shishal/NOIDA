@@ -20,6 +20,8 @@ public class AssetIssueDetail {
 	private int issuedBy;
 	private int returnedBy;
 	private String description;
+	private Date createdTime;
+	private Date updatedTime;
 	
 	public int getId() {
 		return id;
@@ -93,9 +95,24 @@ public class AssetIssueDetail {
 		this.description = description;
 	}
 	
-	public AssetIssueDetail(int assetId, String issueType, int requestId,
-			Date issueDate, Date returnDate, int issuedBy, int returnedBy,
-			String description) {
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
+	public AssetIssueDetail(int assetId, String issueType, int requestId, Date issueDate, Date returnDate,
+			int issuedBy, int returnedBy, String description, Date createdTime, Date updatedTime) {
 		super();
 		this.assetId = assetId;
 		this.issueType = issueType;
@@ -105,15 +122,16 @@ public class AssetIssueDetail {
 		this.issuedBy = issuedBy;
 		this.returnedBy = returnedBy;
 		this.description = description;
+		this.createdTime = createdTime;
+		this.updatedTime = updatedTime;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "AssetIssueDetail [id=" + id + ", assetId=" + assetId + ", issueType=" + issueType + ", requestId="
-				+ requestId + ", issueDate=" + issueDate + ", returnDate=" + returnDate 
-				+ ", issuedBy=" + issuedBy + ", returnedBy=" + returnedBy
-				+ ", description=" + description + "]";
+				+ requestId + ", issueDate=" + issueDate + ", returnDate=" + returnDate + ", issuedBy=" + issuedBy
+				+ ", returnedBy=" + returnedBy + ", description=" + description + ", createdTime=" + createdTime
+				+ ", updatedTime=" + updatedTime + "]";
 	}
-	
-	
+
 }

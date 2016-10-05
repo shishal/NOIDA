@@ -17,6 +17,8 @@ public class RequestDetail {
 	private String requestType;
 	private int assetQuantity;
 	private String description;
+	private Date createdTime;
+	private Date updatedTime;
 	
 	public int getRequestId() {
 		return requestId;
@@ -81,7 +83,23 @@ public class RequestDetail {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
 	public RequestDetail(String assetMainTypeId, String assetSubTypeId, int requester,
 			Date requestDate, String requestType, int assetQuantity,
 			String description) {
@@ -95,10 +113,25 @@ public class RequestDetail {
 		this.description = description;
 	}
 
+	public RequestDetail(String assetMainTypeId, String assetSubTypeId, int requester, Date requestDate,
+			String requestType, int assetQuantity, String description, Date createdTime, Date updatedTime) {
+		super();
+		this.assetMainTypeId = assetMainTypeId;
+		this.assetSubTypeId = assetSubTypeId;
+		this.requester = requester;
+		this.requestDate = requestDate;
+		this.requestType = requestType;
+		this.assetQuantity = assetQuantity;
+		this.description = description;
+		this.createdTime = createdTime;
+		this.updatedTime = updatedTime;
+	}
+
 	@Override
 	public String toString() {
-		return "RequestDetail [requestId=" + requestId + ", assetMainTypeId=" + assetMainTypeId + ", assetSubTypeId=" + assetSubTypeId
-				+ ", requester=" + requester + ", requestDate=" + requestDate + ", requestType=" + requestType
-				+ ", assetQuantity=" + assetQuantity + ", description=" + description + "]";
-	}	
+		return "RequestDetail [requestId=" + requestId + ", assetMainTypeId=" + assetMainTypeId + ", assetSubTypeId="
+				+ assetSubTypeId + ", requester=" + requester + ", requestDate=" + requestDate + ", requestType="
+				+ requestType + ", assetQuantity=" + assetQuantity + ", description=" + description + ", createdTime="
+				+ createdTime + ", updatedTime=" + updatedTime + "]";
+	}
 }

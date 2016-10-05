@@ -1,5 +1,7 @@
 package com.noida.model;
 
+import java.sql.Date;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +19,8 @@ public class AssetDetail {
 	private int assetSubTypeId;
 	private int status;
 	private String description;
+	private Date createdTime;
+	private Date updatedTime;
 	
 	public int getId() {
 		return id;
@@ -89,8 +93,24 @@ public class AssetDetail {
 		this.description = description;
 	}
 	
-	public AssetDetail(String serialNo, String barcode, int amcId, int poId, int assetMainTypeId, 
-			int assetSubTypeId, int status, String description) {
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
+	public AssetDetail(String serialNo, String barcode, int amcId, int poId, int assetMainTypeId,
+			int assetSubTypeId, int status, String description, Date createdTime, Date updatedTime) {
 		super();
 		this.serialNo = serialNo;
 		this.barcode = barcode;
@@ -100,14 +120,17 @@ public class AssetDetail {
 		this.assetSubTypeId = assetSubTypeId;
 		this.status = status;
 		this.description = description;
+		this.createdTime = createdTime;
+		this.updatedTime = updatedTime;
 	}
+
 	@Override
 	public String toString() {
 		return "AssetDetail [id=" + id + ", serialNo=" + serialNo + ", barcode=" + barcode + ", amcId=" + amcId
-				+ ", poId=" + poId + ", assetMainTypeId=" + assetMainTypeId + ", assetSubTypeId=" + assetSubTypeId 
-				+ ", status=" + status + ", description="
-				+ description + "]";
+				+ ", poId=" + poId + ", assetMainTypeId=" + assetMainTypeId + ", assetSubTypeId=" + assetSubTypeId
+				+ ", status=" + status + ", description=" + description + ", createdTime=" + createdTime
+				+ ", updatedTime=" + updatedTime + "]";
 	}
-	
-	
+
+
 }

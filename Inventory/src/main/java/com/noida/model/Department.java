@@ -1,5 +1,7 @@
 package com.noida.model;
 
+import java.sql.Date;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,8 @@ public class Department {
 	private int id;
 	private String name;
 	private String description;
+	private Date createdTime;
+	private Date updatedTime;
 	
 	public int getId() {
 		return id;
@@ -36,14 +40,39 @@ public class Department {
 		this.description = description;
 	}
 	
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
 	public Department(String name, String description) {
 		super();
 		this.name = name;
 		this.description = description;
 	}
-	
+
+	public Department(String name, String description, Date createdTime, Date updatedTime) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.createdTime = createdTime;
+		this.updatedTime = updatedTime;
+	}
+
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", name=" + name + ", description=" + description + "]";
-	}	
+		return "Department [id=" + id + ", name=" + name + ", description=" + description + ", createdTime="
+				+ createdTime + ", updatedTime=" + updatedTime + "]";
+	}
 }

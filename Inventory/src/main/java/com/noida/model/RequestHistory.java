@@ -1,12 +1,16 @@
 package com.noida.model;
 
+import java.sql.Date;
+
 public class RequestHistory {
 
 	private int id;
 	private int requestId;
 	private String status;
 	private String byUser;
-	private String desc;
+	private String description;
+	private Date createdTime;
+	private Date updatedTime;
 	
 	public int getId() {
 		return id;
@@ -39,21 +43,55 @@ public class RequestHistory {
 	public void setByUser(String byUser) {
 		this.byUser = byUser;
 	}
-	
-	public String getDesc() {
-		return desc;
+
+	public String getDescription() {
+		return description;
 	}
-	
-	public void setDesc(String desc) {
-		this.desc = desc;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	
+
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
+	}
+
 	public RequestHistory(int requestId, String status, String byUser,
-			String desc) {
+			String description) {
 		super();
 		this.requestId = requestId;
 		this.status = status;
 		this.byUser = byUser;
-		this.desc = desc;
+		this.description = description;
+	}
+
+	public RequestHistory(int requestId, String status, String byUser, String description, Date createdTime,
+			Date updatedTime) {
+		super();
+		this.requestId = requestId;
+		this.status = status;
+		this.byUser = byUser;
+		this.description = description;
+		this.createdTime = createdTime;
+		this.updatedTime = updatedTime;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestHistory [id=" + id + ", requestId=" + requestId + ", status=" + status + ", byUser=" + byUser
+				+ ", description=" + description + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ "]";
 	}
 }
