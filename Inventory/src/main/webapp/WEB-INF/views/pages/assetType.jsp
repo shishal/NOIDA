@@ -132,124 +132,80 @@
 
 <script>
 	//When the document is ready
-	$(document)
-			.ready(
-					function() {
-						/* $('#fromDatePicker').datepicker({
-						    format: "dd/mm/yyyy",
-						    autoclose: true
-						});  
-						$('#toDatePicker').datepicker({
-						    format: "dd/mm/yyyy",
-						    autoclose: true
-						});   */
-
-						var export_filename = 'AssetType';
-
-						$('#assetTypeTable')
-								.DataTable(
-										{
-											dom : '<"top"B>rft<"bottom"lp><"clear">',
-											buttons : [
-													{
-														text : '',
-														extend : 'excel',
-														className : 'hidden-xs showopacity glyphicon glyphicon-export',
-														title : export_filename,
-														extension : '.xls'
-													},
-													{
-														text : '',
-														extend : 'print',
-														className : 'hidden-xs showopacity glyphicon glyphicon-print'
-													} ]
-										});
-						
-						 $('#assetTypeTable tbody').on( 'click', 'tr', function () {
-						        if ( $(this).hasClass('selected') ) {
-						            $(this).removeClass('selected');
-						        }
-						        else {
-						            table.$('tr.selected').removeClass('selected');
-						            $(this).addClass('selected');
-						        }
-						    } );
-
-						$('#assetTypeTable tfoot th')
-								.each(
-										function() {
-											var title = $(this).text();
-											$(this)
-													.html(
-															'<input type="text" placeholder="Search '+title+'" />');
-										});
-
-						var table = $('#assetTypeTable').DataTable();
-
-						// Apply the search
-
-						table
-								.columns()
-								.every(
-										function() {
-											var that = this;
-
-											$('input', this.footer())
-													.on(
-															'keyup change',
-															function() {
-																if (that
-																		.search() !== this.value) {
-																	that
-																			.search(
-																					this.value)
-																			.draw();
-																}
-															});
-										});
-					});
-
+$(function() {
+	var export_filename = 'AssetType';
+	var table = $('#assetTypeTable').DataTable({
+		dom : '<"top"B>rft<"bottom"lp><"clear">',
+		buttons : [
+			{
+				text : '',
+				extend : 'excel',
+				className : 'hidden-xs showopacity glyphicon glyphicon-export',
+				title : export_filename,
+				extension : '.xls'
+			},
+			{
+				text : '',
+				extend : 'print',
+				className : 'hidden-xs showopacity glyphicon glyphicon-print'
+			} 
+		]
+	});
+				
+	$('#assetTypeTable tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			table.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected');
+		}
+	});
+	$('#assetTypeTable tfoot th').each(function() {
+		var title = $(this).text();
+		$(this).html('<input type="text" placeholder="Search '+title+'" />');
+	});
+	// Apply the search
+	table.columns().every(function() {
+		var that = this;
+		$('input', this.footer()).on('keyup change',function() {
+			if (that.search() !== this.value) {
+				that.search(this.value).draw();
+			}
+		});
+	});
 	$('#addNewAssetType').on('shown.bs.modal', function(e) {
 		resetModalForm();
 		resetModalAlerts();
 	});
-
 	$('#addNewAssetType').on('hidden.bs.modal', function(e) {
 		resetModalForm();
 		resetModalAlerts();
 	});
-
 	function resetModalForm() {
 		$('#inputAssetType').val('').end();
 		$('#inputDesc').val('');
 	}
-
 	function resetModalAlerts() {
 		$('#successMessage').hide();
 		$('#errorMessage').hide();
 	}
-
-	$(function() {
-		$('#assetTypeTable').DataTable();
-		$('#saveBtn')
-				.click(
-						function() {
-							$
-									.ajax({
-										type : "POST",
-										url : "createAssetType",
-										data : $("#assetTypeForm").serialize(),
-										success : function(data) {
-											if (data.status == 1) {
-												showSuccessMessage('<spring:message code="asset.type.create.success" />');
-												resetModalForm();
-											} else if (data.status == 0) {
-												showErrorMessage(data.message);//code to show error
-											} else {
-												showErrorMessage('Unknow error');
-											}
-										}//success end
-									});//ajax end
-						});//onclik end
-	});//onload end
+	$('#saveBtn').click(function() {
+		$.ajax({
+			type : "POST",
+			url : "createAssetType",
+			data : $("#assetTypeForm").serialize(),
+			success : function(data) {
+				if (data.status == 1) {
+					showSuccessMessage('<spring:message code="asset.type.create.success" />');
+					resetModalForm();
+				} else if (data.status == 0) {
+					showErrorMessage(data.message);//code to show error
+				} else {
+					showErrorMessage('Unknow error');
+				}
+			}//success end
+		});//ajax end
+	});//onclik end
+});//onload end
 </script>
