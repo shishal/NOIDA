@@ -59,7 +59,7 @@
 </form> -->
 <br>
 <div class="table-responsive">
-	<table class="table table-bordered hover stripe " id="assetTypeTable">
+	<table class="table table-bordered hover " id="assetTypeTable">
 		<thead class="thead-inverse table-header" style="">
 			<tr>
 				<th>#</th>
