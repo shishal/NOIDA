@@ -61,7 +61,7 @@ DROP TABLE IF EXISTS `asset_main_type`;
 CREATE TABLE `asset_main_type` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `MAIN_TYPE` varchar(45) NOT NULL,
-  `DESC` varchar(500) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `MAIN_TYPE_UNIQUE` (`MAIN_TYPE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -79,7 +79,7 @@ CREATE TABLE `asset_sub_type` (
   `MAIN_TYPE_ID` int(11) NOT NULL,
   `SUB_TYPE` varchar(45) NOT NULL,
   `MAKE` varchar(45) DEFAULT NULL,
-  `DESC` varchar(500) NOT NULL,
+  `description` varchar(500) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `MAIN_TYPE_ID_FK_idx` (`MAIN_TYPE_ID`),
   CONSTRAINT `MAIN_TYPE_ID_FK` FOREIGN KEY (`MAIN_TYPE_ID`) REFERENCES `asset_main_type` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -213,7 +213,7 @@ CREATE TABLE `request_history` (
   `REQUEST_ID` int(11) NOT NULL,
   `STATUS` varchar(45) NOT NULL,
   `BY_USER` varchar(45) NOT NULL,
-  `DESC` varchar(45) DEFAULT NULL,
+  `description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `REQUEST_ID_FK_idx` (`REQUEST_ID`),
   KEY `BY_USER_FK_idx` (`BY_USER`),

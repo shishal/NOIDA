@@ -27,7 +27,7 @@
 			</div>
 			<button type="submit" class="btn btn-primary">Login</button>
 			<c:if test="${param.error ne null}">
-				<div class="alert-danger">Invalid username and password.</div>
+				<div class="alert alert-danger">Invalid username or password.</div>
 			</c:if>
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />

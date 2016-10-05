@@ -1,5 +1,6 @@
 package com.noida.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.MultiValueMap;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.noida.exception.InventoryException;
 import com.noida.manager.AssetTypeManager;
 import com.noida.model.AssetMainType;
 import com.noida.util.Constants;
+import com.noida.util.Message;
 import com.noida.util.Util;
 
 @Controller
@@ -54,6 +57,8 @@ public class AdminController {
 
 	@RequestMapping(value = { "/assetType" }, method = RequestMethod.GET)
 	public String assetType(ModelMap model) {
+		List<AssetMainType> assetTypeList = assetTypeMgr.getAllAssetType();
+		model.put("assetTypeList", assetTypeList);
 		return "assetType";
 	}
 
@@ -63,8 +68,16 @@ public class AdminController {
 	}
 	@ResponseBody
 	@RequestMapping(value = { "/createAssetType" }, method = RequestMethod.POST)
-	public Map<String,Object> createAssetType(@RequestParam Map parameters) {
-		AssetMainType assetType = assetTypeMgr.createAssetType(parameters);
-		return Util.toMap("result",Constants.SUCCESS,"assetType",assetType);
+	public Map<String,Object> createAssetType(
+			@RequestParam String name, 
+			@RequestParam String desc) {
+		
+		AssetMainType assetType = null;
+		try{
+			assetType = assetTypeMgr.createAssetType(name, desc);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS,"assetType",assetType);
 	}
 }

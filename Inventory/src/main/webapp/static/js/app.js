@@ -20,15 +20,37 @@ $(document).ready(function() {
 		height2 = $('.main').height()
 		htmlbodyHeightUpdate()
 	});
+	
 });
 
 function appLogout() {
 	document.getElementById("applicationlogout").click();
 };
 
-function tableRowSelection(id) {
+/*function tableRowSelection(id) {
 	if($(id).hasClass("active"))
         $(id).removeClass('active');
     else
         $(id).addClass('active').siblings().removeClass('active');
+}*/
+
+function showSuccessMessage(message) {
+	$('#successMessage').show();
+	$('#successMessage').text(message);
 }
+
+function showErrorMessage(message) {
+	$('#errorMessage').show();
+	$('#errorMessage').text(message);
+}
+
+
+function printData()
+{
+var divToPrint=document.getElementById("printTable");
+newWin= window.open("");
+newWin.document.write(divToPrint.outerHTML);
+newWin.print();
+newWin.close();
+}
+
