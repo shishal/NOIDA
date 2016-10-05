@@ -80,4 +80,29 @@ public class AdminController {
 		}
 		return Util.toMap("status",Constants.SUCCESS,"assetType",assetType);
 	}
+	@ResponseBody
+	@RequestMapping(value = { "/updateAssetType" }, method = RequestMethod.POST)
+	public Map<String,Object> updateAssetType(
+			@RequestParam Long id,
+			@RequestParam String name, 
+			@RequestParam String desc 
+			) {
+		
+		try{
+			assetTypeMgr.updateAssetType(id,name, desc);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	@ResponseBody
+	@RequestMapping(value = { "/deleteAssetType" }, method = RequestMethod.POST)
+	public Map<String,Object> deleteAssetType(@RequestParam Long id) {
+		try{
+			assetTypeMgr.deleteAssetType(id);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
 }

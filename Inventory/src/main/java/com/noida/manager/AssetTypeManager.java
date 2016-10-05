@@ -11,4 +11,8 @@ public interface AssetTypeManager {
 
 	public List<AssetMainType> getAllAssetType();
 
+	public void updateAssetType(Long id, String name, String desc);
+
+	public void deleteAssetType(Long id);
+
 }

@@ -34,14 +34,14 @@ function appLogout() {
         $(id).addClass('active').siblings().removeClass('active');
 }*/
 
-function showSuccessMessage(message) {
-	$('#successMessage').show();
-	$('#successMessage').text(message);
+function showSuccessMessage(id, message) {
+	$('#'+id).show();
+	$('#'+id).text(message);
 }
 
-function showErrorMessage(message) {
-	$('#errorMessage').show();
-	$('#errorMessage').text(message);
+function showErrorMessage(id,message) {
+	$('#'+id).show();
+	$('#'+id).text(message);
 }
 
 
