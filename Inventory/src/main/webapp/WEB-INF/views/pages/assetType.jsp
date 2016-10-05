@@ -78,7 +78,7 @@
 		</tfoot>
 		<tbody>
 			<c:forEach items="${assetTypeList}" var="assetType" varStatus="row">
-				<tr onclick="tableRowSelection(this);">
+				<tr onclick="">
 					<th scope="row">${row.index +1}</th>
 					<td>${assetType.mainType}</td>
 					<td>20-June-2016</td>
@@ -164,6 +164,16 @@
 														className : 'hidden-xs showopacity glyphicon glyphicon-print'
 													} ]
 										});
+						
+						 $('#assetTypeTable tbody').on( 'click', 'tr', function () {
+						        if ( $(this).hasClass('selected') ) {
+						            $(this).removeClass('selected');
+						        }
+						        else {
+						            table.$('tr.selected').removeClass('selected');
+						            $(this).addClass('selected');
+						        }
+						    } );
 
 						$('#assetTypeTable tfoot th')
 								.each(

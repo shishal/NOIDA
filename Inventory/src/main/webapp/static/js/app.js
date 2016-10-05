@@ -27,12 +27,12 @@ function appLogout() {
 	document.getElementById("applicationlogout").click();
 };
 
-function tableRowSelection(id) {
+/*function tableRowSelection(id) {
 	if($(id).hasClass("active"))
         $(id).removeClass('active');
     else
         $(id).addClass('active').siblings().removeClass('active');
-}
+}*/
 
 function showSuccessMessage(message) {
 	$('#successMessage').show();
