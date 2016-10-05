@@ -20,6 +20,7 @@ $(document).ready(function() {
 		height2 = $('.main').height()
 		htmlbodyHeightUpdate()
 	});
+	
 });
 
 function appLogout() {

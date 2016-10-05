@@ -4,7 +4,7 @@
 	<div class="bs-example"> -->
 <div class="row">
 	<div class="col-md-6">
-		<h4 style="padding-left: 2%; padding-top: 2%">Search Filter</h4>
+		<h3 style="padding-left: 2%; padding-top: 2%">Asset Type</h3>
 	</div>
 	<div class="col-md-6 text-right"
 		style="padding-right: 2%; padding-top: 2%">
@@ -16,21 +16,21 @@
 			style="font-size: 20px;" data-toggle="modal"
 			data-target="#addNewAssetType"
 			class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
-		&nbsp;&nbsp; <a href="#"><span title="Export"
-			style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
 		&nbsp;&nbsp; <a href="#"><span title="Delete selected AssetType"
 			style="font-size: 20px;"
 			class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
+		<!-- &nbsp;&nbsp; <a href="#"><span title="Export"
+			style="font-size: 20px;" id="exportAssetType"
+			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
 		&nbsp;&nbsp; <a href="#"><span title="Print"
-			style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
+			style="font-size: 20px;" id="printAssetType"
+			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a> -->
 		<!-- <button type="button" id="addPO" data-toggle="tooltip" title="Add New PO" class="glyphicon glyphicon-plus"></button> -->
 		<!-- <button type="button" id="deletePO" data-toggle="tooltip" title="Edit PO" class="glyphicon glyphicon-edit"></button>
 		<button type="button" id="deletePO" data-toggle="tooltip" title="Delete PO" class="glyphicon glyphicon-trash"></button> -->
 	</div>
 </div>
-<form class="form-inline" style="padding-left: 2%">
+<!-- <form class="form-inline" style="padding-left: 2%">
 	<div class="form-group">
 		<label for="assetType">Asset Type</label> <input type="text"
 			class="form-control" id="assetType">
@@ -56,9 +56,10 @@
 		</div>
 	</div>
 	<button type="button" class="btn btn-primary">Search</button>
-</form>
+</form> -->
+<br>
 <div class="table-responsive">
-	<table class="table table-bordered" id="assetTypeTable">
+	<table class="table table-bordered hover stripe " id="assetTypeTable">
 		<thead class="thead-inverse table-header" style="">
 			<tr>
 				<th>#</th>
@@ -67,6 +68,14 @@
 				<th>Description</th>
 			</tr>
 		</thead>
+		<tfoot>
+			<tr>
+				<th>#</th>
+				<th>Asset Type</th>
+				<th>Date</th>
+				<th>Description</th>
+			</tr>
+		</tfoot>
 		<tbody>
 			<c:forEach items="${assetTypeList}" var="assetType" varStatus="row">
 				<tr onclick="tableRowSelection(this);">
@@ -120,19 +129,75 @@
 		</div>
 	</div>
 </div>
-<script>
 
-//When the document is ready
-$(document).ready(function () {
-    $('#fromDatePicker').datepicker({
-        format: "dd/mm/yyyy",
-        autoclose: true
-    });  
-    $('#toDatePicker').datepicker({
-        format: "dd/mm/yyyy",
-        autoclose: true
-    });  
-});
+<script>
+	//When the document is ready
+	$(document)
+			.ready(
+					function() {
+						/* $('#fromDatePicker').datepicker({
+						    format: "dd/mm/yyyy",
+						    autoclose: true
+						});  
+						$('#toDatePicker').datepicker({
+						    format: "dd/mm/yyyy",
+						    autoclose: true
+						});   */
+
+						var export_filename = 'AssetType';
+
+						$('#assetTypeTable')
+								.DataTable(
+										{
+											dom : '<"top"B>rft<"bottom"lp><"clear">',
+											buttons : [
+													{
+														text : '',
+														extend : 'excel',
+														className : 'hidden-xs showopacity glyphicon glyphicon-export',
+														title : export_filename,
+														extension : '.xls'
+													},
+													{
+														text : '',
+														extend : 'print',
+														className : 'hidden-xs showopacity glyphicon glyphicon-print'
+													} ]
+										});
+
+						$('#assetTypeTable tfoot th')
+								.each(
+										function() {
+											var title = $(this).text();
+											$(this)
+													.html(
+															'<input type="text" placeholder="Search '+title+'" />');
+										});
+
+						var table = $('#assetTypeTable').DataTable();
+
+						// Apply the search
+
+						table
+								.columns()
+								.every(
+										function() {
+											var that = this;
+
+											$('input', this.footer())
+													.on(
+															'keyup change',
+															function() {
+																if (that
+																		.search() !== this.value) {
+																	that
+																			.search(
+																					this.value)
+																			.draw();
+																}
+															});
+										});
+					});
 
 	$('#addNewAssetType').on('shown.bs.modal', function(e) {
 		resetModalForm();
