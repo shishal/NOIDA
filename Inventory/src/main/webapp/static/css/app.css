@@ -17,6 +17,21 @@
 	background-color: #343434;
 }
 
+.app-alert-modal-header {
+	color: white;
+	background-color: #d9534f;
+}
+
+.app-success-modal-header {
+	color: white;
+	background-color: #5cb85c;
+}
+
+.app-info-modal-header {
+	color: white;
+	background-color: #f0ad4e;
+}
+
 .app-modal-content{
         font-size: 15px;
     }

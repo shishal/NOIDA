@@ -62,3 +62,69 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade page-normal-font" id="appAlertDialog"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header app-alert-modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">!! Alert !!</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade page-normal-font" id="appSuccessDialog"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header app-success-modal-header ">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">!! Success !!</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade page-normal-font" id="appInfoDialog"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header app-info-modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">!! Info !!</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+			</div>
+
+		</div>
+	</div>
+</div>

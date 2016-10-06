@@ -47,7 +47,7 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Raise Request <span class="caret"></span><span
 							style="font-size: 20px;"
-							class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+							class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
 						<ul class="dropdown-menu forAnimate" role="menu">
 							<li><a href="${pageContext.request.contextPath}/user/raiseRequest">New
 									Request<span style="font-size: 16px;"
@@ -96,7 +96,7 @@
 							<li><a href="${pageContext.request.contextPath}/admin/asset">Asset<span
 									style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
-							<li><a
+							<li><a id="assetTypeMenuLink"
 								href="${pageContext.request.contextPath}/admin/assetType">Asset
 									Type<span style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>

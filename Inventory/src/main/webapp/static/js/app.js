@@ -44,13 +44,19 @@ function showErrorMessage(id,message) {
 	$('#'+id).text(message);
 }
 
-
-function printData()
-{
-var divToPrint=document.getElementById("printTable");
-newWin= window.open("");
-newWin.document.write(divToPrint.outerHTML);
-newWin.print();
-newWin.close();
+function showAlertDialog(msg) {
+	$('#appAlertDialog').find(".modal-body").text(msg);
+	$('#appAlertDialog').modal('show');
 }
+
+function showSuccessDialog(msg) {
+	$('#appSuccessDialog').find(".modal-body").text(msg);
+	$('#appSuccessDialog').modal('show');
+}
+
+function showInfoDialog(msg) {
+	$('#appInfoDialog').find(".modal-body").text(msg);
+	$('#appInfoDialog').modal('show');
+}
+
 

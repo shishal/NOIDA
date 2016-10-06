@@ -82,7 +82,6 @@
 		<div class="modal-content">
 
 			<div class="modal-header app-modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Enter Asset Type Details</h4>
 			</div>
 			<!-- Modal Body -->
@@ -116,7 +115,6 @@
 		<div class="modal-content">
 
 			<div class="modal-header app-modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Update Asset Type Details</h4>
 			</div>
 			<!-- Modal Body -->
@@ -139,7 +137,7 @@
 					<div id="updateSuccessMessage" class="alert alert-success" style="display: none;"></div>
 				</form>
 				<button type="button" class="btn btn-primary" id="updateBtn">Update</button>
-				<button type="button" class="btn btn-primary" onclick=""
+				<button type="button" class="btn btn-primary" onclick="reloadAssetTypePage();"
 					id="closeBtn" data-dismiss="modal">Close</button>
 			</div>
 
@@ -209,6 +207,16 @@ $(function() {
 	$('#addNewAssetType').on('hidden.bs.modal', function(e) {
 		resetModalForm();
 		resetModalAlerts();
+		reloadAssetTypePage();
+	});
+	$('#updateAssetType').on('shown.bs.modal', function(e) {
+		resetModalForm();
+		resetModalAlerts();
+	});
+	$('#updateAssetType').on('hidden.bs.modal', function(e) {
+		resetModalForm();
+		resetModalAlerts();
+		reloadAssetTypePage();
 	});
 	function resetModalForm() {
 		$('#inputAssetType').val('').end();
@@ -217,6 +225,10 @@ $(function() {
 	function resetModalAlerts() {
 		$('#successMessage').hide();
 		$('#errorMessage').hide();
+	}
+	
+	function reloadAssetTypePage() {
+		document.getElementById('assetTypeMenuLink').click();
 	}
 	$('#saveBtn').click(function() {
 		$.ajax({
@@ -237,7 +249,7 @@ $(function() {
 	});//onclik end
 	$('#editAssetType').click(function(){
 		if(selectedRow == 0){
-			alert('Please select row to edit');
+			showAlertDialog('Please select row to edit');
 			return false;
 		}
 		$('#assetTypeId').val(selectedRow[1]);
@@ -263,7 +275,7 @@ $(function() {
 	});
 	$('#deleteAssetType').click(function(){
 		if(selectedRow == 0){
-			alert('Please select row to delete');
+			showAlertDialog('Please select row to delete');
 			return false;
 		}
 		$.ajax({
@@ -272,9 +284,10 @@ $(function() {
 			data : {id:selectedRow[1],${_csrf.parameterName}:'${_csrf.token}'},
 			success : function(data) {
 				if (data.status == 1) {
-					alert('<spring:message code="asset.type.delete.success" />');
+					showAlertDialog('<spring:message code="asset.type.delete.success" />');
+					reloadAssetTypePage();
 				} else {
-					alert('Unknow error');
+					showAlertDialog('Unknow error');
 				}
 			}//success end
 		});//ajax end
