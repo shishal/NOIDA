@@ -101,7 +101,7 @@
 									Type<span style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>
 							</a></li>
-							<li><a
+							<li><a id="assetSubTypeMenuLink"
 								href="${pageContext.request.contextPath}/admin/assetSubType">Asset
 									SubType<span style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>

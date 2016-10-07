@@ -1,5 +1,6 @@
 package com.noida.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.exception.InventoryException;
+import com.noida.manager.AssetSubTypeManager;
 import com.noida.manager.AssetTypeManager;
 import com.noida.manager.UserManager;
 import com.noida.model.AssetMainType;
 import com.noida.model.Users;
+import com.noida.model.AssetSubType;
 import com.noida.util.Constants;
 import com.noida.util.Message;
 import com.noida.util.Util;
@@ -25,11 +28,9 @@ import com.noida.util.Util;
 @RequestMapping("/admin")
 public class AdminController {
 
-	@Autowired 
-	AssetTypeManager assetTypeMgr;
-	
-	@Autowired
-	UserManager userMgr;
+	@Autowired UserManager userMgr;
+	@Autowired AssetTypeManager assetTypeMgr;
+	@Autowired AssetSubTypeManager assetSubTypeMgr;
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -69,14 +70,17 @@ public class AdminController {
 		model.put("assetTypeList", assetTypeList);
 		return "assetType";
 	}
-
+	
 	@RequestMapping(value = { "/assetSubType" }, method = RequestMethod.GET)
 	public String assetSubType(ModelMap model) {
+		List<AssetSubType> assetSubTypeList = assetSubTypeMgr.getAllAssetSubType();
+		model.put("assetSubTypeList", assetSubTypeList);
+		List<AssetMainType> assetTypeList = assetTypeMgr.getAllAssetType();
+		model.put("assetTypeList", assetTypeList);
 		return "assetSubType";
 	}
 	
-	/* AssetType Tab --- Start */
-	
+
 	@ResponseBody
 	@RequestMapping(value = { "/createAssetType" }, method = RequestMethod.POST)
 	public Map<String,Object> createAssetType(
@@ -91,6 +95,7 @@ public class AdminController {
 		}
 		return Util.toMap("status",Constants.SUCCESS,"assetType",assetType);
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = { "/updateAssetType" }, method = RequestMethod.POST)
 	public Map<String,Object> updateAssetType(
@@ -116,11 +121,10 @@ public class AdminController {
 		}
 		return Util.toMap("status",Constants.SUCCESS);
 	}
-	
 	/* AssetType Tab --- End */
 	
-	/* Users Tab --- Start */
 	
+	/* Users Tab --- Start */
 	@ResponseBody
 	@RequestMapping(value = { "/createUser" }, method = RequestMethod.POST)
 	public Map<String,Object> createUser(
@@ -139,6 +143,52 @@ public class AdminController {
 		}
 		return Util.toMap("status",Constants.SUCCESS,"user",user);
 	}
-	
 	/* Users Tab --- End */
+	
+	
+	@ResponseBody
+	@RequestMapping(value = { "/createAssetSubType" }, method = RequestMethod.POST)
+	public Map<String,Object> createAssetSubType(
+			@RequestParam Long assetTypeId,
+			@RequestParam String make,
+			@RequestParam String name, 
+			@RequestParam String desc) {
+		
+		AssetSubType assetSubType = null;
+		try{
+			assetSubType = assetSubTypeMgr.createAssetSubType(assetTypeId, name, make, desc, new Date(), new Date());
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS,"assetType",assetSubType);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/updateAssetSubType" }, method = RequestMethod.POST)
+	public Map<String,Object> updateAssetSubType(
+			@RequestParam Long id,
+			@RequestParam Long assetTypeId,
+			@RequestParam String make,
+			@RequestParam String name, 
+			@RequestParam String desc 
+			) {
+		
+		try{
+			assetSubTypeMgr.updateAssetSubType(id, assetTypeId, name, make, desc, new Date());
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/deleteAssetSubType" }, method = RequestMethod.POST)
+	public Map<String,Object> deleteAssetSubType(@RequestParam Long id) {
+		try{
+			assetSubTypeMgr.deleteAssetSubType(id);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
 }

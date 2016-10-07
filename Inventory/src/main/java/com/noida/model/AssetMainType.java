@@ -81,4 +81,8 @@ public class AssetMainType {
 	public AssetMainType() {
 		super();
 	}
+
+	public AssetMainType(Long id) {
+		this.id =id;
+	}
 }

@@ -2,38 +2,47 @@ package com.noida.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.SelectBeforeUpdate;
+
+@Entity
+@SelectBeforeUpdate
 public class AssetSubType {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	private String mainTypeId;
+	private Long id;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private AssetMainType mainType;//No need for @JoinColumn("ColumnNAME") as default column will be main_type_id
 	private String subType;
 	private String make;
 	private String description;
 	private Date createdTime;
 	private Date updatedTime;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	public String getMainTypeId() {
-		return mainTypeId;
+	public AssetMainType getMainType() {
+		return mainType;
 	}
-	
-	public void setMainTypeId(String mainTypeId) {
-		this.mainTypeId = mainTypeId;
+
+	public void setMainType(AssetMainType mainType) {
+		this.mainType = mainType;
 	}
-	
+
 	public String getSubType() {
 		return subType;
 	}
@@ -74,10 +83,10 @@ public class AssetSubType {
 		this.updatedTime = updatedTime;
 	}
 
-	public AssetSubType(String mainTypeId, String subType, String make, String description, Date createdTime,
+	public AssetSubType(AssetMainType mainType, String subType, String make, String description, Date createdTime,
 			Date updatedTime) {
 		super();
-		this.mainTypeId = mainTypeId;
+		this.mainType = mainType;
 		this.subType = subType;
 		this.make = make;
 		this.description = description;
@@ -85,9 +94,25 @@ public class AssetSubType {
 		this.updatedTime = updatedTime;
 	}
 
+	public AssetSubType(Long id, AssetMainType mainType, String subType, String make, String desc, Date updatedTime) {
+		super();
+		this.id = id; 
+		this.mainType = mainType;
+		this.subType = subType;
+		this.make = make;
+		this.description = desc;
+		this.updatedTime = updatedTime;
+	}
+	
+	
+
+	public AssetSubType() {
+		super();
+	}
+
 	@Override
 	public String toString() {
-		return "AssetSubType [id=" + id + ", mainTypeId=" + mainTypeId + ", subType=" + subType + ", make=" + make
+		return "AssetSubType [id=" + id + ", assetMainType=" + mainType + ", subType=" + subType + ", make=" + make
 				+ ", description=" + description + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
 				+ "]";
 	}
