@@ -106,7 +106,8 @@
 									SubType<span style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>
 							</a></li>
-							<li><a href="${pageContext.request.contextPath}/admin/user">User<span
+							<li><a id="userMenuLink"
+								href="${pageContext.request.contextPath}/admin/user">User<span
 									style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 							<li><a

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.exception.InventoryException;
 import com.noida.manager.AssetTypeManager;
+import com.noida.manager.UserManager;
 import com.noida.model.AssetMainType;
+import com.noida.model.Users;
 import com.noida.util.Constants;
 import com.noida.util.Message;
 import com.noida.util.Util;
@@ -23,7 +25,11 @@ import com.noida.util.Util;
 @RequestMapping("/admin")
 public class AdminController {
 
-	@Autowired AssetTypeManager assetTypeMgr;
+	@Autowired 
+	AssetTypeManager assetTypeMgr;
+	
+	@Autowired
+	UserManager userMgr;
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -42,6 +48,8 @@ public class AdminController {
 
 	@RequestMapping(value = { "/user" }, method = RequestMethod.GET)
 	public String user(ModelMap model) {
+		List<Users> userList = userMgr.getAllUsers();
+		model.put("userList", userList);
 		return "user";
 	}
 
@@ -66,6 +74,9 @@ public class AdminController {
 	public String assetSubType(ModelMap model) {
 		return "assetSubType";
 	}
+	
+	/* AssetType Tab --- Start */
+	
 	@ResponseBody
 	@RequestMapping(value = { "/createAssetType" }, method = RequestMethod.POST)
 	public Map<String,Object> createAssetType(
@@ -105,4 +116,29 @@ public class AdminController {
 		}
 		return Util.toMap("status",Constants.SUCCESS);
 	}
+	
+	/* AssetType Tab --- End */
+	
+	/* Users Tab --- Start */
+	
+	@ResponseBody
+	@RequestMapping(value = { "/createUser" }, method = RequestMethod.POST)
+	public Map<String,Object> createUser(
+			@RequestParam String empCode,
+			@RequestParam String userName, 
+			@RequestParam String firstName,
+			@RequestParam String lastName,
+			@RequestParam String contactNo,
+			@RequestParam boolean enabled) {
+		
+		Users user = null;
+		try{
+			user = userMgr.createUser(empCode, userName, firstName, lastName, contactNo, enabled, Constants.USER_RESET_PASSWORD);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS,"user",user);
+	}
+	
+	/* Users Tab --- End */
 }
