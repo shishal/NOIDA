@@ -8,6 +8,4 @@ public class Constants {
 	public static final String PATH_CONFFILE = "config/config.properties";
 	public static final int SUCCESS = 1;
 	public static final int FAIL = 0;
-	
-	public static final String USER_RESET_PASSWORD = "noida123";
 	}

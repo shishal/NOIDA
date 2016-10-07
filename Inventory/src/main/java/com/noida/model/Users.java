@@ -16,7 +16,7 @@ public class Users {
 	private String lastName;
 	private int deptId;
 	private String empCode;
-	/*private String status;*/
+	private String status;
 	private String contactNo;
 	private Date createdTime;
 	private Date updatedTime;
@@ -79,13 +79,13 @@ public class Users {
 		this.empCode = empCode;
 	}
 
-	/*public String getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
-	}*/
+	}
 
 	public String getContactNo() {
 		return contactNo;
@@ -112,7 +112,7 @@ public class Users {
 	}
 
 	public Users(String username, String password, boolean enabled, String firstName, String lastName, int deptId,
-			String empCode, /*String status,*/ String contactNo, Date createdTime, Date updatedTime) {
+			String empCode, String status, String contactNo, Date createdTime, Date updatedTime) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -121,7 +121,7 @@ public class Users {
 		this.lastName = lastName;
 		this.deptId = deptId;
 		this.empCode = empCode;
-		/*this.status = status;*/
+		this.status = status;
 		this.contactNo = contactNo;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
@@ -130,8 +130,8 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [username=" + username + ", password=" + password + ", enabled=" + enabled + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", deptId=" + deptId + ", empCode=" + empCode + /*", status="
-				+ status +*/ ", contactNo=" + contactNo + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ firstName + ", lastName=" + lastName + ", deptId=" + deptId + ", empCode=" + empCode + ", status="
+				+ status + ", contactNo=" + contactNo + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
 				+ "]";
 	}
 }
