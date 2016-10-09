@@ -100,7 +100,8 @@
 		</tbody>
 		</table>
 		</div>
-		<div class="modal fade page-normal-font" id="userDetails" tabindex="-1" role="dialog" 
+		
+		<!-- <div class="modal fade page-normal-font" id="userDetails" tabindex="-1" role="dialog" 
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -108,7 +109,7 @@
         <h4 class="modal-title">User Details</h4>
       </div>
        
-            <!-- Modal Body -->
+            Modal Body
             <div class="modal-body app-modal-content bg-alt">
                 
                 <form role="form">
@@ -134,7 +135,7 @@
             
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="modal fade page-normal-font" id="addUser" tabindex="-1" role="dialog" 
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -151,7 +152,7 @@
                 <form role="form" id="userForm">					
                   <div class="form-group">
                     <label for="inputModalEmpCode">Emp Code: </label>
-                      <input name="empCode" type="text" class="form-control"
+                      <input name="empCode" type="number" class="form-control"
                       placeholder="Employee Code" id="inputModalEmpCode"/>
                   </div>
                   <div class="form-group">
@@ -171,7 +172,7 @@
                   </div>
                   <div class="form-group">
                     <label for="inputContactNo">Contact No: </label>
-                      <input name="contactNo" type="text" class="form-control" 
+                      <input name="contactNo" type="number" class="form-control" 
                       placeholder="Contact No" id="inputContactNo"/>
                   </div>
                   <div class="form-group">
@@ -216,12 +217,12 @@
                 <form role="form" id="updateUserForm" >
                   <div class="form-group">
                     <label for="inputUpdateUsername">Username: </label>
-                      <input type="text" name="username" class="form-control" 
+                      <input type="text" name="username" class="form-control" readonly
                       id="inputUpdateUsername"/>
                   </div>
                   <div class="form-group">
                     <label for="inputUpdateEmpCode">Emp Code: </label>
-                      <input type="text" name="empCode" class="form-control" 
+                      <input type="number" name="empCode" class="form-control" 
                       id="inputUpdateEmpCode"/>
                   </div>
                   <div class="form-group">
@@ -236,7 +237,7 @@
                   </div>
                   <div class="form-group">
                     <label for="inputUpdateContactNo">Contact No: </label>
-                      <input type="text" name="contactNo" class="form-control" 
+                      <input type="number" name="contactNo" class="form-control" 
                       id="inputUpdateContactNo"/>
                   </div>
                   <div class="form-group">

@@ -35,7 +35,6 @@ function appLogout() {
 }*/
 
 function showSuccessMessage(id, message) {
-	alert(id);
 	$('#'+id).show();
 	$('#'+id).text(message);
 }
