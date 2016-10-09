@@ -8,40 +8,11 @@
 	</div>
 	<div class="col-md-6 text-right"
 		style="padding-right: 2%; padding-top: 2%">
-		<a href="javascript:(0)"><span title="Add New AssetType" style="font-size: 20px;" data-toggle="modal" data-target="#addNewAssetType" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>
-		&nbsp;&nbsp; 
-		<a id="editAssetType" href="javascript:(0)"><span title="Edit selected AssetType" style="font-size: 20px;" data-toggle="modal" data-target="#updateAssetType" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
-		&nbsp;&nbsp; 
+		<a href="javascript:(0)"><span title="Add New AssetType" style="font-size: 20px;" data-toggle="modal" data-target="#addNewAssetType" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>&nbsp;&nbsp; 
+		<a id="editAssetType" href="javascript:(0)"><span title="Edit selected AssetType" style="font-size: 20px;" data-toggle="modal" data-target="#updateAssetType" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp; 
 		<a id="deleteAssetType" href="javascript:(0)"><span title="Delete selected AssetType" style="font-size: 20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
 	</div>
 </div>
-<!-- <form class="form-inline" style="padding-left: 2%">
-	<div class="form-group">
-		<label for="assetType">Asset Type</label> <input type="text"
-			class="form-control" id="assetType">
-	</div>
-
-
-	<div class="form-group">
-		<label for="fromDate">From</label>&nbsp;
-		<div id="fromDate" class="input-group date">
-			<input type="text" class="form-control" id="fromDatePicker">
-			<div class="input-group-addon">
-				<span class="glyphicon glyphicon-th"></span>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="toDate">To</label>&nbsp;
-		<div id="toDate" class="input-group date">
-			<input type="text" class="form-control" id="toDatePicker">
-			<div class="input-group-addon">
-				<span class="glyphicon glyphicon-th"></span>
-			</div>
-		</div>
-	</div>
-	<button type="button" class="btn btn-primary">Search</button>
-</form> -->
 <div class="table-responsive">
 	<table class="table table-bordered hover " id="assetTypeTable">
 		<thead class="thead-inverse table-header" style="">
@@ -102,8 +73,7 @@
 					<div id="createSuccessMessage" class="alert alert-success" style="display: none;"></div>
 				</form>
 				<button type="button" class="btn btn-primary" id="saveBtn">Save</button>
-				<button type="button" class="btn btn-primary" onclick=""
-					id="closeBtn" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="" id="closeBtn" data-dismiss="modal">Close</button>
 			</div>
 
 		</div>
@@ -186,7 +156,8 @@ $(function() {
 			console.log(selectedRow)
 		}
 	});
-	$('#assetTypeTable tfoot th').each(function() {
+	$('#assetTypeTable tfoot th').each(function(index) {
+		if(index==0) return;
 		var title = $(this).text();
 		$(this).html('<input type="text" placeholder="Search '+title+'" />');
 	});

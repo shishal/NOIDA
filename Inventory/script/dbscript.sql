@@ -45,13 +45,15 @@ DROP TABLE IF EXISTS `po`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `po` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PO_NUMBER` varchar(100) NOT NULL,
   `COMPANY` varchar(100) NOT NULL,
   `PO_DATE` datetime NOT NULL,
   `DESCRIPTION` varchar(500) NOT NULL,
   `CREATED_TIME` datetime DEFAULT NULL,
   `UPDATED_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `ID_UNIQUE` (`ID`)
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  UNIQUE KEY `PO_NUMBER_UNIQUE` (`PO_NUMBER`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

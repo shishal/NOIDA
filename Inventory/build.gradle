@@ -39,6 +39,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	compile group: 'joda-time', name: 'joda-time', version: '2.3'
 	runtime('mysql:mysql-connector-java')
 	compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '3.2.0.RELEASE'
 	compile group: 'com.google.guava', name: 'guava', version: '11.0.2'

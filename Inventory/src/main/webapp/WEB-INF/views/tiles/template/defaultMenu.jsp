@@ -86,7 +86,7 @@
 							style="font-size: 20px;"
 							class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
 						<ul class="dropdown-menu forAnimate" role="menu">
-							<li><a href="${pageContext.request.contextPath}/admin/po">Purchase
+							<li><a id="poMenuLink" href="${pageContext.request.contextPath}/admin/po">Purchase
 									Order<span style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span>
 							</a></li>

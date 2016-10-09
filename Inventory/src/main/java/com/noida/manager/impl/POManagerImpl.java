@@ -9,35 +9,38 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.noida.dao.AssetTypeRepository;
+import com.noida.dao.PORepository;
 import com.noida.exception.InventoryException;
 import com.noida.manager.AssetTypeManager;
+import com.noida.manager.POManager;
 import com.noida.model.AssetMainType;
+import com.noida.model.PO;
 import com.noida.util.Message;
 
 @Service
-public class AssetTypeManagerImpl implements AssetTypeManager{
+public class POManagerImpl implements POManager{
 
 	@Autowired
-	AssetTypeRepository assetTypeRepo;
+	PORepository poRepo;
 
 	@Override
-	public AssetMainType createAssetType(String name, String desc) {
+	public PO createPO(String poNumber, String company, Date PoDate,String desc) {
 		try{
-			return  assetTypeRepo.save(new AssetMainType(name, desc, new Date(), new Date()));
+			return  poRepo.save(new PO(poNumber, company, PoDate,desc, new Date(), new Date()));
 		}catch (DataIntegrityViolationException e) {
 	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
 	    }
 	}
 
 	@Override
-	public List<AssetMainType> getAllAssetType() {
-		return Lists.newArrayList(assetTypeRepo.findAll());
+	public List<PO> getAllPO() {
+		return Lists.newArrayList(poRepo.findAll());
 	}
 
 	@Override
-	public void updateAssetType(Long id, String name, String desc) {
+	public void updatePO(Long id,String poNumber, String company, Date PoDate,String desc) {
 		try{
-			assetTypeRepo.save(new AssetMainType(id, name, desc, new Date()));
+			poRepo.save(new PO(id, poNumber,company, PoDate,desc, new Date()));
 		}catch (DataIntegrityViolationException e) {
 	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
 	    }
@@ -45,9 +48,9 @@ public class AssetTypeManagerImpl implements AssetTypeManager{
 	}
 
 	@Override
-	public void deleteAssetType(Long id) {
+	public void deletePO(Long id) {
 		try{
-			assetTypeRepo.delete(id);
+			poRepo.delete(id);
 		}catch (DataIntegrityViolationException e) {
 	        throw new InventoryException(Message.UNKNOW_ERROR,e);
 	    }

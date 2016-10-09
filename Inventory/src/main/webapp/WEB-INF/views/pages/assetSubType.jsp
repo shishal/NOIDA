@@ -6,10 +6,8 @@
 	</div>
 	<div class="col-md-6 text-right"
 		style="padding-right: 2%; padding-top: 2%">
-		<a href="#"><span title="Add New AssetSubType" style="font-size: 20px;" data-toggle="modal" data-target="#addNewAssetSubType" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>
-		&nbsp;&nbsp; 
-		<a href="#" id="editAssetSubType"><span title="Edit selected AssetSubType" style="font-size: 20px;" data-toggle="modal" data-target="#updateAssetSubType" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
-		&nbsp;&nbsp; 
+		<a href="#"><span title="Add New AssetSubType" style="font-size: 20px;" data-toggle="modal" data-target="#addNewAssetSubType" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>&nbsp;&nbsp; 
+		<a href="#" id="editAssetSubType"><span title="Edit selected AssetSubType" style="font-size: 20px;" data-toggle="modal" data-target="#updateAssetSubType" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp; 
 		<a href="#" id="deleteAssetSubType"><span title="Delete selected AssetSubType" style="font-size: 20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
 	</div>
 </div>
@@ -183,7 +181,8 @@
 				console.log(selectedRow)
 			}
 		});
-		$('#assetSubTypeTable tfoot th').each(function() {
+		$('#assetSubTypeTable tfoot th').each(function(index) {
+			if(index==0) return;
 			var title = $(this).text();
 			$(this).html('<input style="width:100%" type="text" placeholder="Search '+title+'" />');
 		});

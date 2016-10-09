@@ -2,31 +2,39 @@ package com.noida.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class AssetDetail {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String serialNo;
 	private String barcode;
-	private int amcId;
-	private int poId;
-	private int assetMainTypeId;
-	private int assetSubTypeId;
+	@ManyToOne(fetch=FetchType.LAZY)
+	private AMC amc;
+	@ManyToOne(fetch=FetchType.LAZY)
+	private PO po;
+	@ManyToOne(fetch=FetchType.LAZY)
+	private AssetMainType assetMainType;
+	@ManyToOne(fetch=FetchType.LAZY)
+	private AssetSubType assetSubType;
 	private int status;
 	private String description;
 	private Date createdTime;
 	private Date updatedTime;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -45,36 +53,37 @@ public class AssetDetail {
 		this.barcode = barcode;
 	}
 	
-	public int getAmcId() {
-		return amcId;
-	}
-	
-	public void setAmcId(int amcId) {
-		this.amcId = amcId;
-	}
-	
-	public int getPoId() {
-		return poId;
-	}
-	
-	public void setPoId(int poId) {
-		this.poId = poId;
-	}
-	
-	public int getAssetMainTypeId() {
-		return assetMainTypeId;
-	}
-	
-	public void setAssetMainTypeId(int assetMainTypeId) {
-		this.assetMainTypeId = assetMainTypeId;
-	}
-	
-	public int getAssetSubTypeId() {
-		return assetSubTypeId;
+
+	public AMC getAmc() {
+		return amc;
 	}
 
-	public void setAssetSubTypeId(int assetSubTypeId) {
-		this.assetSubTypeId = assetSubTypeId;
+	public void setAmc(AMC amc) {
+		this.amc = amc;
+	}
+
+	public PO getPo() {
+		return po;
+	}
+
+	public void setPo(PO po) {
+		this.po = po;
+	}
+
+	public AssetMainType getAssetMainType() {
+		return assetMainType;
+	}
+
+	public void setAssetMainType(AssetMainType assetMainType) {
+		this.assetMainType = assetMainType;
+	}
+
+	public AssetSubType getAssetSubType() {
+		return assetSubType;
+	}
+
+	public void setAssetSubType(AssetSubType assetSubType) {
+		this.assetSubType = assetSubType;
 	}
 
 	public int getStatus() {
@@ -109,15 +118,15 @@ public class AssetDetail {
 		this.updatedTime = updatedTime;
 	}
 
-	public AssetDetail(String serialNo, String barcode, int amcId, int poId, int assetMainTypeId,
-			int assetSubTypeId, int status, String description, Date createdTime, Date updatedTime) {
+	public AssetDetail(String serialNo, String barcode, AMC amc, PO po, AssetMainType assetMainType,
+			AssetSubType assetSubType, int status, String description, Date createdTime, Date updatedTime) {
 		super();
 		this.serialNo = serialNo;
 		this.barcode = barcode;
-		this.amcId = amcId;
-		this.poId = poId;
-		this.assetMainTypeId = assetMainTypeId;
-		this.assetSubTypeId = assetSubTypeId;
+		this.amc = amc;
+		this.po = po;
+		this.assetMainType = assetMainType;
+		this.assetSubType = assetSubType;
 		this.status = status;
 		this.description = description;
 		this.createdTime = createdTime;
@@ -126,10 +135,14 @@ public class AssetDetail {
 
 	@Override
 	public String toString() {
-		return "AssetDetail [id=" + id + ", serialNo=" + serialNo + ", barcode=" + barcode + ", amcId=" + amcId
-				+ ", poId=" + poId + ", assetMainTypeId=" + assetMainTypeId + ", assetSubTypeId=" + assetSubTypeId
+		return "AssetDetail [id=" + id + ", serialNo=" + serialNo + ", barcode=" + barcode + ", amc=" + amc
+				+ ", po=" + po + ", assetMainTypeId=" + assetMainType + ", assetSubTypeId=" + assetSubType
 				+ ", status=" + status + ", description=" + description + ", createdTime=" + createdTime
 				+ ", updatedTime=" + updatedTime + "]";
+	}
+
+	public AssetDetail() {
+		super();
 	}
 
 

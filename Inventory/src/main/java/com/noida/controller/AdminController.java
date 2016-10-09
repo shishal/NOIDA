@@ -1,13 +1,17 @@
 package com.noida.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +21,13 @@ import com.noida.exception.InventoryException;
 import com.noida.manager.AssetSubTypeManager;
 import com.noida.manager.AssetTypeManager;
 import com.noida.manager.DepartmentManager;
+import com.noida.manager.POManager;
 import com.noida.manager.UserManager;
 import com.noida.model.AssetMainType;
-import com.noida.model.Department;
-import com.noida.model.Users;
 import com.noida.model.AssetSubType;
+import com.noida.model.Department;
+import com.noida.model.PO;
+import com.noida.model.Users;
 import com.noida.util.Constants;
 import com.noida.util.Util;
 
@@ -33,6 +39,7 @@ public class AdminController {
 	@Autowired AssetTypeManager assetTypeMgr;
 	@Autowired AssetSubTypeManager assetSubTypeMgr;
 	@Autowired DepartmentManager departmentMgr;
+	@Autowired POManager poMgr;
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -41,7 +48,53 @@ public class AdminController {
 
 	@RequestMapping(value = { "/po" }, method = RequestMethod.GET)
 	public String purchaseOrder(ModelMap model) {
+		List<PO> poList = poMgr.getAllPO();
+		model.put("poList", poList);
 		return "po";
+	}
+	@ResponseBody
+	@RequestMapping(value = { "/createPO" }, method = RequestMethod.POST)
+	public Map<String,Object> createPO(
+			@RequestParam String poNumber,
+			@RequestParam String company,
+			@RequestParam Date poDate,
+			@RequestParam String desc) {
+		
+		PO po = null;
+		try{
+			po = poMgr.createPO(poNumber, company,poDate, desc);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS,"po",po);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/updatePO" }, method = RequestMethod.POST)
+	public Map<String,Object> updatePO(
+			@RequestParam Long id,
+			@RequestParam String poNumber,
+			@RequestParam String company,
+			@RequestParam Date poDate,
+			@RequestParam String desc 
+			) {
+		
+		try{
+			poMgr.updatePO(id,poNumber,company,poDate, desc);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	@ResponseBody
+	@RequestMapping(value = { "/deletePO" }, method = RequestMethod.POST)
+	public Map<String,Object> deletePO(@RequestParam Long id) {
+		try{
+			poMgr.deletePO(id);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
 	}
 
 	@RequestMapping(value = { "/amc" }, method = RequestMethod.GET)
@@ -281,4 +334,10 @@ public class AdminController {
 	}
 	
 	/* Department Tab --- End */
+	@InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+     dateFormat.setLenient(false);
+     webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+     }
 }
