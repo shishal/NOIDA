@@ -6,11 +6,14 @@ import com.noida.model.Users;
 
 public interface UserManager {
 	public Users createUser(String empCode, String userName, String firstName, String lastName, 
-	String contactNo, boolean enabled, String password);
+	String contactNo, boolean enabled, String password, Long deptId);
 
 	public List<Users> getAllUsers();
+	
+	public List<Users> getUser(String username);
 
-	public void updateUser(Long id, String name, String desc);
+	public void updateUser(String empCode, String userName, String firstName, String lastName, 
+			String contactNo, boolean enabled, String password, Long deptId);
 
-	public void deleteUser(Long id);
+	public void deleteUser(String userName);
 }

@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<h3 style="padding-left: 2%; padding-top: 2%">User</h3>
+		<h3 style="padding-left: 1%; padding-top: 2%"><strong>User</strong></h3>
 	</div>
 	<div class="col-md-6 text-right"
 		style="padding-right: 2%; padding-top: 2%">
@@ -62,7 +62,9 @@
 					<th>Last Name</th>
 					<th>Emp Code</th>
 					<th>Contact No</th>
-					<!-- <th>Department</th> -->
+					<th></th>
+					<th>Department</th>
+					<th>Status</th>
 				</tr>
 		</thead>
 		<tfoot>
@@ -73,7 +75,9 @@
 					<th>Last Name</th>
 					<th>Emp Code</th>
 					<th>Contact No</th>
-					<!-- <th>Department</th> -->
+					<th></th>
+					<th>Department</th>
+					<th>Status</th>
 			</tr>
 		</tfoot>
 		<tbody>
@@ -85,8 +89,12 @@
 					<td>${user.lastName}</td>
 					<td>${user.empCode}</td>
 					<td>${user.contactNo}</td>
-					<%-- <td>${user.deptId}</td>
-					<th>${user.status}</th> --%>
+					<td>${user.department.id}</td>
+					<td>${user.department.name}</td>
+					<td>
+						<c:if test="${user.enabled == true}">Enabled</c:if>
+						<c:if test="${user.enabled == false}">Disabled</c:if>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -105,7 +113,7 @@
                 
                 <form role="form">
                   <div class="form-group">
-                    <label for="inputModalUsername">UserName: </label>
+                    <label for="inputModalUsername">Username: </label>
                       <input type="text" class="form-control" value=""
                       id="inputModalUsername" disabled="disabled"/>
                   </div>
@@ -119,11 +127,7 @@
                       <input type="text" class="form-control" value=""
                       id="inputModalLastName" disabled="disabled"/>
                   </div>
-                  <div class="form-group">
-                    <label for="inputModalDepartment">Department: </label>
-                      <input type="text" class="form-control" value=""
-                      id="inputModalDepartment" disabled="disabled"/>
-                  </div>
+                  
                 </form>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
@@ -151,8 +155,8 @@
                       placeholder="Employee Code" id="inputModalEmpCode"/>
                   </div>
                   <div class="form-group">
-                    <label for="inputModalUsername">UserName: </label>
-                      <input name="userName" type="text" class="form-control" 
+                    <label for="inputModalUsername">Username: </label>
+                      <input name="username" type="text" class="form-control" 
                       placeholder="Username" id="inputModalUsername"/>
                   </div>
                   <div class="form-group">
@@ -161,7 +165,7 @@
                       placeholder="First Name" id="inputModalFirstName"/>
                   </div>
                   <div class="form-group">
-                    <label for="inputModalLastName">LastName: </label>
+                    <label for="inputModalLastName">Last Name: </label>
                       <input name="lastName" type="text" class="form-control" 
                       placeholder="Last Name" id="inputModalLastName"/>
                   </div>
@@ -171,15 +175,19 @@
                       placeholder="Contact No" id="inputContactNo"/>
                   </div>
                   <div class="form-group">
-                    <label for="inputEnabled">Enable: </label>
-                      <input name="enabled" type="checkbox" class="form-control" 
-                      id="inputEnabled"/>
-                  </div>
-                  <!-- <div class="form-group">
                     <label for="inputModalDepartment">Department: </label>
-                      <input type="text" class="form-control" value=""
-                      id="inputModalDepartment"/>
-                  </div> -->
+                    <select class="form-control" name="deptId" id="inputModalDepartment">
+							<c:forEach  items="${deptList}" var="dept" varStatus="row">
+								<option value="${dept.id}">${dept.name}</option>
+							</c:forEach>
+						</select>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEnabled">Enable: </label>
+                      <input name="enabled" type="checkbox" checked="checked" value="true"
+                      id="inputEnabled"/>
+                      <input name="enabled" type="hidden" value="false">
+                  </div>
                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<div id="createErrorMessage" class="alert alert-danger" style="display: none;"></div>
 					<div id="createSuccessMessage" class="alert alert-success" style="display: none;"></div>
@@ -207,34 +215,43 @@
                 
                 <form role="form" id="updateUserForm" >
                   <div class="form-group">
-                    <label for="inputUpdateEmpCode">Emp Code: </label>
-                      <input type="text" class="form-control" value=""
-                      id="inputUpdateEmpCode"/>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputUpdateUsername">UserName: </label>
-                      <input type="text" class="form-control" value=""
+                    <label for="inputUpdateUsername">Username: </label>
+                      <input type="text" name="username" class="form-control" 
                       id="inputUpdateUsername"/>
                   </div>
                   <div class="form-group">
+                    <label for="inputUpdateEmpCode">Emp Code: </label>
+                      <input type="text" name="empCode" class="form-control" 
+                      id="inputUpdateEmpCode"/>
+                  </div>
+                  <div class="form-group">
                     <label for="inputUpdateFirstName">First Name: </label>
-                      <input type="text" class="form-control" value=""
+                      <input type="text" name="firstName" class="form-control" 
                       id="inputUpdateFirstName"/>
                   </div>
                   <div class="form-group">
-                    <label for="inputUpdateLastName">LastName: </label>
-                      <input type="text" class="form-control" value=""
+                    <label for="inputUpdateLastName">Last Name: </label>
+                      <input type="text" name="lastName" class="form-control" 
                       id="inputUpdateLastName"/>
                   </div>
                   <div class="form-group">
                     <label for="inputUpdateContactNo">Contact No: </label>
-                      <input type="text" class="form-control" value=""
+                      <input type="text" name="contactNo" class="form-control" 
                       id="inputUpdateContactNo"/>
                   </div>
                   <div class="form-group">
                     <label for="inputUpdateDepartment">Department: </label>
-                      <input type="text" class="form-control" value=""
-                      id="inputUpdateDepartment"/>
+                    <select class="form-control" name="deptId" id="inputUpdateDepartment">
+							<c:forEach  items="${deptList}" var="dept" varStatus="row">
+								<option value="${dept.id}">${dept.name}</option>
+							</c:forEach>
+						</select>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputUpdateEnabled">Enable: </label>
+                      <input name="enabled" type="checkbox" checked="checked" value="true"
+                      id="inputUpdateEnabled"/>
+                      <input name="enabled" type="hidden" value="false">
                   </div>
                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<div id="updateErrorMessage" class="alert alert-danger" style="display: none;"></div>
@@ -273,9 +290,9 @@ $(function() {
 		] ,
 		columnDefs: [
 			{
-				"targets": [ 1 ],
-				"visible": true,
-				"searchable": true
+				"targets": [ 6 ],
+				"visible": false,
+				"searchable": false
 		    }
 		]
 	});
@@ -289,7 +306,6 @@ $(function() {
 			table.$('tr.selected').removeClass('selected');
 			$(this).addClass('selected');
 			selectedRow = table.row( this ).data();
-			console.log(selectedRow)
 		}
 	});
 	$('#userTable tfoot th').each(function() {
@@ -312,7 +328,7 @@ $(function() {
 	$('#addUser').on('hidden.bs.modal', function(e) {
 		resetModalForm();
 		resetModalAlerts();
-		reloadAssetTypePage();
+		reloadUserPage();
 	});
 	$('#updateUser').on('shown.bs.modal', function(e) {
 		resetModalForm();
@@ -321,11 +337,15 @@ $(function() {
 	$('#updateUser').on('hidden.bs.modal', function(e) {
 		resetModalForm();
 		resetModalAlerts();
-		reloadAssetTypePage();
+		reloadUserPage();
 	});
 	function resetModalForm() {
-		//$('#inputAssetType').val('').end();
-		//$('#inputDesc').val('');
+		$('#inputModalEmpCode').val('').end();
+		$('#inputModalUsername').val('');
+		$('#inputModalFirstName').val('').end();
+		$('#inputModalLastName').val('');
+		$('#inputContactNo').val('').end();
+		$('#inputModalDepartment').val('');
 	}
 	function resetModalAlerts() {
 		$('#createErrorMessage').hide();
@@ -334,7 +354,7 @@ $(function() {
 		$('#updateSuccessMessage').hide();
 	}
 	
-	function reloadAssetTypePage() {
+	function reloadUserPage() {
 		document.getElementById('userMenuLink').click();
 	}
 	
@@ -344,6 +364,7 @@ $(function() {
 			url : "createUser",
 			data : $("#userForm").serialize(),
 			success : function(data) {
+				console.log(data);
 				if (data.status == 1) {
 					showSuccessMessage('createSuccessMessage','<spring:message code="user.create.success" />');
 					resetModalForm();
@@ -361,19 +382,30 @@ $(function() {
 			showAlertDialog('Please select row to edit');
 			return false;
 		}
-		//$('#assetTypeId').val(selectedRow[1]);
-		//$('#inputUpdateAsset').val(selectedRow[2]);
-		//$('#inputUpdateDesc').val(selectedRow[3])
+		$('#inputUpdateUsername').val(selectedRow[1]);
+		$('#inputUpdateFirstName').val(selectedRow[2]);
+		$('#inputUpdateLastName').val(selectedRow[3]);
+		$('#inputUpdateEmpCode').val(selectedRow[4]);
+		$('#inputUpdateContactNo').val(selectedRow[5]);
+		$('#inputUpdateDepartment').val(selectedRow[6]);
+		if(selectedRow[8] == "Enabled") {
+			$('#inputUpdateEnabled').prop('checked', true);
+		}
+		else {
+			$('#inputUpdateEnabled').prop('checked', false);
+		}
+		
 	});
 	
 	$('#updateBtn').click(function() {
+		console.log($("#updateUserForm").serialize());
 		$.ajax({
 		type : "POST",
 		url : "updateUser",
 		data : $("#updateUserForm").serialize(),
 		success : function(data) {
 			if (data.status == 1) {
-				showSuccessMessage('updateSuccessMessage','<spring:message code="asset.type.update.success" />');
+				showSuccessMessage('updateSuccessMessage','<spring:message code="user.update.success" />');
 				resetModalForm();
 			} else if (data.status == 0) {
 				showErrorMessage('updateErrorMessage',data.message);//code to show error
@@ -392,11 +424,11 @@ $(function() {
 		$.ajax({
 			type : "POST",
 			url : "deleteUser",
-			data : {id:selectedRow[1],${_csrf.parameterName}:'${_csrf.token}'},
+			data : {username:selectedRow[1],${_csrf.parameterName}:'${_csrf.token}'},
 			success : function(data) {
 				if (data.status == 1) {
-					showAlertDialog('<spring:message code="asset.type.delete.success" />');
-					reloadAssetTypePage();
+					showAlertDialog('<spring:message code="user.delete.success" />');
+					reloadUserPage();
 				} else {
 					showAlertDialog('Unknow error');
 				}

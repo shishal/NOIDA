@@ -4,7 +4,7 @@
 	<div class="bs-example"> -->
 <div class="row">
 	<div class="col-md-6">
-		<h3 style="padding-left: 2%; padding-top: 2%">Asset Type</h3>
+		<h3 style="padding-left: 1%; padding-top: 2%"><strong>Asset Type</strong></h3>
 	</div>
 	<div class="col-md-6 text-right"
 		style="padding-right: 2%; padding-top: 2%">
@@ -42,7 +42,6 @@
 	</div>
 	<button type="button" class="btn btn-primary">Search</button>
 </form> -->
-<br>
 <div class="table-responsive">
 	<table class="table table-bordered hover " id="assetTypeTable">
 		<thead class="thead-inverse table-header" style="">

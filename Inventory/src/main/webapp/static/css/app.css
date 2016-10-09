@@ -83,6 +83,12 @@
   margin-bottom: 2%
 }
 
+input[type="checkbox"]{
+  width: 30px; /*Desired width*/
+  height: 20px; /*Desired height*/
+  cursor: pointer;
+}
+
 /* remove outer padding */
 	.main .row{
 		padding: 0px;

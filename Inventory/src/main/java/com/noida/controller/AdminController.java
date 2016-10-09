@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.map.MultiValueMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.noida.exception.InventoryException;
 import com.noida.manager.AssetSubTypeManager;
 import com.noida.manager.AssetTypeManager;
+import com.noida.manager.DepartmentManager;
 import com.noida.manager.UserManager;
 import com.noida.model.AssetMainType;
+import com.noida.model.Department;
 import com.noida.model.Users;
 import com.noida.model.AssetSubType;
 import com.noida.util.Constants;
-import com.noida.util.Message;
 import com.noida.util.Util;
 
 @Controller
@@ -31,6 +32,7 @@ public class AdminController {
 	@Autowired UserManager userMgr;
 	@Autowired AssetTypeManager assetTypeMgr;
 	@Autowired AssetSubTypeManager assetSubTypeMgr;
+	@Autowired DepartmentManager departmentMgr;
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -51,6 +53,9 @@ public class AdminController {
 	public String user(ModelMap model) {
 		List<Users> userList = userMgr.getAllUsers();
 		model.put("userList", userList);
+		List<Department> deptList = departmentMgr.getAllDepartments();
+		model.put("deptList", deptList);
+		
 		return "user";
 	}
 
@@ -129,23 +134,60 @@ public class AdminController {
 	@RequestMapping(value = { "/createUser" }, method = RequestMethod.POST)
 	public Map<String,Object> createUser(
 			@RequestParam String empCode,
-			@RequestParam String userName, 
+			@RequestParam String username, 
 			@RequestParam String firstName,
 			@RequestParam String lastName,
 			@RequestParam String contactNo,
+			@RequestParam Long deptId,
 			@RequestParam boolean enabled) {
 		
 		Users user = null;
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		try{
-			user = userMgr.createUser(empCode, userName, firstName, lastName, contactNo, enabled, Constants.USER_RESET_PASSWORD);
+			user = userMgr.createUser(empCode, username, firstName, lastName, contactNo, enabled, encoder.encode(Constants.USER_RESET_PASSWORD), deptId);
 		}catch(InventoryException e){
 			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
 		}
-		return Util.toMap("status",Constants.SUCCESS,"user",user);
+		return Util.toMap("status",Constants.SUCCESS);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/updateUser" }, method = RequestMethod.POST)
+	public Map<String,Object> updateUser(
+			@RequestParam String empCode,
+			@RequestParam String username, 
+			@RequestParam String firstName,
+			@RequestParam String lastName,
+			@RequestParam String contactNo,
+			@RequestParam Long deptId,
+			@RequestParam boolean enabled) {
+		
+		try{
+			String password = null;
+			List<Users> user = userMgr.getUser(username);
+			if(user.size() >= 0)
+				password = user.get(0).getPassword();
+			userMgr.updateUser(username, empCode, firstName, lastName, contactNo, enabled, password, deptId);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/deleteUser" }, method = RequestMethod.POST)
+	public Map<String,Object> deleteUser(@RequestParam String username) {
+		try{
+			userMgr.deleteUser(username);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	
 	/* Users Tab --- End */
 	
-	
+	/* Asset SubType Tab --- Start */
 	@ResponseBody
 	@RequestMapping(value = { "/createAssetSubType" }, method = RequestMethod.POST)
 	public Map<String,Object> createAssetSubType(
@@ -191,4 +233,6 @@ public class AdminController {
 		}
 		return Util.toMap("status",Constants.SUCCESS);
 	}
+	
+	/* AssetSubType Tab --- End */
 }

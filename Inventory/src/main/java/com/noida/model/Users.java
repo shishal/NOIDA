@@ -3,9 +3,14 @@ package com.noida.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
+@SelectBeforeUpdate
 public class Users {
 
 	@Id
@@ -14,7 +19,9 @@ public class Users {
     private boolean enabled;
     private String firstName;
 	private String lastName;
-	private int deptId;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Department dept;
 	private String empCode;
 	/*private String status;*/
 	private String contactNo;
@@ -63,12 +70,12 @@ public class Users {
 		this.lastName = lastName;
 	}
 
-	public int getDeptId() {
-		return deptId;
+	public Department getDepartment() {
+		return dept;
 	}
 
-	public void setDeptId(int deptId) {
-		this.deptId = deptId;
+	public void setDepartment(Department department) {
+		this.dept = department;
 	}
 
 	public String getEmpCode() {
@@ -111,7 +118,7 @@ public class Users {
 		this.updatedTime = updatedTime;
 	}
 
-	public Users(String username, String password, boolean enabled, String firstName, String lastName, int deptId,
+	public Users(String username, String password, boolean enabled, String firstName, String lastName, Department department,
 			String empCode, /*String status,*/ String contactNo, Date createdTime, Date updatedTime) {
 		super();
 		this.username = username;
@@ -119,18 +126,33 @@ public class Users {
 		this.enabled = enabled;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.deptId = deptId;
+		this.dept = department;
 		this.empCode = empCode;
 		/*this.status = status;*/
 		this.contactNo = contactNo;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
 	}
+	
+	public Users(String username, String password, boolean enabled, String firstName, String lastName, Department department,
+			String empCode, /*String status,*/ String contactNo, Date updatedTime) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dept = department;
+		this.empCode = empCode;
+		/*this.status = status;*/
+		this.contactNo = contactNo;
+		this.updatedTime = updatedTime;
+	}
 
 	@Override
 	public String toString() {
 		return "Users [username=" + username + ", password=" + password + ", enabled=" + enabled + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", deptId=" + deptId + ", empCode=" + empCode + /*", status="
+				+ firstName + ", lastName=" + lastName + ", department=" + dept + ", empCode=" + empCode + /*", status="
 				+ status +*/ ", contactNo=" + contactNo + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
 				+ "]";
 	}

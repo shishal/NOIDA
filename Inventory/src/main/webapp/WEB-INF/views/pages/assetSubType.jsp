@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="row">
 	<div class="col-md-6">
-		<h4 style="padding-left: 2%; padding-top: 2%">Search Filter</h4>
+		<h3 style="padding-left: 1%; padding-top: 2%"><strong>Asset SubType</strong></h3>
 	</div>
 	<div class="col-md-6 text-right"
 		style="padding-right: 2%; padding-top: 2%">
@@ -10,11 +10,7 @@
 		&nbsp;&nbsp; 
 		<a href="#" id="editAssetSubType"><span title="Edit selected AssetSubType" style="font-size: 20px;" data-toggle="modal" data-target="#updateAssetSubType" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
 		&nbsp;&nbsp; 
-		<a href="#"><span title="Export" style="font-size: 20px;" class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
-		&nbsp;&nbsp; 
 		<a href="#" id="deleteAssetSubType"><span title="Delete selected AssetSubType" style="font-size: 20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a>
-		&nbsp;&nbsp; 
-		<a href="#"><span title="Print" style="font-size: 20px;" class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
 	</div>
 </div>
 <div class="table-responsive">

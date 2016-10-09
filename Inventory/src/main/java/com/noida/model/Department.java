@@ -1,26 +1,33 @@
 package com.noida.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Department {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String name;
 	private String description;
 	private Date createdTime;
 	private Date updatedTime;
+	/*@OneToMany(mappedBy = "dept", cascade = CascadeType.ALL)
+	private Set<Users> users;*/
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -56,6 +63,14 @@ public class Department {
 		this.updatedTime = updatedTime;
 	}
 
+	/*public Set<Users> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<Users> users) {
+		this.users = users;
+	}*/
+
 	public Department(String name, String description) {
 		super();
 		this.name = name;
@@ -68,6 +83,21 @@ public class Department {
 		this.description = description;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
+	}
+	
+	public Department(String name, String description, Date updatedTime) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.updatedTime = updatedTime;
+	}
+	
+	public Department() {
+		super();
+	}
+	
+	public Department(Long id) {
+		this.id = id;
 	}
 
 	@Override
