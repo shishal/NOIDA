@@ -61,6 +61,8 @@ public class AdminController {
 
 	@RequestMapping(value = { "/department" }, method = RequestMethod.GET)
 	public String department(ModelMap model) {
+		List<Department> deptList = departmentMgr.getAllDepartments();
+		model.put("deptList", deptList);
 		return "department";
 	}
 
@@ -235,4 +237,48 @@ public class AdminController {
 	}
 	
 	/* AssetSubType Tab --- End */
+	
+	/* Department Tab --- Start */
+	@ResponseBody
+	@RequestMapping(value = { "/createDepartment" }, method = RequestMethod.POST)
+	public Map<String,Object> createDepartment(
+			@RequestParam String name,
+			@RequestParam String description) {
+		
+		Department dept = null;
+		try{
+			dept = departmentMgr.createDepartment(name, description);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/updateDepartment" }, method = RequestMethod.POST)
+	public Map<String,Object> updateDepartment(
+			@RequestParam Long id,
+			@RequestParam String name, 
+			@RequestParam String description ) {
+		
+		try{
+			departmentMgr.updateDepartment(id, name, description);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/deleteDepartment" }, method = RequestMethod.POST)
+	public Map<String,Object> deleteDepartment(@RequestParam Long id) {
+		try{
+			departmentMgr.deleteDepartment(id);;
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	
+	/* Department Tab --- End */
 }

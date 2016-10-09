@@ -110,7 +110,7 @@
 								href="${pageContext.request.contextPath}/admin/user">User<span
 									style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
-							<li><a
+							<li><a id="deptMenuLink"
 								href="${pageContext.request.contextPath}/admin/department">Department<span
 									style="font-size: 16px;"
 									class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>

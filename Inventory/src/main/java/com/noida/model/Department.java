@@ -85,8 +85,9 @@ public class Department {
 		this.updatedTime = updatedTime;
 	}
 	
-	public Department(String name, String description, Date updatedTime) {
+	public Department(Long id, String name, String description, Date updatedTime) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.updatedTime = updatedTime;
