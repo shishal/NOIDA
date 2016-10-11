@@ -12,22 +12,32 @@ public class AMC {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
+	private String amcNumber;
 	private Date startDate;
 	private Date endDate;
+	private String vendor;
 	private String description;
 	private Date createdTime;
 	private Date updatedTime;
 
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
+	public String getAmcNumber() {
+		return amcNumber;
+	}
+
+	public void setAmcNumber(String amcNumber) {
+		this.amcNumber = amcNumber;
+	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -44,6 +54,15 @@ public class AMC {
 		this.endDate = endDate;
 	}
 	
+	
+	public String getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(String vendor) {
+		this.vendor = vendor;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -68,20 +87,38 @@ public class AMC {
 		this.updatedTime = updatedTime;
 	}
 
-	public AMC(Date startDate, Date endDate, String description, Date createdTime, Date updatedTime) {
+	public AMC(String amcNumber, Date startDate, Date endDate, String vendor, String description, Date createdTime, Date updatedTime) {
 		super();
+		this.amcNumber = amcNumber;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.vendor = vendor;
 		this.description = description;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
 	}
 
-	@Override
-	public String toString() {
-		return "AMC [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", description=" + description
-				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+	public AMC(Long id,String amcNumber, Date startDate, Date endDate, String vendor, String desc, Date updatedTime) {
+		super();
+		this.id= id;
+		this.amcNumber = amcNumber;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.vendor = vendor;
+		this.description = desc;
+		this.updatedTime = updatedTime;
 	}
 	
+	public AMC() {
+		super();
+	}
 
+	@Override
+	public String toString() {
+		return "AMC [id=" + id + ", amcNumber=" + amcNumber + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", vendor=" + vendor + ", description=" + description + ", createdTime=" + createdTime
+				+ ", updatedTime=" + updatedTime + "]";
+	}
+
+	
 }

@@ -26,13 +26,16 @@ DROP TABLE IF EXISTS `amc`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `amc` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `AMC_NUMBER` VARCHAR(100) NOT NULL,
   `START_DATE` datetime NOT NULL,
   `END_DATE` datetime NOT NULL,
+  `VENDOR` VARCHAR(100) NOT NULL,
   `DESCRIPTION` varchar(500) NOT NULL,
   `CREATED_TIME` datetime DEFAULT NULL,
   `UPDATED_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `ID_UNIQUE` (`ID`)
+  UNIQUE KEY `ID_UNIQUE` (`ID`),
+  UNIQUE KEY `AMC_NUMBER_UNIQUE` (`AMC_NUMBER`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

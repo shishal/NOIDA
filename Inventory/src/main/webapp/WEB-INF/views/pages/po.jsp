@@ -93,7 +93,6 @@
 				<button type="button" id="updateBtn" class="btn btn-primary">Update</button>
 				<button type="button" class="btn btn-primary" onclick="" id="closeBtn" data-dismiss="modal">Close</button>
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -119,12 +118,7 @@ $(function() {
 			} 
 		],
 		columnDefs: [
-			{ "targets": [ 0 ], "width":'0%', "visible": false, "searchable": false },
-			{ "targets": [ 1 ], "width":'5%'},
-			{ "targets": [ 2 ], "width":'20%'},
-			{ "targets": [ 3 ], "width":'20%'},
-			{ "targets": [ 4 ], "width":'20%'},
-			{ "targets": [ 5 ], "width":'35%'},
+			{ "targets": [ 1 ], "visible": false, "searchable": false },
 		]
 	});
 				

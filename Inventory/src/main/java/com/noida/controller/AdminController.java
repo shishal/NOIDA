@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.exception.InventoryException;
+import com.noida.manager.AMCManager;
 import com.noida.manager.AssetSubTypeManager;
 import com.noida.manager.AssetTypeManager;
 import com.noida.manager.DepartmentManager;
 import com.noida.manager.POManager;
 import com.noida.manager.UserManager;
+import com.noida.model.AMC;
 import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
 import com.noida.model.Department;
@@ -40,6 +42,7 @@ public class AdminController {
 	@Autowired AssetSubTypeManager assetSubTypeMgr;
 	@Autowired DepartmentManager departmentMgr;
 	@Autowired POManager poMgr;
+	@Autowired AMCManager amcMgr;
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -99,7 +102,56 @@ public class AdminController {
 
 	@RequestMapping(value = { "/amc" }, method = RequestMethod.GET)
 	public String amc(ModelMap model) {
+		List<AMC> amcList = amcMgr.getAllAMC();
+		model.put("amcList", amcList);
 		return "amc";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/createAMC" }, method = RequestMethod.POST)
+	public Map<String,Object> createAMC(
+			@RequestParam String amcNumber,
+			@RequestParam Date startDate,
+			@RequestParam Date endDate,
+			@RequestParam String vendor,
+			@RequestParam String desc) {
+		
+		AMC amc = null;
+		try{
+			amc = amcMgr.createAMC(amcNumber,startDate, endDate, vendor,desc);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS,"amc",amc);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/updateAMC" }, method = RequestMethod.POST)
+	public Map<String,Object> updateAMC(
+			@RequestParam Long id,
+			@RequestParam String amcNumber,
+			@RequestParam Date startDate,
+			@RequestParam Date endDate,
+			@RequestParam String vendor,
+			@RequestParam String desc 
+			) {
+		
+		try{
+			amcMgr.updateAMC(id, amcNumber,startDate,endDate, vendor,desc);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	@ResponseBody
+	@RequestMapping(value = { "/deleteAMC" }, method = RequestMethod.POST)
+	public Map<String,Object> deleteAMC(@RequestParam Long id) {
+		try{
+			amcMgr.deleteAMC(id);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
 	}
 
 	@RequestMapping(value = { "/user" }, method = RequestMethod.GET)
