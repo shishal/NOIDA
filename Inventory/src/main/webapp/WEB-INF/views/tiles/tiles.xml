@@ -103,6 +103,10 @@
 		<put-attribute name="title" value="My Assigned Assets" />
 		<put-attribute name="body" value="/WEB-INF/views/pages/myAsset.jsp" />
 	</definition>
+	<definition name="changePassword" extends="base-definition">
+		<put-attribute name="title" value="Change Password" />
+		<put-attribute name="body" value="/WEB-INF/views/pages/changePassword.jsp" />
+	</definition>
 	<definition name="approvePendingRequest" extends="base-definition">
 		<put-attribute name="title" value="New Requests" />
 		<put-attribute name="body"

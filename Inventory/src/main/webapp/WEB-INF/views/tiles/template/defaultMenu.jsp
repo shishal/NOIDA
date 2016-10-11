@@ -120,6 +120,13 @@
 						<li><a href="#">One more separated link</a></li> -->
 						</ul></li>
 				</sec:authorize>
+				<sec:authorize
+					access="hasAnyRole('APPROVER','ADMIN','USER','ISSUER')">
+					<li><a href="${pageContext.request.contextPath}/user/changePassword">Change Password
+						<span style="font-size: 20px;"
+							class="pull-right hidden-xs showopacity glyphicon glyphicon-lock"></span>
+					</a></li>
+				</sec:authorize>
 				<li><a href="#" onclick="appLogout();">Logout<span
 						style="font-size: 20px;"
 						class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span>
