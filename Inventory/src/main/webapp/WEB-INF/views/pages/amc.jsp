@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="row">
 	<div class="col-md-6">
-		<h4 style="padding-left: 2%; padding-top: 2%">Search Filter</h4>
+		<h4 style="padding-left: 2%; padding-top: 2%">AMC</h4>
 	</div>
 	<div class="col-md-6 text-right" style="padding-right: 2%; padding-top: 2%">
 		<a  id="createAMC" href="#"><span title="Add New AMC" style="font-size: 20px;" data-toggle="modal" data-target="#AMCModel" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a>&nbsp;&nbsp;
