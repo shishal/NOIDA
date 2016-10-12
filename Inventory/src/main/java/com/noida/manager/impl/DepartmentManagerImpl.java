@@ -27,7 +27,7 @@ public class DepartmentManagerImpl implements DepartmentManager {
 		try{
 			return  departmentRepo.save(new Department(name, desc, new Date(), new Date()));
 		}catch (DataIntegrityViolationException e) {
-	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
+	        throw new InventoryException(Message.DUPLICATE_DEPARTMENT,e);
 	    }
 	}
 
@@ -41,7 +41,7 @@ public class DepartmentManagerImpl implements DepartmentManager {
 		try{
 			departmentRepo.save(new Department(id, name, desc, new Date()));
 		}catch (DataIntegrityViolationException e) {
-	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
+	        throw new InventoryException(Message.DUPLICATE_DEPARTMENT,e);
 	    }
 	}
 

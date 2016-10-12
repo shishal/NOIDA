@@ -28,7 +28,7 @@ public class POManagerImpl implements POManager{
 		try{
 			return  poRepo.save(new PO(poNumber, company, PoDate,desc, new Date(), new Date()));
 		}catch (DataIntegrityViolationException e) {
-	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
+	        throw new InventoryException(Message.DUPLICATE_PO,e);
 	    }
 	}
 
@@ -42,7 +42,7 @@ public class POManagerImpl implements POManager{
 		try{
 			poRepo.save(new PO(id, poNumber,company, PoDate,desc, new Date()));
 		}catch (DataIntegrityViolationException e) {
-	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
+	        throw new InventoryException(Message.DUPLICATE_PO,e);
 	    }
 		
 	}

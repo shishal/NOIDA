@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class AssetIssueDetail {
+public class AssetIssue {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -111,7 +111,7 @@ public class AssetIssueDetail {
 		this.updatedTime = updatedTime;
 	}
 
-	public AssetIssueDetail(int assetId, String issueType, int requestId, Date issueDate, Date returnDate,
+	public AssetIssue(int assetId, String issueType, int requestId, Date issueDate, Date returnDate,
 			int issuedBy, int returnedBy, String description, Date createdTime, Date updatedTime) {
 		super();
 		this.assetId = assetId;

@@ -113,6 +113,10 @@ public class AMC {
 		super();
 	}
 
+	public AMC(Long amcId) {
+		this.id = amcId;
+	}
+
 	@Override
 	public String toString() {
 		return "AMC [id=" + id + ", amcNumber=" + amcNumber + ", startDate=" + startDate + ", endDate=" + endDate
