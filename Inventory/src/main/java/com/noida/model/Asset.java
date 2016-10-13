@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.noida.util.AssetStatus;
+
 @Entity
-public class AssetDetail {
+public class Asset {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -25,7 +27,7 @@ public class AssetDetail {
 	private AssetMainType assetMainType;
 	@ManyToOne(fetch=FetchType.LAZY)
 	private AssetSubType assetSubType;
-	private int status;
+	private AssetStatus status;
 	private String description;
 	private Date createdTime;
 	private Date updatedTime;
@@ -86,11 +88,11 @@ public class AssetDetail {
 		this.assetSubType = assetSubType;
 	}
 
-	public int getStatus() {
+	public AssetStatus getStatus() {
 		return status;
 	}
 	
-	public void setStatus(int status) {
+	public void setStatus(AssetStatus status) {
 		this.status = status;
 	}
 	
@@ -118,8 +120,20 @@ public class AssetDetail {
 		this.updatedTime = updatedTime;
 	}
 
-	public AssetDetail(String serialNo, String barcode, AMC amc, PO po, AssetMainType assetMainType,
-			AssetSubType assetSubType, int status, String description, Date createdTime, Date updatedTime) {
+	public Asset(Long id, AssetMainType assetMainType, AssetSubType assetSubType,AMC amc, PO po, AssetStatus status,String serialNo, String barcode,String description, Date updatedTime) {
+		super();
+		this.id = id;
+		this.serialNo = serialNo;
+		this.barcode = barcode;
+		this.amc = amc;
+		this.po = po;
+		this.assetMainType = assetMainType;
+		this.assetSubType = assetSubType;
+		this.status = status;
+		this.description = description;
+		this.updatedTime = updatedTime;
+	}
+	public Asset(AssetMainType assetMainType, AssetSubType assetSubType,AMC amc, PO po, AssetStatus status,String serialNo, String barcode,String description, Date createdTime, Date updatedTime) {
 		super();
 		this.serialNo = serialNo;
 		this.barcode = barcode;
@@ -135,15 +149,13 @@ public class AssetDetail {
 
 	@Override
 	public String toString() {
-		return "AssetDetail [id=" + id + ", serialNo=" + serialNo + ", barcode=" + barcode + ", amc=" + amc
+		return "Asset [id=" + id + ", serialNo=" + serialNo + ", barcode=" + barcode + ", amc=" + amc
 				+ ", po=" + po + ", assetMainTypeId=" + assetMainType + ", assetSubTypeId=" + assetSubType
 				+ ", status=" + status + ", description=" + description + ", createdTime=" + createdTime
 				+ ", updatedTime=" + updatedTime + "]";
 	}
-
-	public AssetDetail() {
+	
+	public Asset() {
 		super();
 	}
-
-
 }

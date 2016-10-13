@@ -110,6 +110,10 @@ public class AssetSubType {
 		super();
 	}
 
+	public AssetSubType(Long assetSubTypeId) {
+		this.id = assetSubTypeId;
+	}
+
 	@Override
 	public String toString() {
 		return "AssetSubType [id=" + id + ", assetMainType=" + mainType + ", subType=" + subType + ", make=" + make

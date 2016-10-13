@@ -109,6 +109,10 @@ public class PO {
 		super();
 	}
 
+	public PO(Long poId) {
+		this.id = poId;
+	}
+
 	@Override
 	public String toString() {
 		return "PO [id=" + id + ", company=" + company + ", poNumber=" + poNumber + ", poDate=" + poDate

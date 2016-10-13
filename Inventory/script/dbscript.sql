@@ -1,3 +1,4 @@
+
 CREATE DATABASE  IF NOT EXISTS `noida` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `noida`;
 -- MySQL dump 10.13  Distrib 5.7.12, for osx10.9 (x86_64)
@@ -166,10 +167,10 @@ CREATE TABLE `user_roles` (
 -- Table structure for table `asset_detail`
 --
 
-DROP TABLE IF EXISTS `asset_detail`;
+DROP TABLE IF EXISTS `asset`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `asset_detail` (
+CREATE TABLE `asset` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `SERIAL_NO` varchar(45) NOT NULL,
   `BARCODE` varchar(45) NOT NULL,
@@ -247,13 +248,13 @@ CREATE TABLE `request_history` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `asset_issue_detail`
+-- Table structure for table `asset_issue`
 --
 
-DROP TABLE IF EXISTS `asset_issue_detail`;
+DROP TABLE IF EXISTS `asset_issue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `asset_issue_detail` (
+CREATE TABLE `asset_issue` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `ASSET_ID` int(11) NOT NULL,
   `ISSUE_TYPE` varchar(45) NOT NULL,
@@ -269,7 +270,7 @@ CREATE TABLE `asset_issue_detail` (
   KEY `REQUEST_ID_FK_idx` (`REQUEST_ID`),
   KEY `ISSUER_ID_FK_idx` (`ISSUED_BY`),
   KEY `RETURNED_BY_FK_idx` (`RETURNED_BY`),
-  CONSTRAINT `ASSET_ID_FK` FOREIGN KEY (`ID`) REFERENCES `asset_detail` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ASSET_ID_FK` FOREIGN KEY (`ID`) REFERENCES `asset` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ISSUED_BY_FK` FOREIGN KEY (`ISSUED_BY`) REFERENCES `users` (`USERNAME`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `REQUEST_ID_FK` FOREIGN KEY (`REQUEST_ID`) REFERENCES `request_detail` (`REQUEST_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `RETURNED_BY_FK` FOREIGN KEY (`RETURNED_BY`) REFERENCES `users` (`USERNAME`) ON DELETE CASCADE ON UPDATE CASCADE

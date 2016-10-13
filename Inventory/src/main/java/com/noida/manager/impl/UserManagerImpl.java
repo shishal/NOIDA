@@ -42,7 +42,7 @@ public class UserManagerImpl implements UserManager {
 			
 			return user;
 		}catch (DataIntegrityViolationException e) {
-	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
+	        throw new InventoryException(Message.DUPLICATE_USER,e);
 	    }
 	}
 
@@ -63,7 +63,7 @@ public class UserManagerImpl implements UserManager {
 			userRepo.save(new Users(userName, password, enabled, firstName, lastName, new Department(deptId), empCode , userRoles, contactNo, 
 				new Date()));
 		}catch (DataIntegrityViolationException e) {
-	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
+	        throw new InventoryException(Message.DUPLICATE_USER,e);
 	    }
 		
 	}

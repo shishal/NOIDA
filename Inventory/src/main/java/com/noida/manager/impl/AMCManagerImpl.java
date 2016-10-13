@@ -25,7 +25,7 @@ public class AMCManagerImpl implements AMCManager {
 		try {
 			return amcRepo.save(new AMC(amcNumber,startDate, endDate, vendor,desc, new Date(), new Date()));
 		} catch (DataIntegrityViolationException e) {
-			throw new InventoryException(Message.DUPLICATE_MAIN_TYPE, e);
+			throw new InventoryException(Message.DUPLICATE_AMC, e);
 		}
 	}
 
@@ -39,7 +39,7 @@ public class AMCManagerImpl implements AMCManager {
 		try {
 			amcRepo.save(new AMC(id, amcNumber,startDate, endDate, vendor,desc, new Date()));
 		} catch (DataIntegrityViolationException e) {
-			throw new InventoryException(Message.DUPLICATE_MAIN_TYPE, e);
+			throw new InventoryException(Message.DUPLICATE_AMC, e);
 		}
 
 	}

@@ -21,18 +21,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.exception.InventoryException;
 import com.noida.manager.AMCManager;
+import com.noida.manager.AssetManager;
 import com.noida.manager.AssetSubTypeManager;
 import com.noida.manager.AssetTypeManager;
 import com.noida.manager.DepartmentManager;
 import com.noida.manager.POManager;
 import com.noida.manager.UserManager;
 import com.noida.model.AMC;
+import com.noida.model.Asset;
 import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
 import com.noida.model.Department;
 import com.noida.model.PO;
 import com.noida.model.UserRoles;
 import com.noida.model.Users;
+import com.noida.util.AssetStatus;
 import com.noida.util.Constants;
 import com.noida.util.Util;
 
@@ -46,6 +49,7 @@ public class AdminController {
 	@Autowired DepartmentManager departmentMgr;
 	@Autowired POManager poMgr;
 	@Autowired AMCManager amcMgr;
+	@Autowired AssetManager assetMgr;
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -176,7 +180,62 @@ public class AdminController {
 
 	@RequestMapping(value = { "/asset" }, method = RequestMethod.GET)
 	public String asset(ModelMap model) {
+		List<Asset> assetList = assetMgr.getAllAssetDetail();
+		model.put("assetList", assetList);
 		return "asset";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/createAsset" }, method = RequestMethod.POST)
+	public Map<String,Object> createAsset(
+			@RequestParam Long assetTypeId,
+			@RequestParam Long assetSubTypeId,
+			@RequestParam Long amcId, 
+			@RequestParam Long poId,
+			@RequestParam String serialNumber, 
+			@RequestParam String barcode,
+			@RequestParam AssetStatus status,
+			@RequestParam String desc) {
+		
+		Asset asset = null;
+		try{
+			asset = assetMgr.createAsset(assetTypeId, assetSubTypeId, amcId, poId, serialNumber, barcode, status, desc);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS,"asset",asset);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/updateAsset" }, method = RequestMethod.POST)
+	public Map<String,Object> updateAsset(
+			@RequestParam Long id,
+			@RequestParam Long assetTypeId,
+			@RequestParam Long assetSubTypeId,
+			@RequestParam Long amcId, 
+			@RequestParam Long poId,
+			@RequestParam String serialNumber, 
+			@RequestParam String barcode,
+			@RequestParam AssetStatus status,
+			@RequestParam String desc
+			) {
+		
+		try{
+			assetMgr.updateAsset(id, assetTypeId, assetSubTypeId, amcId, poId, serialNumber, barcode, status, desc);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	@ResponseBody
+	@RequestMapping(value = { "/deleteAsset" }, method = RequestMethod.POST)
+	public Map<String,Object> deleteAsset(@RequestParam Long id) {
+		try{
+			assetMgr.deleteAsset(id);
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
 	}
 
 	@RequestMapping(value = { "/assetType" }, method = RequestMethod.GET)

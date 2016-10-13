@@ -27,7 +27,7 @@ public class AssetSubTypeManagerImpl implements AssetSubTypeManager{
 			
 			return  assetSubTypeRepo.save(new AssetSubType(new AssetMainType(assetMainTypeId), subType,make, desc, new Date(), new Date()));
 		}catch (DataIntegrityViolationException e) {
-	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
+	        throw new InventoryException(Message.DUPLICATE_SUB_TYPE,e);
 	    }
 	}
 
@@ -41,7 +41,7 @@ public class AssetSubTypeManagerImpl implements AssetSubTypeManager{
 		try{
 			assetSubTypeRepo.save(new AssetSubType(id, new AssetMainType(assetMainTypeId), subType, make, desc, new Date()));
 		}catch (DataIntegrityViolationException e) {
-	        throw new InventoryException(Message.DUPLICATE_MAIN_TYPE,e);
+	        throw new InventoryException(Message.DUPLICATE_SUB_TYPE,e);
 	    }
 		
 	}
