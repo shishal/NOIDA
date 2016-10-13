@@ -87,7 +87,7 @@ public class UserController {
 			if(!encoder.matches(currentPassword,password))
 				return Util.toMap("status",Constants.FAIL,"message","Current Password is wrong.");
 			
-			userMgr.updateUser(username, user.get(0).getEmpCode(), user.get(0).getFirstName(), user.get(0).getLastName(), user.get(0).getContactNo(), user.get(0).isEnabled(), encoder.encode(newPassword), user.get(0).getDepartment().getId());
+			userMgr.updateUser(username, user.get(0).getEmpCode(), user.get(0).getFirstName(), user.get(0).getLastName(), user.get(0).getContactNo(), user.get(0).isEnabled(), encoder.encode(newPassword), user.get(0).getDepartment().getId(), user.get(0).getUserRoles());
 		}catch(InventoryException e){
 			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
 		}

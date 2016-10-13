@@ -2,8 +2,10 @@ package com.noida.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -29,6 +31,7 @@ import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
 import com.noida.model.Department;
 import com.noida.model.PO;
+import com.noida.model.UserRoles;
 import com.noida.model.Users;
 import com.noida.util.Constants;
 import com.noida.util.Util;
@@ -246,12 +249,18 @@ public class AdminController {
 			@RequestParam String lastName,
 			@RequestParam String contactNo,
 			@RequestParam Long deptId,
+			@RequestParam String userRole,
 			@RequestParam boolean enabled) {
 		
 		Users user = null;
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Set<UserRoles> roleSet = new HashSet<UserRoles>();
+		UserRoles role = new UserRoles();
+		role.setRole(userRole);
+		roleSet.add(role);
+		 
 		try{
-			user = userMgr.createUser(empCode, username, firstName, lastName, contactNo, enabled, encoder.encode(Constants.USER_RESET_PASSWORD), deptId);
+			user = userMgr.createUser(empCode, username, firstName, lastName, contactNo, enabled, encoder.encode(Constants.USER_RESET_PASSWORD), deptId, roleSet);
 		}catch(InventoryException e){
 			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
 		}
@@ -267,14 +276,21 @@ public class AdminController {
 			@RequestParam String lastName,
 			@RequestParam String contactNo,
 			@RequestParam Long deptId,
+			@RequestParam String userRole,
 			@RequestParam boolean enabled) {
 		
 		try{
 			String password = null;
+			Set<UserRoles> userRoles = null;
 			List<Users> user = userMgr.getUser(username);
-			if(user.size() >= 0)
+			if(user.size() >= 0) {
 				password = user.get(0).getPassword();
-			userMgr.updateUser(username, empCode, firstName, lastName, contactNo, enabled, password, deptId);
+				userRoles = user.get(0).getUserRoles();
+				for(UserRoles role :userRoles) {
+					role.setRole(userRole);
+				}
+			}
+			userMgr.updateUser(username, empCode, firstName, lastName, contactNo, enabled, password, deptId, userRoles);
 		}catch(InventoryException e){
 			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
 		}
