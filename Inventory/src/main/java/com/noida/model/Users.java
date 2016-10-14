@@ -1,11 +1,14 @@
 package com.noida.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.SelectBeforeUpdate;
 
@@ -22,6 +25,8 @@ public class Users {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Department dept;
+	@OneToMany(mappedBy="username")
+	private Set<UserRoles> userRoles;
 	private String empCode;
 	/*private String status;*/
 	private String contactNo;
@@ -118,8 +123,26 @@ public class Users {
 		this.updatedTime = updatedTime;
 	}
 
+	public Department getDept() {
+		return dept;
+	}
+
+	public void setDept(Department dept) {
+		this.dept = dept;
+	}
+
+	
+
+	public Set<UserRoles> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(Set<UserRoles> userRoles) {
+		this.userRoles = userRoles;
+	}
+
 	public Users(String username, String password, boolean enabled, String firstName, String lastName, Department department,
-			String empCode, /*String status,*/ String contactNo, Date createdTime, Date updatedTime) {
+			String empCode, Set<UserRoles> userRoles, String contactNo, Date createdTime, Date updatedTime) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -128,14 +151,14 @@ public class Users {
 		this.lastName = lastName;
 		this.dept = department;
 		this.empCode = empCode;
-		/*this.status = status;*/
+		this.userRoles = userRoles;
 		this.contactNo = contactNo;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
 	}
 	
 	public Users(String username, String password, boolean enabled, String firstName, String lastName, Department department,
-			String empCode, /*String status,*/ String contactNo, Date updatedTime) {
+			String empCode, Set<UserRoles> userRoles, String contactNo, Date updatedTime) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -144,7 +167,7 @@ public class Users {
 		this.lastName = lastName;
 		this.dept = department;
 		this.empCode = empCode;
-		/*this.status = status;*/
+		this.userRoles = userRoles;
 		this.contactNo = contactNo;
 		this.updatedTime = updatedTime;
 	}
@@ -152,8 +175,8 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [username=" + username + ", password=" + password + ", enabled=" + enabled + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", department=" + dept + ", empCode=" + empCode + /*", status="
-				+ status +*/ ", contactNo=" + contactNo + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ firstName + ", lastName=" + lastName + ", department=" + dept + ", empCode=" + empCode + ", userRoles="
+				+ userRoles + ", contactNo=" + contactNo + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
 				+ "]";
 	}
 }

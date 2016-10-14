@@ -296,8 +296,8 @@ INSERT INTO users(username,password,enabled,FIRST_NAME,EMP_CODE,DEPT_ID) VALUES 
 
 INSERT INTO user_roles (username, role) VALUES ('admin', 'ROLE_ADMIN');
 INSERT INTO user_roles (username, role) VALUES ('user', 'ROLE_USER');
-INSERT INTO user_roles (username, role) VALUES ('ISSUER', 'ROLE_ISSUER');
-INSERT INTO user_roles (username, role) VALUES ('APPROVER', 'ROLE_APPROVER');
+INSERT INTO user_roles (username, role) VALUES ('issuer', 'ROLE_ISSUER');
+INSERT INTO user_roles (username, role) VALUES ('approver', 'ROLE_APPROVER');
 
 
 -- Dump completed on 2016-10-06 21:40:49

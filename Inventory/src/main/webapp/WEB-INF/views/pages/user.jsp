@@ -65,6 +65,8 @@
 					<th></th>
 					<th>Department</th>
 					<th>Status</th>
+					<th></th>
+					<th>Role</th>
 				</tr>
 		</thead>
 		<tfoot>
@@ -78,6 +80,8 @@
 					<th></th>
 					<th>Department</th>
 					<th>Status</th>
+					<th></th>
+					<th>Role</th>
 			</tr>
 		</tfoot>
 		<tbody>
@@ -94,6 +98,31 @@
 					<td>
 						<c:if test="${user.enabled == true}">Enabled</c:if>
 						<c:if test="${user.enabled == false}">Disabled</c:if>
+					</td>
+					<td>
+						<c:choose>
+						    <c:when test="${user.userRoles.size() == 1}">
+						        ${user.userRoles.iterator().next().userRoleId}<br/>
+						    </c:when>
+						    <%-- <c:when test="${user.userRoles.size() > 1}">
+						        
+						    </c:when> --%>
+						    <c:otherwise>
+						    </c:otherwise>
+						</c:choose>
+					
+					</td>
+					<td>
+						<c:choose>
+						    <c:when test="${user.userRoles.size() == 1}">
+						        ${user.userRoles.iterator().next().role}<br/>
+						    </c:when>
+						   <%--  <c:when test="${user.userRoles.size() > 1}">
+						        
+						    </c:when> --%>
+						    <c:otherwise>
+						    </c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 			</c:forEach>
@@ -184,6 +213,15 @@
 						</select>
                   </div>
                   <div class="form-group">
+                    <label for="inputModalUserRole">Role: </label>
+                    	<select class="form-control" name="userRole" id="inputModalUserRole">
+							<option value="ROLE_USER" selected>ROLE_USER</option>
+  							<option value="ROLE_ISSUER">ROLE_ISSUER</option>
+  							<option value="ROLE_APPROVER">ROLE_APPROVER</option>
+  							<option value="ROLE_ADMIN" >ROLE_ADMIN</option>
+						</select>
+                  </div>
+                  <div class="form-group">
                     <label for="inputEnabled">Enable: </label>
                       <input name="enabled" type="checkbox" checked="checked" value="true"
                       id="inputEnabled"/>
@@ -249,6 +287,15 @@
 						</select>
                   </div>
                   <div class="form-group">
+                    <label for="inputUpdateUserRole">Role: </label>
+                    	<select class="form-control" name="userRole" id="inputUpdateUserRole">
+							<option value="ROLE_USER" selected>ROLE_USER</option>
+  							<option value="ROLE_ISSUER">ROLE_ISSUER</option>
+  							<option value="ROLE_APPROVER">ROLE_APPROVER</option>
+  							<option value="ROLE_ADMIN" >ROLE_ADMIN</option>
+						</select>
+                  </div>
+                  <div class="form-group">
                     <label for="inputUpdateEnabled">Enable: </label>
                       <input name="enabled" type="checkbox" checked="checked" value="true"
                       id="inputUpdateEnabled"/>
@@ -270,7 +317,6 @@
 <script>
 
 $(function() {
-	
 	var selectedRow = 0;
 	var export_filename = 'User';
 	var table = $('#userTable').DataTable({
@@ -294,7 +340,12 @@ $(function() {
 				"targets": [ 6 ],
 				"visible": false,
 				"searchable": false
-		    }
+			},
+			{
+				"targets": [ 9 ],
+				"visible": false,
+				"searchable": false
+			}
 		]
 	});
 				
