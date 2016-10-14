@@ -2,6 +2,7 @@ package com.noida.manager;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
@@ -15,5 +16,7 @@ public interface AssetSubTypeManager {
 	AssetSubType createAssetSubType(Long assetMainTypeId, String subType, String make, String desc, Date createdTime, Date updatedTime);
 
 	void updateAssetSubType(Long id, Long assetMainTypeId, String subType, String make, String desc, Date updatedTime);
+
+	Map getAssetSubTypeByAssetType(Long assetTypeId);
 
 }

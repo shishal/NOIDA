@@ -1,8 +1,11 @@
 package com.noida.manager.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -54,6 +57,16 @@ public class AssetSubTypeManagerImpl implements AssetSubTypeManager{
 	        throw new InventoryException(Message.UNKNOW_ERROR,e);
 	    }
 		
+	}
+
+	@Override
+	public Map getAssetSubTypeByAssetType(Long assetTypeId) {
+		List<AssetSubType> assetSubTypeList =  assetSubTypeRepo.findByMainType(new AssetMainType(assetTypeId));
+		Map<Long,String> assetSubTypeMap = new HashMap<>();
+		for(AssetSubType subType:assetSubTypeList){
+			assetSubTypeMap.put(subType.getId(), subType.getSubType());
+		}
+		return assetSubTypeMap;
 	}
 
 	

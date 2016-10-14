@@ -108,7 +108,7 @@
 	//When the document is ready
 $(function() {
 	var selectedRow = 0;
-	var export_filename = 'po';
+	var export_filename = 'amc';
 	var table = $('#amcTable').DataTable({
 		dom : '<"top"B>rft<"bottom"lp><"clear">',
 		buttons : [

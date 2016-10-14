@@ -177,8 +177,11 @@ public class AdminController {
 
 	@RequestMapping(value = { "/asset" }, method = RequestMethod.GET)
 	public String asset(ModelMap model) {
-		List<Asset> assetList = assetMgr.getAllAssetDetail();
-		model.put("assetList", assetList);
+		//model.put("assetSubTypeList", assetSubTypeMgr.getAllAssetSubType());
+		model.put("assetTypeList", assetTypeMgr.getAllAssetType());
+		model.put("amcList", amcMgr.getAllAMC());
+		model.put("poList", poMgr.getAllPO());
+		model.put("assetList", assetMgr.getAllAssetDetail());
 		return "asset";
 	}
 	
@@ -251,7 +254,13 @@ public class AdminController {
 		return "assetSubType";
 	}
 	
-
+	@ResponseBody
+	@RequestMapping(value = { "/assetSubTypeByAssetType"}, method = RequestMethod.POST)
+	public Map<String,Object> assetSubTypeByAssetType(@RequestParam Long assetTypeId) {
+		Map assetSubTypeMap = assetSubTypeMgr.getAssetSubTypeByAssetType(assetTypeId);
+		return Util.toMap("assetSubTypeMap",assetSubTypeMap);
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = { "/createAssetType" }, method = RequestMethod.POST)
 	public Map<String,Object> createAssetType(
