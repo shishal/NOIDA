@@ -100,7 +100,7 @@
 						<input type="text" class="form-control" placeholder="Bar Code" name="barcode" id="barcode" readonly/>
 						<br>
 						<div id="barcodeImgDiv"><img id="barcodeImg" style="width:300px; height:90px"></div>
-						<br><br>
+						<br>
 						<button type="button" id="generateBarcodeBtn" class="btn btn-primary" onclick="generateBarcode()">Generate Barcode</button>
 						<button type="button" id="printBarcodeBtn" class="btn btn-primary" onclick="printBarcodeImage('#barcodeImgDiv')" disabled="disabled">Print Barcode</button>
 					</div>
