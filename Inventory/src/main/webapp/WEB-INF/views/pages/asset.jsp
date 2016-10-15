@@ -99,9 +99,10 @@
 						<label for="inputAssetBarCode">Asset BarCode: </label> 
 						<input type="text" class="form-control" placeholder="Bar Code" name="barcode" id="barcode" readonly/>
 						<br>
-						<img id="barcodeImg" style="width:50%; height:10%">
+						<div id="barcodeImgDiv"><img id="barcodeImg" style="width:300px; height:90px"></div>
 						<br><br>
 						<button type="button" id="generateBarcodeBtn" class="btn btn-primary" onclick="generateBarcode()">Generate Barcode</button>
+						<button type="button" id="printBarcodeBtn" class="btn btn-primary" onclick="printBarcodeImage('#barcodeImgDiv')" disabled="disabled">Print Barcode</button>
 					</div>
 					
 					<div class="form-group">
@@ -156,7 +157,6 @@
 				</form>
 				<button type="button" id="saveBtn" class="btn btn-primary">Save</button>
 				<button type="button" id="updateBtn" class="btn btn-primary">Update</button>
-				<button type="button" id="printBarcodeBtn" class="btn btn-primary" onclick="">Print Barcode</button>
 				<button type="button" class="btn btn-primary" onclick="" id="closeBtn" data-dismiss="modal">Close</button>
 			</div>
 		</div>
