@@ -34,6 +34,11 @@ function appLogout() {
         $(id).addClass('active').siblings().removeClass('active');
 }*/
 
+function resetModalAlerts() {
+	$('#successMessage').hide();
+	$('#errorMessage').hide();
+}
+
 function showSuccessMessage(id, message) {
 	$('#'+id).show();
 	$('#'+id).text(message);
@@ -58,5 +63,21 @@ function showInfoDialog(msg) {
 	$('#appInfoDialog').find(".modal-body").text(msg);
 	$('#appInfoDialog').modal('show');
 }
+
+function generateBarcode() {
+	resetModalAlerts();
+	$("#barcodeImg").hide();
+	$('#barcode').val('');
+	var barCodeValue = $('#serialNumber').val();
+	if(barCodeValue == "" ){
+		showErrorMessage('errorMessage', "Serial Number can not be blank.")
+	}
+	else {
+		$("#barcodeImg").show();
+		$('#barcode').val(barCodeValue);
+		$('#barcodeImg').JsBarcode(barCodeValue,{width:3,height:30});
+	}
+	
+};
 
 

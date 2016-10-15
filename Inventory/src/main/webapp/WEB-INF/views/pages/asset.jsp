@@ -91,13 +91,19 @@
 
 				<form role="form" id="assetForm">
 					<div class="form-group">
-						<label for="inputAssetBarCode">Asset BarCode: </label> 
-						<input type="text" class="form-control" placeholder="Bar Code" name="barcode" id="barcode" />
-					</div>
-					<div class="form-group">
 						<label for="inputAssetType">Serial Number: </label> 
-						<input type="text" class="form-control" placeholder="Serial Number" id="serialNumber" name="serialNumber"/>
+						<input type="text" class="form-control" onsubmit="" placeholder="Serial Number" id="serialNumber" name="serialNumber"/>
 					</div>
+					
+					<div class="form-group">
+						<label for="inputAssetBarCode">Asset BarCode: </label> 
+						<input type="text" class="form-control" placeholder="Bar Code" name="barcode" id="barcode" readonly/>
+						<br>
+						<img id="barcodeImg" style="width:50%; height:10%">
+						<br><br>
+						<button type="button" id="generateBarcodeBtn" class="btn btn-primary" onclick="generateBarcode()">Generate Barcode</button>
+					</div>
+					
 					<div class="form-group">
 						<label for="inputAssetSubType">AMC: </label>
 						<select class="form-control" id="amcId" name="amcId">
@@ -150,6 +156,7 @@
 				</form>
 				<button type="button" id="saveBtn" class="btn btn-primary">Save</button>
 				<button type="button" id="updateBtn" class="btn btn-primary">Update</button>
+				<button type="button" id="printBarcodeBtn" class="btn btn-primary" onclick="">Print Barcode</button>
 				<button type="button" class="btn btn-primary" onclick="" id="closeBtn" data-dismiss="modal">Close</button>
 			</div>
 		</div>
@@ -213,6 +220,7 @@ $(function() {
 	});
 	$('#createAsset').click(function() {
 		$('#saveBtn').show();
+		$('#generateBarcodeBtn').show();
 		$('#updateBtn').hide();
 		resetModalForm();
 		resetModalAlerts();
@@ -239,6 +247,7 @@ $(function() {
 	});//onclik end
 	$('#updateAsset').click(function(){
 		$('#saveBtn').hide();
+		$('#generateBarcodeBtn').hide();
 		$('#updateBtn').show();
 		if(selectedRow == 0){
 			showAlertDialog('Please select row to edit');
@@ -253,6 +262,7 @@ $(function() {
 		$('#poId').val(selectedRow[12]);
 		$('#assetTypeId').val(selectedRow[13]);
 		$('#assetTypeId').change();
+		generateBarcode();
 	});
 	$('#updateBtn').click(function() {
 		$.ajax({
@@ -304,10 +314,7 @@ $(function() {
 			}//success end
 		});//ajax end
 	});
-	function resetModalAlerts() {
-		$('#successMessage').hide();
-		$('#errorMessage').hide();
-	}
+	
 	function resetModalForm() {
 		$('#id').val('');
 		$('#barcode').val('');
