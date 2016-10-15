@@ -1,54 +1,67 @@
 package com.noida.model;
 
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-public class RequestDetail {
+import com.noida.util.RequestType;
+
+@Entity
+public class Request {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private int requestId;
-	private String assetMainTypeId;
-	private String assetSubTypeId;
-	private int requester;
+	private Long id;
+	@ManyToOne(fetch=FetchType.LAZY)
+	private AssetMainType assetMainType;
+	@ManyToOne(fetch=FetchType.LAZY)
+	private AssetSubType assetSubType;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name ="REQUESTER")
+	private Users requester;
 	private Date requestDate;
-	private String requestType;
+	private RequestType requestType;
 	private int assetQuantity;
 	private String description;
 	private Date createdTime;
 	private Date updatedTime;
 	
-	public int getRequestId() {
-		return requestId;
+	public Long getId() {
+		return id;
 	}
 	
-	public void setRequestId(int requestId) {
-		this.requestId = requestId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
-	public String getAssetMainTypeId() {
-		return assetMainTypeId;
+	public AssetMainType getAssetMainType() {
+		return assetMainType;
 	}
 	
-	public void setAssetMainTypeId(String assetMainTypeId) {
-		this.assetMainTypeId = assetMainTypeId;
+	public void setAssetMainType(AssetMainType assetMainType) {
+		this.assetMainType = assetMainType;
 	}
 	
-	public String getAssetSubTypeId() {
-		return assetSubTypeId;
+	public AssetSubType getAssetSubType() {
+		return assetSubType;
 	}
 	
-	public void setAssetSubTypeId(String assetSubTypeId) {
-		this.assetSubTypeId = assetSubTypeId;
+	public void setAssetSubType(AssetSubType assetSubType) {
+		this.assetSubType = assetSubType;
 	}
 	
-	public int getRequester() {
+	public Users getRequester() {
 		return requester;
 	}
 	
-	public void setRequester(int requester) {
+	public void setRequester(Users requester) {
 		this.requester = requester;
 	}
 	
@@ -60,11 +73,11 @@ public class RequestDetail {
 		this.requestDate = requestDate;
 	}
 	
-	public String getRequestType() {
+	public RequestType getRequestType() {
 		return requestType;
 	}
 	
-	public void setRequestType(String requestType) {
+	public void setRequestType(RequestType requestType) {
 		this.requestType = requestType;
 	}
 	
@@ -100,12 +113,12 @@ public class RequestDetail {
 		this.updatedTime = updatedTime;
 	}
 
-	public RequestDetail(String assetMainTypeId, String assetSubTypeId, int requester,
-			Date requestDate, String requestType, int assetQuantity,
+	public Request(AssetMainType assetMainType, AssetSubType assetSubType, Users requester,
+			Date requestDate, RequestType requestType, int assetQuantity,
 			String description) {
 		super();
-		this.assetMainTypeId = assetMainTypeId;
-		this.assetSubTypeId = assetSubTypeId;
+		this.assetMainType = assetMainType;
+		this.assetSubType = assetSubType;
 		this.requester = requester;
 		this.requestDate = requestDate;
 		this.requestType = requestType;
@@ -113,11 +126,11 @@ public class RequestDetail {
 		this.description = description;
 	}
 
-	public RequestDetail(String assetMainTypeId, String assetSubTypeId, int requester, Date requestDate,
-			String requestType, int assetQuantity, String description, Date createdTime, Date updatedTime) {
+	public Request(AssetMainType assetMainType, AssetSubType assetSubType, Users requester, Date requestDate,
+			RequestType requestType, int assetQuantity, String description, Date createdTime, Date updatedTime) {
 		super();
-		this.assetMainTypeId = assetMainTypeId;
-		this.assetSubTypeId = assetSubTypeId;
+		this.assetMainType = assetMainType;
+		this.assetSubType = assetSubType;
 		this.requester = requester;
 		this.requestDate = requestDate;
 		this.requestType = requestType;
@@ -126,11 +139,17 @@ public class RequestDetail {
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
 	}
+	
+	
+
+	public Request() {
+		super();
+	}
 
 	@Override
 	public String toString() {
-		return "RequestDetail [requestId=" + requestId + ", assetMainTypeId=" + assetMainTypeId + ", assetSubTypeId="
-				+ assetSubTypeId + ", requester=" + requester + ", requestDate=" + requestDate + ", requestType="
+		return "RequestDetail [id=" + id + ", assetMainTypeId=" + assetMainType + ", assetSubTypeId="
+				+ assetSubType + ", requester=" + requester + ", requestDate=" + requestDate + ", requestType="
 				+ requestType + ", assetQuantity=" + assetQuantity + ", description=" + description + ", createdTime="
 				+ createdTime + ", updatedTime=" + updatedTime + "]";
 	}

@@ -1,10 +1,11 @@
 package com.noida.controller;
 
-import java.util.Date;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.exception.InventoryException;
+import com.noida.manager.AssetTypeManager;
+import com.noida.manager.RequestManager;
 import com.noida.manager.UserManager;
-import com.noida.model.PO;
+import com.noida.model.Request;
 import com.noida.model.Users;
 import com.noida.util.Constants;
 import com.noida.util.Util;
@@ -28,6 +31,9 @@ import com.noida.util.Util;
 public class UserController {
 	
 	@Autowired UserManager userMgr;
+	@Autowired AssetTypeManager assetTypeMgr;
+	@Autowired RequestManager reqMrg;
+	@Autowired MessageSource messageSource;
 
 	@RequestMapping(value = { "/", "home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -40,8 +46,23 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "/raiseRequest" }, method = RequestMethod.GET)
-	public String raiseRequest(ModelMap model) {
+	public String loadRaiseRequest(ModelMap model) {
+		model.put("assetTypeList", assetTypeMgr.getAllAssetType());
 		return "raiseRequest";
+	}
+	@ResponseBody
+	@RequestMapping(value = { "/raiseRequest" }, method = RequestMethod.POST)
+	public Map<String,Object> raiseRequest(
+			@RequestParam Long  assetTypeId,
+			@RequestParam Long  assetSubTypeId,
+			@RequestParam int  qty,
+			@RequestParam String  desc,
+			Principal principal) {
+		
+		Request reqDetail = reqMrg.raiseNewRequest(assetTypeId, assetSubTypeId, principal.getName(), qty, desc);
+		return Util.toMap("status",Constants.SUCCESS,"msg",
+				messageSource.getMessage("request.create.success",
+				Util.toAttay(reqDetail.getId().toString()), null,null));
 	}
 	
 	@RequestMapping(value = { "/raiseRepairRequest" }, method = RequestMethod.GET)

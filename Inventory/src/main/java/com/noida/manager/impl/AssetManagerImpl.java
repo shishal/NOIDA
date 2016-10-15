@@ -26,7 +26,7 @@ public class AssetManagerImpl implements AssetManager{
 	AssetRepository assetDetailRepo;
 
 	@Override
-	public List<Asset> getAllAssetDetail() {
+	public List<Asset> getAllAsset() {
 		return Lists.newArrayList(assetDetailRepo.findAll());
 	}
 

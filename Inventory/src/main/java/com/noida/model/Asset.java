@@ -1,6 +1,8 @@
 package com.noida.model;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Where;
 
 import com.noida.util.AssetStatus;
 
@@ -31,6 +37,9 @@ public class Asset {
 	private String description;
 	private Date createdTime;
 	private Date updatedTime;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "asset")
+	@Where(clause = "return_date is null")
+	private List<AssetIssue> assetIssue;
 	
 	public Long getId() {
 		return id;
@@ -118,6 +127,14 @@ public class Asset {
 
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
+	}
+	
+	public List<AssetIssue> getAssetIssue() {
+		return assetIssue;
+	}
+
+	public void setAssetIssue(List<AssetIssue> assetIssue) {
+		this.assetIssue = assetIssue;
 	}
 
 	public Asset(Long id, AssetMainType assetMainType, AssetSubType assetSubType,AMC amc, PO po, AssetStatus status,String serialNo, String barcode,String description, Date updatedTime) {

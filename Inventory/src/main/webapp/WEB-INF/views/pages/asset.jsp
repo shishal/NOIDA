@@ -18,7 +18,7 @@
 			<tr>
 				<th>#</th>
 				<th></th>
-				<th>BarCode</th>
+				<th>Bar Code</th>
 				<th>Serial Number</th>
 				<th>AMC</th>
 				<th>PO</th>
@@ -65,7 +65,9 @@
 					<td>${asset.assetSubType.subType}</td>
 					<td>${asset.status}</td>
 					<td>${asset.description}</td>
-					<td>-</td>
+					<td>
+					<c:out value="${asset.assetIssue[0].issuedTo.username}"/>
+					</td>
 					<td>${asset.amc.id}</td>
 					<td>${asset.po.id}</td>
 					<td>${asset.assetMainType.id}</td>
@@ -303,7 +305,7 @@ $(function() {
 		assetTypeId=this.value;
 		$.ajax({
 			type : "POST",
-			url : "assetSubTypeByAssetType",
+			url : "/assetSubTypeByAssetType",
 			data : {assetTypeId:assetTypeId,${_csrf.parameterName}:'${_csrf.token}'},
 			success : function(result) {
 				$('#assetSubTypeId').empty();

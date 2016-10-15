@@ -8,7 +8,7 @@ import com.noida.util.AssetStatus;
 
 public interface AssetManager {
 	
-	List<Asset> getAllAssetDetail();
+	List<Asset> getAllAsset();
 
 	void deleteAsset(Long id);
 	

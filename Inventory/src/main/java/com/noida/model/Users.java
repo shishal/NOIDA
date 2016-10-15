@@ -172,6 +172,10 @@ public class Users {
 		this.updatedTime = updatedTime;
 	}
 
+	public Users(String username) {
+		this.username = username;
+	}
+
 	@Override
 	public String toString() {
 		return "Users [username=" + username + ", password=" + password + ", enabled=" + enabled + ", firstName="

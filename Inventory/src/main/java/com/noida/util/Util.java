@@ -61,5 +61,16 @@ public class Util {
 		m.put(k7, k7);
 		return m;
 	}
-
+	public static Object[] toAttay(String a1){
+		Object[] arr = {a1};
+		return arr;
+	}
+	public static Object[] toAttay(String a1, String a2){
+		Object[] arr = {a1,a2};
+		return arr;
+	}
+	public static Object[] toAttay(String a1, String a2, String a3){
+		Object[] arr = {a1,a2,a3};
+		return arr;
+	}
 }
