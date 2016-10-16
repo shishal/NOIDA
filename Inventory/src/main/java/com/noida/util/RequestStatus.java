@@ -1,7 +1,7 @@
 package com.noida.util;
 
 public enum RequestStatus {
-	CREATED,
+	PENDING,
 	APPROVED,
 	REJECTED,
 	ISSUED;
