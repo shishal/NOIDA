@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.noida.util.RequestStatus;
 import com.noida.util.RequestType;
 
 @Entity
@@ -27,7 +30,10 @@ public class Request {
 	@JoinColumn(name ="REQUESTER")
 	private Users requester;
 	private Date requestDate;
+	@Enumerated(EnumType.STRING)
 	private RequestType requestType;
+	@Enumerated(EnumType.STRING)
+	private RequestStatus status;
 	private int assetQuantity;
 	private String description;
 	private Date createdTime;
@@ -65,6 +71,14 @@ public class Request {
 		this.requester = requester;
 	}
 	
+	public RequestStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(RequestStatus status) {
+		this.status = status;
+	}
+
 	public Date getRequestDate() {
 		return requestDate;
 	}
@@ -115,7 +129,7 @@ public class Request {
 
 	public Request(AssetMainType assetMainType, AssetSubType assetSubType, Users requester,
 			Date requestDate, RequestType requestType, int assetQuantity,
-			String description) {
+			String description, RequestStatus status) {
 		super();
 		this.assetMainType = assetMainType;
 		this.assetSubType = assetSubType;
@@ -124,10 +138,11 @@ public class Request {
 		this.requestType = requestType;
 		this.assetQuantity = assetQuantity;
 		this.description = description;
+		this.status = status;
 	}
 
 	public Request(AssetMainType assetMainType, AssetSubType assetSubType, Users requester, Date requestDate,
-			RequestType requestType, int assetQuantity, String description, Date createdTime, Date updatedTime) {
+			RequestType requestType, int assetQuantity, String description,RequestStatus status, Date createdTime, Date updatedTime) {
 		super();
 		this.assetMainType = assetMainType;
 		this.assetSubType = assetSubType;
@@ -138,6 +153,7 @@ public class Request {
 		this.description = description;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
+		this.status = status;
 	}
 	
 	
