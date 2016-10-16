@@ -68,6 +68,14 @@
 			<div class="modal-body app-modal-content bg-alt">
 
 				<form role="form" id="assetSubTypeForm">
+				<div class="form-group">
+						<label for="selectItemType">Asset Type: </label> 
+						<select class="form-control" name="assetTypeId" id="inputAssetType">
+							<c:forEach  items="${assetTypeList}" var="assetType" varStatus="row">
+								<option value="${assetType.id}">${assetType.mainType}</option>
+							</c:forEach>
+						</select>
+					</div>
 					<div class="form-group">
 						<label for="inputAssetSubType">Asset SubType: </label> 
 						<input type="text" name="name" class="form-control" placeholder="Asset Sub Type" id="inputAssetSubType" />
@@ -75,14 +83,6 @@
 					<div class="form-group">
 						<label for="inputMake">Make: </label> 
 						<input type="text" name="make" class="form-control" placeholder="Asset Sub Type" id="inputMake" />
-					</div>
-					<div class="form-group">
-						<label for="selectItemType">Asset Type: </label> 
-						<select class="form-control" name="assetTypeId" id="inputAssetType">
-							<c:forEach  items="${assetTypeList}" var="assetType" varStatus="row">
-								<option value="${assetType.id}">${assetType.mainType}</option>
-							</c:forEach>
-						</select>
 					</div>
 					<div class="form-group">
 						<label for="inputDesc">Description: </label> 
@@ -114,20 +114,20 @@
 				<form role="form" id="updateAssetSubTypeForm">
 					<input type="hidden" name ="id" id="inputUpdateAssetSubTypeId" value=""/>
 					<div class="form-group">
-						<label for="inputUpdateAssetSubType">Asset Sub Type: </label> 
-						<input type="text" name="name" class="form-control" placeholder="Asset Sub Type" id="inputUpdateAssetSubType" />
-					</div>
-					<div class="form-group">
-						<label for="inputMake">Make: </label> 
-						<input type="text" name="make" class="form-control" placeholder="Asset Sub Type" id="inputUpdateMake" />
-					</div>
-					<div class="form-group">
 						<label for="selectItemType">Asset Type: </label> 
 						<select class="form-control" name="assetTypeId" id="inputUpdateAssetType">
 							<c:forEach items="${assetTypeList}" var="assetType" varStatus="row">
 								<option value="${assetType.id}">${assetType.mainType}</option>
 							</c:forEach>
 						</select>
+					</div>
+					<div class="form-group">
+						<label for="inputUpdateAssetSubType">Asset Sub Type: </label> 
+						<input type="text" name="name" class="form-control" placeholder="Asset Sub Type" id="inputUpdateAssetSubType" />
+					</div>
+					<div class="form-group">
+						<label for="inputMake">Make: </label> 
+						<input type="text" name="make" class="form-control" placeholder="Asset Sub Type" id="inputUpdateMake" />
 					</div>
 					<div class="form-group">
 						<label for="inputDesc">Description: </label> 
