@@ -30,7 +30,7 @@ public class RequestManagerImpl implements RequestManager{
 				RequestType.NEW,
 				quantity,
 				desc,
-				RequestStatus.CREATED,
+				RequestStatus.PENDING,
 				new Date(),
 				new Date()));
 	}
