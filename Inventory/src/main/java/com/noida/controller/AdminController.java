@@ -185,6 +185,8 @@ public class AdminController {
 		model.put("amcList", amcMgr.getAllAMC());
 		model.put("poList", poMgr.getAllPO());
 		model.put("assetList", assetMgr.getAllAsset());
+		List<Users> userList = userMgr.getAllUsers();
+		model.put("userList", userList);
 		return "asset";
 	}
 	
@@ -220,11 +222,13 @@ public class AdminController {
 			@RequestParam String serialNumber, 
 			@RequestParam String barcode,
 			@RequestParam AssetStatus status,
-			@RequestParam String desc
+			@RequestParam String desc,
+			@RequestParam Date returnDate,
+			@RequestParam Long assetIssuedToId
 			) {
 		
 		try{
-			assetMgr.updateAsset(id, assetTypeId, assetSubTypeId, amcId, poId, serialNumber, barcode, status, desc);
+			assetMgr.updateAsset(id, assetTypeId, assetSubTypeId, amcId, poId, serialNumber, barcode, status, desc, returnDate, assetIssuedToId);
 		}catch(InventoryException e){
 			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
 		}

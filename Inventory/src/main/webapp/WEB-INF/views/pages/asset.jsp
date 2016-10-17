@@ -26,7 +26,7 @@
 				<th>Sub Type</th>
 				<th>Status</th>
 				<th>Description</th>
-				<th>Assigned User</th>
+				<th>Issued To</th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -45,7 +45,7 @@
 				<th>Sub Type</th>
 				<th>Status</th>
 				<th>Description</th>
-				<th>Assigned User</th>
+				<th>Issued To</th>
 				<th></th>
 				<th></th>
 				<th></th>
@@ -72,7 +72,9 @@
 					<td>${asset.po.id}</td>
 					<td>${asset.assetMainType.id}</td>
 					<td>${asset.assetSubType.id}</td>
-					
+					<td>
+					<c:out value="${asset.assetIssue[0].id}"/>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -125,7 +127,7 @@
 					</div>
 					<div class="form-group">
 						<label for="selectItemType">Asset Type: </label> 
-						<select class="form-control" name="assetTypeId" id="assetTypeId">
+						<select class="form-control" name="assetTypeId" id="assetTypeId" data-live-search="true">
 							<c:forEach  items="${assetTypeList}" var="assetType" varStatus="row">
 								<option value="${assetType.id}">${assetType.mainType}</option>
 							</c:forEach>
@@ -152,7 +154,29 @@
 						<label for="desc">Description: </label> 
 						<input type="text" class="form-control" placeholder="Description" id="desc" name="desc"/>
 					</div>
+					
+					<div class="form-group" id="issuedToSection">
+						<label for="selectIssuedTo">Issued To: </label> 
+						<select class="form-control" name="issuedTo" id="selectIssuedTo" 
+							onfocus="this.defaultIndex=this.selectedIndex;" disabled="disabled">
+							<c:forEach  items="${userList}" var="user" varStatus="row">
+								<option value="${user.username}">${user.username}</option>
+							</c:forEach>
+						</select>
+					</div>
+					
+					<div class="form-group" id="returnDateSection">
+						<label for="returnDate">Return Date: </label>&nbsp;
+						<div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
+							<input id="returnDate" type="text" name="returnDate" class="form-control" placeholder="Return Date" >
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-th"></span>
+							</div>
+						</div>
+					</div>
+					
 					<input type="hidden" id="id" name="id" value="" />
+					<input type="hidden" id="assetIssuedToId" name="assetIssuedToId" value="" />
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
 					<div id="successMessage" class="alert alert-success" style="display: none;"></div>
@@ -190,7 +214,8 @@ $(function() {
 			{ "targets": [ 11 ], "visible": false, "searchable": false },
 			{ "targets": [ 12 ], "visible": false, "searchable": false },
 			{ "targets": [ 13 ], "visible": false, "searchable": false },
-			{ "targets": [ 14 ], "visible": false, "searchable": false }
+			{ "targets": [ 14 ], "visible": false, "searchable": false },
+			{ "targets": [ 15 ], "visible": false, "searchable": false }
 		]
 	});
 				
@@ -224,6 +249,8 @@ $(function() {
 		$('#saveBtn').show();
 		$('#generateBarcodeBtn').show();
 		$('#updateBtn').hide();
+		$('#issuedToSection').hide();
+		$('#returnDateSection').hide();
 		resetModalForm();
 		resetModalAlerts();
 	});
@@ -251,6 +278,7 @@ $(function() {
 		$('#saveBtn').hide();
 		$('#generateBarcodeBtn').hide();
 		$('#updateBtn').show();
+		
 		if(selectedRow == 0){
 			showAlertDialog('Please select row to edit');
 			return false;
@@ -265,6 +293,19 @@ $(function() {
 		$('#assetTypeId').val(selectedRow[13]);
 		$('#assetTypeId').change();
 		generateBarcode();
+		
+		if(selectedRow[10].length > 0) {
+			$('#issuedToSection').show();
+			$('#returnDateSection').show();
+			$('#selectIssuedTo').val(selectedRow[10]);
+			$('#assetIssuedToId').val(selectedRow[15]);
+		}
+		else {
+			$('#issuedToSection').hide();
+			$('#returnDateSection').hide();
+		}
+		
+		
 	});
 	$('#updateBtn').click(function() {
 		$.ajax({

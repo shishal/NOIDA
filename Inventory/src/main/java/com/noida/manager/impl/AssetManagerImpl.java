@@ -8,11 +8,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.noida.dao.AssetIssueRepository;
 import com.noida.dao.AssetRepository;
 import com.noida.exception.InventoryException;
 import com.noida.manager.AssetManager;
 import com.noida.model.AMC;
 import com.noida.model.Asset;
+import com.noida.model.AssetIssue;
 import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
 import com.noida.model.PO;
@@ -24,6 +26,9 @@ public class AssetManagerImpl implements AssetManager{
 
 	@Autowired
 	AssetRepository assetDetailRepo;
+	
+	@Autowired
+	AssetIssueRepository assetIssueRepo;
 
 	@Override
 	public List<Asset> getAllAsset() {
@@ -64,7 +69,7 @@ public class AssetManagerImpl implements AssetManager{
 
 	@Override
 	public void updateAsset(Long id, Long assetTypeId, Long assetSubTypeId, Long amcId, Long poId,
-			String serialNumber, String barcode, AssetStatus status, String desc) {
+			String serialNumber, String barcode, AssetStatus status, String desc, Date returnDate, Long assetIssuedToId) {
 		try {
 			 	assetDetailRepo.save(
 				new Asset(id, new AssetMainType(assetTypeId),
@@ -76,6 +81,9 @@ public class AssetManagerImpl implements AssetManager{
 				barcode,
 				desc,
 				new Date()));
+			 	AssetIssue issue = assetIssueRepo.findOne(assetIssuedToId);
+				issue.setReturnDate(returnDate);
+			 	assetIssueRepo.save(issue);
 		} catch (DataIntegrityViolationException e) {
 			throw new InventoryException(Message.DUPLICATE_ASSET, e);
 		}

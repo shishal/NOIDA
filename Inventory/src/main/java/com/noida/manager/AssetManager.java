@@ -14,6 +14,6 @@ public interface AssetManager {
 	
 	Asset createAsset(Long assetTypeId, Long assetSubTypeId, Long amcId, Long poId, String serialNumber,String barcode, AssetStatus status, String desc);
 
-	void updateAsset(Long id, Long assetTypeId, Long assetSubTypeId, Long amcId, Long poId, String serialNumber,String barcode, AssetStatus status, String desc);
+	void updateAsset(Long id, Long assetTypeId, Long assetSubTypeId, Long amcId, Long poId, String serialNumber,String barcode, AssetStatus status, String desc, Date returnDate, Long assetIssuedToId);
 
 }
