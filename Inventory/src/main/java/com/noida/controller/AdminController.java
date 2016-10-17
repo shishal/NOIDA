@@ -26,6 +26,7 @@ import com.noida.manager.AssetSubTypeManager;
 import com.noida.manager.AssetTypeManager;
 import com.noida.manager.DepartmentManager;
 import com.noida.manager.POManager;
+import com.noida.manager.RequestManager;
 import com.noida.manager.UserManager;
 import com.noida.model.AMC;
 import com.noida.model.Asset;
@@ -37,6 +38,7 @@ import com.noida.model.UserRoles;
 import com.noida.model.Users;
 import com.noida.util.AssetStatus;
 import com.noida.util.Constants;
+import com.noida.util.RequestStatus;
 import com.noida.util.Util;
 
 @Controller
@@ -50,11 +52,7 @@ public class AdminController {
 	@Autowired POManager poMgr;
 	@Autowired AMCManager amcMgr;
 	@Autowired AssetManager assetMgr;
-
-	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
-	public String homePage(ModelMap model) {
-		return "approvePendingRequest";
-	}
+	@Autowired RequestManager reqMgr;
 
 	@RequestMapping(value = { "/po" }, method = RequestMethod.GET)
 	public String purchaseOrder(ModelMap model) {

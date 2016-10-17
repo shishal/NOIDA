@@ -146,7 +146,6 @@
 						<select class="form-control" name="status" id="status">
 								<option value="NEW">New</option>
 								<option value="OLD">Old</option>
-								<option value="DAMAGED">Damaged</option>
 						</select>
 					</div>
 					

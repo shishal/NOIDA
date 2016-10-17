@@ -2,11 +2,17 @@ package com.noida.model;
 
 import java.util.Date;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.noida.util.RequestStatus;
+
 public class RequestHistory {
 
 	private int id;
 	private int requestId;
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private RequestStatus status;
 	private String byUser;
 	private String description;
 	private Date createdTime;
@@ -28,11 +34,11 @@ public class RequestHistory {
 		this.requestId = requestId;
 	}
 	
-	public String getStatus() {
+	public RequestStatus getStatus() {
 		return status;
 	}
 	
-	public void setStatus(String status) {
+	public void setStatus(RequestStatus status) {
 		this.status = status;
 	}
 	
@@ -68,7 +74,7 @@ public class RequestHistory {
 		this.updatedTime = updatedTime;
 	}
 
-	public RequestHistory(int requestId, String status, String byUser,
+	public RequestHistory(int requestId, RequestStatus status, String byUser,
 			String description) {
 		super();
 		this.requestId = requestId;
@@ -77,7 +83,7 @@ public class RequestHistory {
 		this.description = description;
 	}
 
-	public RequestHistory(int requestId, String status, String byUser, String description, Date createdTime,
+	public RequestHistory(int requestId, RequestStatus status, String byUser, String description, Date createdTime,
 			Date updatedTime) {
 		super();
 		this.requestId = requestId;

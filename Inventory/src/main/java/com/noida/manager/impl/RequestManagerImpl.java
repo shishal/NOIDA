@@ -1,6 +1,7 @@
 package com.noida.manager.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class RequestManagerImpl implements RequestManager{
 	@Autowired
 	RequestRepository reqRepo;
 	
+	@Override
 	public Request raiseNewRequest(Long assetTypeNo, Long assetSubTypeNo, String requester, int quantity, String desc){
 		
 		return reqRepo.save(new Request(
@@ -33,5 +35,9 @@ public class RequestManagerImpl implements RequestManager{
 				RequestStatus.PENDING,
 				new Date(),
 				new Date()));
+	}
+	@Override
+	public List<Request> getRequestByStatus(RequestStatus status){
+		return reqRepo.findByStatus(status);
 	}
 }

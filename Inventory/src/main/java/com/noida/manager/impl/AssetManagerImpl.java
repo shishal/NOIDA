@@ -25,20 +25,20 @@ import com.noida.util.Message;
 public class AssetManagerImpl implements AssetManager{
 
 	@Autowired
-	AssetRepository assetDetailRepo;
+	AssetRepository assetRepo;
 	
 	@Autowired
 	AssetIssueRepository assetIssueRepo;
 
 	@Override
 	public List<Asset> getAllAsset() {
-		return Lists.newArrayList(assetDetailRepo.findAll());
+		return Lists.newArrayList(assetRepo.findAll());
 	}
 
 	@Override
 	public void deleteAsset(Long id) {
 		try{
-			assetDetailRepo.delete(id);
+			assetRepo.delete(id);
 		}catch (DataIntegrityViolationException e) {
 	        throw new InventoryException(Message.UNKNOW_ERROR,e);
 	    }
@@ -51,7 +51,7 @@ public class AssetManagerImpl implements AssetManager{
 
 		try {
 
-			return assetDetailRepo.save(
+			return assetRepo.save(
 					new Asset(new AssetMainType(assetTypeId),
 							new AssetSubType(assetSubTypeId),
 							new AMC(amcId),
@@ -71,7 +71,7 @@ public class AssetManagerImpl implements AssetManager{
 	public void updateAsset(Long id, Long assetTypeId, Long assetSubTypeId, Long amcId, Long poId,
 			String serialNumber, String barcode, AssetStatus status, String desc, Date returnDate, Long assetIssuedToId) {
 		try {
-			 	assetDetailRepo.save(
+			 	assetRepo.save(
 				new Asset(id, new AssetMainType(assetTypeId),
 				new AssetSubType(assetSubTypeId),
 				new AMC(amcId),
@@ -87,6 +87,13 @@ public class AssetManagerImpl implements AssetManager{
 		} catch (DataIntegrityViolationException e) {
 			throw new InventoryException(Message.DUPLICATE_ASSET, e);
 		}
+	}
+
+	@Override
+	public Integer getAssetAvailability(Long assetSubTypeId) {
+		List<Asset> assetList = assetRepo.findAssetByAssetSubType(new AssetSubType(assetSubTypeId));
+		List<AssetIssue> assetIssueList = assetIssueRepo.findAssetIssueByAssetAssetSubTypeAndReturnDateIsNull(new AssetSubType(assetSubTypeId));
+		return assetList.size() - assetIssueList.size();
 	}
 
 	

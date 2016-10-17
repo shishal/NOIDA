@@ -37,9 +37,9 @@ public class CommonController {
 			else if ("ROLE_ISSUER".equals(gAuth.getAuthority()))
 				return "approvedRequest";
 			else if ("ROLE_APPROVER".equals(gAuth.getAuthority()))
-				return "approvePendingRequest";
+				return "redirect:approver/pendingRequest";
 			else if ("ROLE_ADMIN".equals(gAuth.getAuthority()))
-				return "approvePendingRequest";
+				return "redirect:approver/pendingRequest";
 
 		}
 		return "403";
