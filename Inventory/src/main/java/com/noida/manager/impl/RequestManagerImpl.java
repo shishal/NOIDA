@@ -11,6 +11,7 @@ import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
 import com.noida.model.Request;
 import com.noida.model.Users;
+import com.noida.util.RequestStatus;
 import com.noida.util.RequestType;
 
 @Service
@@ -29,6 +30,7 @@ public class RequestManagerImpl implements RequestManager{
 				RequestType.NEW,
 				quantity,
 				desc,
+				RequestStatus.PENDING,
 				new Date(),
 				new Date()));
 	}

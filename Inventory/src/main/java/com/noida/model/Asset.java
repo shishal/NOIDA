@@ -2,16 +2,16 @@ package com.noida.model;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Where;
 
@@ -33,6 +33,7 @@ public class Asset {
 	private AssetMainType assetMainType;
 	@ManyToOne(fetch=FetchType.LAZY)
 	private AssetSubType assetSubType;
+	@Enumerated(EnumType.STRING)
 	private AssetStatus status;
 	private String description;
 	private Date createdTime;
