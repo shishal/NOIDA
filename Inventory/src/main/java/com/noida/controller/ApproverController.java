@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.manager.AssetManager;
@@ -32,6 +33,24 @@ public class ApproverController {
 	public Map<String,Object> getAssetAvailability(Long assetSubTypeId){
 		Integer qty = assetMgr.getAssetAvailability(assetSubTypeId);
 		return Util.toMap("status",Constants.SUCCESS,"availableQty",qty);
+	}
+	
+	@RequestMapping(value={"approveRequest"}, method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> approveRequest(
+			@RequestParam int approvedQty,
+			@RequestParam Long requestNumber,
+			@RequestParam String remark){
+		reqMgr.approveRequest(requestNumber,approvedQty,remark);
+		return Util.toMap("status",Constants.SUCCESS);
+	}
+	@RequestMapping(value={"rejectRequest"}, method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> rejectRequest(
+			@RequestParam Long requestNumber,
+			@RequestParam String remark){
+		reqMgr.rejectRequest(requestNumber,remark);
+		return Util.toMap("status",Constants.SUCCESS);
 	}
 	
 	@RequestMapping(value = { "/requests" }, method = RequestMethod.GET)

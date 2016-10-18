@@ -2,15 +2,22 @@ package com.noida.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import com.noida.util.RequestStatus;
 
+@Entity
 public class RequestHistory {
 
-	private int id;
-	private int requestId;
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	private Long requestId;
 	@Enumerated(EnumType.STRING)
 	private RequestStatus status;
 	private String byUser;
@@ -18,19 +25,19 @@ public class RequestHistory {
 	private Date createdTime;
 	private Date updatedTime;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	public int getRequestId() {
+	public Long getRequestId() {
 		return requestId;
 	}
 	
-	public void setRequestId(int requestId) {
+	public void setRequestId(Long requestId) {
 		this.requestId = requestId;
 	}
 	
@@ -74,7 +81,7 @@ public class RequestHistory {
 		this.updatedTime = updatedTime;
 	}
 
-	public RequestHistory(int requestId, RequestStatus status, String byUser,
+	public RequestHistory(Long requestId, RequestStatus status, String byUser,
 			String description) {
 		super();
 		this.requestId = requestId;
@@ -83,7 +90,7 @@ public class RequestHistory {
 		this.description = description;
 	}
 
-	public RequestHistory(int requestId, RequestStatus status, String byUser, String description, Date createdTime,
+	public RequestHistory(Long requestId, RequestStatus status, String byUser, String description, Date createdTime,
 			Date updatedTime) {
 		super();
 		this.requestId = requestId;
@@ -92,6 +99,10 @@ public class RequestHistory {
 		this.description = description;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
+	}
+	
+	public RequestHistory() {
+		super();
 	}
 
 	@Override

@@ -52,7 +52,7 @@
 			<td>${request.requester.username}</td>
 			<td><fmt:formatDate type="date"  value="${request.createdTime}" pattern="dd-MM-yyyy" /></td>
 			<td>${request.status}</td>
-			<td><button type="button" class="btn btn-primary approveBtn" data-toggle="modal" data-target="#actionPopOver">Approve /Reject</button></td>
+			<td><button type="button" class="btn btn-primary approveRejectBtn" data-toggle="modal" data-target="#actionPopOver">Approve /Reject</button></td>
 			<td>${request.assetSubType.id}</td>
 		</tr>
 		</c:forEach>
@@ -71,16 +71,31 @@
 
 			<!-- Modal Body -->
 			<div class="modal-body app-modal-content bg-alt">
-				<form role="form">
+				<form role="form" id="approvalForm">
 					<div class="form-group">
-						<label for="inputRemarks">Enter Remarks</label> <input type="text"
-							class="form-control" id="inputRemarks" placeholder="Remarks" />
+						<label for="requestedQty">Requested Quantity:</label>
+						<span id="requestedQty"></span>
 					</div>
+					<div class="form-group">
+						<label for="availableQty">Available Quantity:</label> 
+						<span id="availableQty"></span>
+					</div>
+					<div class="form-group">
+						<label for="approvedQty">Approved Quantity</label> 
+						<input type="number" id="approvedQty" name="approvedQty" class="form-control" placeholder="Approved Quantity"/>
+					</div>
+					<div class="form-group">
+						<label for="remark">Enter Remarks</label> 
+						<input type="text" class="form-control" name="remark" id="remark" placeholder="Remarks" />
+					</div>
+					<input type="hidden" name="requestNumber" id="requestNumber"/>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				</form>
 
-				<button type="button" class="btn btn-primary">Approve</button>
-				<button type="button" class="btn btn-primary">Reject</button>
-
+				<button id="approveBtn" type="button" class="btn btn-primary">Approve</button>
+				<button id="rejectBtn" type="button" class="btn btn-primary">Reject</button>
+				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 			</div>
 
 		</div>
@@ -90,7 +105,7 @@
 	//When the document is ready
 $(function() {
 	var selectedRow = 0;
-	var export_filename = 'po';
+	var export_filename = 'PendingRequest';
 	var table = $('#requestTable').DataTable({
 		dom : '<"top"B>rft<"bottom"lp><"clear">',
 		buttons : [
@@ -125,18 +140,25 @@ $(function() {
 			}
 		});
 	});
-	$('.approveBtn').click(function(e) {
+	$('#actionPopOver').on('hidden.bs.modal', function(e) {
+		resetModalAlerts();
+		reloadPendingRequestPage();
+	});
+	$('.approveRejectBtn').click(function(e) {
 		var selectedRow = table.row( $(this).parent().parent() ).data();
+		var requestedNumber = selectedRow[0]
 		var requestedQty = selectedRow[3]
 		var assetSubTypeId = selectedRow[8]
-		console.log(requestedQty + ' '+assetSubTypeId)
+		$('#requestedQty').text(requestedQty);
+		$('#requestNumber').val(requestedNumber)
+		$('#assetSubTypeId').val(assetSubTypeId)
 		 $.ajax({
 			type : "POST",
 			url : "getAssetAvailability",
 			data : {assetSubTypeId:assetSubTypeId,${_csrf.parameterName}:'${_csrf.token}'},
 			success : function(data) {
 				if (data.status == 1) {
-					alert(data.availableQty)
+					$('#availableQty').text(data.availableQty);
 				} else if (data.status == 0) {
 					showErrorMessage('errorMessage',data.message);//code to show error
 				} else {
@@ -145,5 +167,49 @@ $(function() {
 			}//success end
 		});//ajax end 
 	});
+	$('#approveBtn').click(function(e) {
+		resetModalAlerts();
+		var approvedQty = $('#approvedQty').val();
+		var availableQty = $('#availableQty').text();
+		console.log(availableQty+' '+approvedQty)
+		if(availableQty < approvedQty){
+			showErrorMessage('errorMessage','<spring:message code="request.approve.alert" />');
+			return false;
+		}
+		 $.ajax({
+			type : "POST",
+			url : "approveRequest",
+			data : $("#approvalForm").serialize(),
+			success : function(data) {
+				if (data.status == 1) {
+					showSuccessMessage('successMessage','<spring:message code="request.approve.success" />');
+				}else {
+					showErrorMessage('errorMessage','Unknow error');
+				}
+			}//success end
+		});//ajax end 
+	});
+	$('#rejectBtn').click(function(e) {
+		resetModalAlerts();
+		 $.ajax({
+			type : "POST",
+			url : "rejectRequest",
+			data : $("#approvalForm").serialize(),
+			success : function(data) {
+				if (data.status == 1) {
+					showSuccessMessage('successMessage','<spring:message code="request.reject.success" />');
+				}else {
+					showErrorMessage('errorMessage','Unknow error');
+				}
+			}//success end
+		});//ajax end 
+	});
 });
+function resetModalAlerts() {
+	$('#successMessage').hide();
+	$('#errorMessage').hide();
+}
+function reloadPendingRequestPage() {
+	document.getElementById('pendingRequestMenuLink').click();
+}
 </script>
