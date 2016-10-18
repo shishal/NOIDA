@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.noida.dao.AssetIssueRepository;
 import com.noida.dao.AssetRepository;
+import com.noida.dao.UserRepository;
 import com.noida.exception.InventoryException;
 import com.noida.manager.AssetManager;
 import com.noida.model.AMC;
@@ -18,6 +19,7 @@ import com.noida.model.AssetIssue;
 import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
 import com.noida.model.PO;
+import com.noida.model.Users;
 import com.noida.util.AssetStatus;
 import com.noida.util.Message;
 
@@ -29,6 +31,9 @@ public class AssetManagerImpl implements AssetManager{
 	
 	@Autowired
 	AssetIssueRepository assetIssueRepo;
+	
+	@Autowired
+	UserRepository userRepo;
 
 	@Override
 	public List<Asset> getAllAsset() {
@@ -96,5 +101,14 @@ public class AssetManagerImpl implements AssetManager{
 		return assetList.size() - assetIssueList.size();
 	}
 
+	@Override
+	public List<Asset> getAssetByUsername(String username) {
+		List<Users> user = userRepo.findByUsername(username);
+		List<AssetIssue> assetIssue = assetIssueRepo.findByIssuedTo(user.get(0));
+		if(assetIssue != null){
+			return Lists.newArrayList(assetRepo.findByAssetIssue(assetIssue));
+		}
+		return null;
+	}
 	
 }

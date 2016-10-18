@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.exception.InventoryException;
+import com.noida.manager.AssetManager;
 import com.noida.manager.AssetTypeManager;
 import com.noida.manager.RequestManager;
 import com.noida.manager.UserManager;
@@ -34,6 +35,7 @@ public class UserController {
 	@Autowired AssetTypeManager assetTypeMgr;
 	@Autowired RequestManager reqMrg;
 	@Autowired MessageSource messageSource;
+	@Autowired AssetManager assetMgr;
 
 	@RequestMapping(value = { "/", "home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -72,6 +74,11 @@ public class UserController {
 
 	@RequestMapping(value = { "/myAsset" }, method = RequestMethod.GET)
 	public String myAssets(ModelMap model) {
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		User loggedUser = (User)auth.getPrincipal();
+		String username = loggedUser.getUsername();
+		model.put("assetList", assetMgr.getAssetByUsername(username));
 		return "myAsset";
 	}
 	
