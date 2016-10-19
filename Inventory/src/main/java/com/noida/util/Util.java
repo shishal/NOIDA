@@ -3,6 +3,8 @@ package com.noida.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 public class Util {
 	
 	public static Map<String, Object> toMap(String k1, Object v1){
@@ -73,4 +75,7 @@ public class Util {
 		Object[] arr = {a1,a2,a3};
 		return arr;
 	}
+	 public static String getLoggedInUsername(){
+		 return SecurityContextHolder.getContext().getAuthentication().getName();
+	 }
 }

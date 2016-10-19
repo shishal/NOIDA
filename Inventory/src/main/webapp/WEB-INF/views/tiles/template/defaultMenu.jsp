@@ -21,7 +21,7 @@
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('APPROVER','ADMIN')">
 					<li class="active">
-					<a href="${pageContext.request.contextPath}/approver/home">Home<span style="font-size: 20px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a>
+					<a id="pendingRequestMenuLink" href="${pageContext.request.contextPath}/approver/home">Home<span style="font-size: 20px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a>
 					</li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ISSUER')">
