@@ -11,6 +11,9 @@
 		<a id="updateAsset" href="#"><span title="Edit selected Asset" style="font-size: 20px;" data-toggle="modal" data-target="#assetModel" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a> &nbsp;&nbsp; 
 		<a id="deleteAsset" href="#"><span title="Delete selected Asset" style="font-size: 20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a> &nbsp;&nbsp; 
 	</div>
+	
+	<div id="assetListId" hidden="true">${assetList}</div>
+	
 </div>
 <div class="table-responsive">
 	<table class="table table-bordered" id="assetTable">
@@ -59,14 +62,24 @@
 					<td>${asset.id}</td>
 					<td>${asset.barcode}</td>
 					<td>${asset.serialNo}</td>
-					<td>${asset.amc.amcNumber}</td>
-					<td>${asset.po.poNumber}</td>
+					<td>
+						<a id="amc_${asset.id}" onmouseover="showAmcDetails(this, '${asset.amc.amcNumber}', '${asset.amc.vendor}', '${asset.amc.startDate}', '${asset.amc.endDate}', '${asset.amc.description}');">
+							${asset.amc.amcNumber}
+						</a>
+					</td>
+					<td>
+						<a id="po_${asset.id}" onmouseover="showPoDetails(this, '${asset.po.poNumber}', '${asset.po.company}', '${asset.po.poDate}', '${asset.po.description}');">
+							${asset.po.poNumber}
+						</a>
+					</td>
 					<td>${asset.assetMainType.mainType}</td>
 					<td>${asset.assetSubType.subType}</td>
 					<td>${asset.status}</td>
 					<td>${asset.description}</td>
 					<td>
-					<c:out value="${asset.assetIssue[0].issuedTo.username}"/>
+						<a id="ïssuedto_${asset.id}" onmouseover="showUserDetails(this, '${asset.assetIssue[0].issuedTo.username}');">
+							<c:out value="${asset.assetIssue[0].issuedTo.username}"/>
+						</a>
 					</td>
 					<td>${asset.amc.id}</td>
 					<td>${asset.po.id}</td>
@@ -190,6 +203,9 @@
 <script>
 	//When the document is ready
 $(function() {
+	
+	//var assetDetailList = $('#assetListId').html();
+	//console.log(assetDetailList);
 	var selectedRow = 0;
 	var export_filename = 'asset';
 	var table = $('#assetTable').DataTable({
@@ -373,4 +389,28 @@ $(function() {
 		document.getElementById('assetMenuLink').click();
 	}
 });//onload end
+
+function showPoDetails(element,poNum, vendor, poDate, description) {
+	
+	element.title = " PO Details: \n ------------ \n PO Number: " 
+		+ poNum + "  \n Vendor: " 
+		+ vendor + "  \n PO Date: "
+		+ poDate + "  \n Description: "
+		+ description + "  \n   ";
+    
+};
+
+function showAmcDetails(element, amcNumber, vendor, startDate, endDate, description) {
+	element.title = " AMC Details: \n ------------ \n AMC Number: " 
+		+ amcNumber + "  \n Vendor: " 
+		+ vendor + "  \n Start Date: "
+		+ startDate + "  \n End Date: "
+		+ endDate + "  \n Description: "
+		+ description + "  \n   ";
+};
+
+function showUserDetails(element, username) {
+	element.title = " User Details: \n ------------ \n Username: " 
+		+ username + "  \n " ;
+};
 </script>
