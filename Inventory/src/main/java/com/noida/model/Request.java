@@ -162,6 +162,10 @@ public class Request {
 		super();
 	}
 
+	public Request(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "RequestDetail [id=" + id + ", assetMainTypeId=" + assetMainType + ", assetSubTypeId="

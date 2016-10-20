@@ -1,51 +1,50 @@
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="row">
 	<div class="col-md-6">
 		<h3 style="padding-left: 2%; padding-top: 2%">Approved Requests</h3>
 	</div>
-	<div class="col-md-6 text-right"
-		style="padding-right: 2%; padding-top: 2%">
-		<a href="#"><span title="Export" style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
-		&nbsp;&nbsp;
-		<a href="#"><span title="Print" style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
-	</div>
 </div>
 <div class="table-responsive">
-<table class="table table-bordered">
+<table class="table table-bordered" id="requestTable">
 	<thead class="thead-inverse table-header" style="">
 		<tr>
-			<th>#</th>
 			<th>Request Number</th>
-			<th>Item Type</th>
-			<th>Item Sub Type</th>
+			<th>Asset Type</th>
+			<th>Asset Sub Type</th>
+			<th>Quantity</th>
 			<th>Raised By</th>
 			<th>Status</th>
 			<th>Action</th>
+			<th></th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<th>Request Number</th>
+			<th>Asset Type</th>
+			<th>Asset Sub Type</th>
+			<th>Quantity</th>
+			<th>Raised By</th>
+			<th>Status</th>
+			<th>Action</th>
+			<th></th>
+		</tr>
+	</tfoot>
 	<tbody>
+	<c:forEach items="${requestList}" var="request" varStatus="row">
 		<tr>
-			<th scope="row">1</th>
-			<td><a href="#">ABC123</a></td>
-			<td>Laptop</td>
-			<td>MacBook Air</td>
-			<td>Ravi</td>
-			<td>Pending</td>
-			<td><button type="button" class="btn btn-primary"
-					data-toggle="modal" data-target="#actionIssuerPopOver">Issue</button></td>
+			<td>${request.id}</td>
+			<td>${request.assetMainType.mainType}</td>
+			<td>${request.assetSubType.subType}</td>
+			<td>${request.assetQuantity}</td>
+			<td>${request.requester.username}</td>
+			<td>${request.status}</td>
+			<td><button type="button" class="btn btn-primary issueBtn" data-toggle="modal" data-target="#actionIssuerPopOver">Issue</button></td>
+			<td>${request.assetSubType.id}</td>
 		</tr>
-		<tr>
-			<th scope="row">2</th>
-			<td><a href="#">DEF456</a></td>
-			<td>Printer Toner</td>
-			<td>Samsung Color</td>
-			<td>R K Gupta</td>
-			<td>Approved</td>
-			<td><button type="button" class="btn btn-primary"
-					data-toggle="modal" data-target="#actionIssuerPopOver">Issue</button></td>
-		</tr>
+		</c:forEach>
 	</tbody>
 </table>
 </div>
@@ -62,22 +61,124 @@
 
 			<!-- Modal Body -->
 			<div class="modal-body app-modal-content bg-alt">
-				<form role="form">
+				<form role="form" id="issueForm" data-toggle="validator">
 					<div class="form-group">
-						<label for="inputBarCode">Enter BarCode</label> <input type="text"
-							class="form-control" id="inputBarCode" placeholder="BarCode" />
+						<label for="inputBarCode">Enter BarCode</label> 
+						<input type="text" id="barcode" name="barcodes" class="form-control" placeholder="BarCode"/>
 					</div>
 					<div class="form-group">
 						<label for="inputRemarks">Enter Remarks</label> <input type="text"
-							class="form-control" id="inputRemarks" placeholder="Remarks" />
+							class="form-control" name="remark" id="inputRemarks" placeholder="Remarks" />
 					</div>
+					<input type="hidden" name="requestedQty" id="requestedQty"/>
+					<input type="hidden" name="requestNumber" id="requestNumber"/>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				</form>
 				<br>
-				<button type="button" class="btn btn-primary">Issue</button>
-				<button type="button" class="btn btn-primary">Cancel</button>
-
+				<button id="issueConfirmBtn" type="button" class="btn btn-primary">Issue</button>
+				<button id="rejectBtn" type="button" class="btn btn-primary">Cancel</button>
+				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 			</div>
 
 		</div>
 	</div>
 </div>
+<script>
+	//When the document is ready
+$(function() {
+	var selectedRow = 0;
+	var export_filename = 'Approved Request';
+	var table = $('#requestTable').DataTable({
+		dom : '<"top"B>rft<"bottom"lp><"clear">',
+		buttons : [
+			{
+				text : '',
+				extend : 'excel',
+				className : 'hidden-xs showopacity glyphicon glyphicon-export',
+				title : export_filename,
+				extension : '.xls'
+			},
+			{
+				text : '',
+				extend : 'print',
+				className : 'hidden-xs showopacity glyphicon glyphicon-print'
+			} 
+		],
+		columnDefs: [
+			{ "targets": [ 7 ], "visible": false, "searchable": false },
+		]
+	});
+	$('#requestTable tfoot th').each(function(index) {
+		var title = $(this).text();
+		$(this).html('<input type="text" style="width:100%" placeholder="Search '+title+'" />');
+	});
+	// Apply the search
+	table.columns().every(function() {
+		var that = this;
+		$('input', this.footer()).on('keyup change',function() {
+			if (that.search() !== this.value) {
+				that.search(this.value).draw();
+			}
+		});
+	});
+	$('#actionIssuerPopOver').on('hidden.bs.modal', function(e) {
+		resetModalAlerts();
+		reloadPendingRequestPage();
+	});
+	$('.issueBtn').click(function(e) {
+		$('.dynaBarcode').remove();
+		var selectedRow = table.row( $(this).parent().parent() ).data();
+		var requestedNumber = selectedRow[0]
+		var requestedQty = selectedRow[3]
+		$('#requestNumber').val(requestedNumber);
+		$('#requestedQty').val(requestedQty);
+		console.log(requestedQty)
+		if(requestedQty > 1){
+			for(i=1;i<requestedQty;i++){
+				$('#barcode').after('<input type="text" name="barcodes" class="form-control dynaBarcode" placeholder="BarCode"/>')
+			}
+		}
+	});
+	$('#issueConfirmBtn').click(function(e) {
+		resetModalAlerts();
+		 $.ajax({
+			type : "POST",
+			url : "issueAsset",
+			data : $("#issueForm").serialize(),
+			success : function(data) {
+				if (data.status == 1) {
+					showSuccessMessage('successMessage','<spring:message code="request.issue.success" />');
+				}else if(data.status == 0){
+					showErrorMessage('errorMessage',data.msg);
+				}
+				else {
+					showErrorMessage('errorMessage','Unknow error');
+				}
+			}//success end
+		});//ajax end 
+	});
+	$('#rejectBtn').click(function(e) {
+		resetModalAlerts();
+		 $.ajax({
+			type : "POST",
+			url : "rejectRequest",
+			data : $("#approvalForm").serialize(),
+			success : function(data) {
+				if (data.status == 1) {
+					showSuccessMessage('successMessage','<spring:message code="request.reject.success" />');
+				}else {
+					showErrorMessage('errorMessage','Unknow error');
+				}
+			}//success end
+		});//ajax end 
+	});
+});
+function resetModalAlerts() {
+	$('#successMessage').hide();
+	$('#errorMessage').hide();
+}
+function reloadPendingRequestPage() {
+	document.getElementById('pendingRequestMenuLink').click();
+}
+</script>

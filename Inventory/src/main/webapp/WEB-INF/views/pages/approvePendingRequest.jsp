@@ -5,14 +5,6 @@
 	<div class="col-md-6">
 		<h3 style="padding-left: 2%; padding-top: 2%">Pending Requests</h3>
 	</div>
-	<div class="col-md-6 text-right"
-		style="padding-right: 2%; padding-top: 2%">
-		<a href="#"><span title="Export" style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
-		&nbsp;&nbsp;
-		<a href="#"><span title="Print" style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
-	</div>
 </div>
 <div class="table-responsive">
 <table class="table table-bordered" id="requestTable">

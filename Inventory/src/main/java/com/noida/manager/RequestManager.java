@@ -1,6 +1,7 @@
 package com.noida.manager;
 
 import java.util.List;
+import java.util.Map;
 
 import com.noida.model.Request;
 import com.noida.util.RequestStatus;
@@ -14,4 +15,6 @@ public interface RequestManager {
 	public void approveRequest(Long requestNumber, int approvedQty, String remark);
 
 	public void rejectRequest(Long requestNumber, String remark);
+
+	public Map<String, Object> issueAsset(Long requestNumber, String[] barcodes, String remark);
 }

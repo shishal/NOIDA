@@ -164,6 +164,12 @@ public class Asset {
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
 	}
+	
+
+	public Asset(Long id) {
+		super();
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {

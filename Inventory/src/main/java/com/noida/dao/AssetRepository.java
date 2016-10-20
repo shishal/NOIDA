@@ -14,5 +14,6 @@ public interface AssetRepository extends CrudRepository<Asset, Long>{
 	public List<Asset> findAssetByAssetSubType(AssetSubType subType);
 	
 	List<Asset> findByAssetIssue(List<AssetIssue> assetIssue);
+	List<Asset> findByBarcode(String barcode);
 
 }

@@ -2,18 +2,28 @@ package com.noida.manager.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.transaction.Transactional;
+
+import org.apache.tomcat.util.bcel.classfile.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import com.noida.dao.AssetIssueRepository;
+import com.noida.dao.AssetRepository;
 import com.noida.dao.RequestHistoryRepository;
 import com.noida.dao.RequestRepository;
 import com.noida.manager.RequestManager;
+import com.noida.model.Asset;
+import com.noida.model.AssetIssue;
 import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
 import com.noida.model.Request;
 import com.noida.model.RequestHistory;
 import com.noida.model.Users;
+import com.noida.util.Constants;
 import com.noida.util.RequestStatus;
 import com.noida.util.RequestType;
 import com.noida.util.Util;
@@ -23,7 +33,9 @@ public class RequestManagerImpl implements RequestManager{
 	
 	@Autowired RequestRepository reqRepo;
 	@Autowired RequestHistoryRepository reqHistoryRepo;
-	
+	@Autowired AssetIssueRepository assetIssueRepo;
+	@Autowired AssetRepository assetRepo;
+	@Autowired MessageSource msgSource;
 	@Override
 	public Request raiseNewRequest(Long assetTypeNo, Long assetSubTypeNo, String requester, int quantity, String desc){
 		
@@ -69,5 +81,48 @@ public class RequestManagerImpl implements RequestManager{
 		request.setUpdatedTime(currentDate);
 		reqRepo.save(request);
 		reqHistoryRepo.save(new RequestHistory(requestNumber, RequestStatus.REJECTED, loginUsername, remark, currentDate, currentDate));
+	}
+	@Override
+	@Transactional
+	public Map<String,Object> issueAsset(Long requestNumber, String[] barcodes, String remark) {
+		Date currentDate = new Date();
+		String loginUsername = Util.getLoggedInUsername();
+		Request request =reqRepo.findOne(requestNumber);
+		for(String barcode:barcodes){
+			List<Asset> assetList = assetRepo.findByBarcode(barcode);
+			if(assetList.isEmpty()){
+				return Util.toMap("status", Constants.FAIL,"msg",msgSource.getMessage("request.issue.fail.wrong.barcode", Util.toAttay(barcode), null));
+			}
+			Asset asset = null;
+			if(!assetList.isEmpty()){
+				asset = assetList.get(0);
+				if(asset.getAssetSubType().getId() != request.getAssetSubType().getId()){
+					return Util.toMap("status", Constants.FAIL,"msg",msgSource.getMessage("request.issue.fail.wrong.asset.issue", null, null));
+				}
+			}
+			List<AssetIssue> assetIssueList = assetIssueRepo.findByAssetAndReturnDateIsNotNull(asset);
+			if(!assetIssueList.isEmpty()){
+				return Util.toMap("status", Constants.FAIL,"msg",msgSource.getMessage("request.issue.fail.already.asset.issued", Util.toAttay(barcode,assetIssueList.get(0).getIssuedTo().getUsername()), null));
+			}
+			AssetIssue assetIssue = new AssetIssue(
+										asset,
+										null, 
+										request, 
+										currentDate, 
+										null,
+										request.getRequester(),
+										new Users(loginUsername),
+										null,
+										remark,
+										currentDate,
+										currentDate);
+			assetIssueRepo.save(assetIssue);
+		}
+		request.setDescription(remark);
+		request.setStatus(RequestStatus.ISSUED);
+		request.setUpdatedTime(currentDate);
+		reqRepo.save(request);
+		reqHistoryRepo.save(new RequestHistory(requestNumber, RequestStatus.ISSUED, loginUsername, remark, currentDate, currentDate));
+		return Util.toMap("status", Constants.SUCCESS);
 	}
 }
