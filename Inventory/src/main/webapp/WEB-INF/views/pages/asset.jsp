@@ -12,7 +12,7 @@
 		<a id="deleteAsset" href="#"><span title="Delete selected Asset" style="font-size: 20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a> &nbsp;&nbsp; 
 	</div>
 	
-	<div id="assetListId" hidden="true">${assetList}</div>
+	<div id="userListId" hidden="true">${userList}</div>
 	
 </div>
 <div class="table-responsive">
@@ -63,13 +63,13 @@
 					<td>${asset.barcode}</td>
 					<td>${asset.serialNo}</td>
 					<td>
-						<a id="amc_${asset.id}" onmouseover="showAmcDetails(this, '${asset.amc.amcNumber}', '${asset.amc.vendor}', '${asset.amc.startDate}', '${asset.amc.endDate}', '${asset.amc.description}');">
-							${asset.amc.amcNumber}
+						<a onmouseover="showAmcDetails(this, '${asset.amc.amcNumber}', '${asset.amc.vendor}', '${asset.amc.startDate}', '${asset.amc.endDate}', '${asset.amc.description}');">
+							<span id="amc_${asset.id}">${asset.amc.amcNumber}</span>
 						</a>
 					</td>
 					<td>
-						<a id="po_${asset.id}" onmouseover="showPoDetails(this, '${asset.po.poNumber}', '${asset.po.company}', '${asset.po.poDate}', '${asset.po.description}');">
-							${asset.po.poNumber}
+						<a onmouseover="showPoDetails(this, '${asset.po.poNumber}', '${asset.po.company}', '${asset.po.poDate}', '${asset.po.description}');">
+							<span id="po_${asset.id}"> ${asset.po.poNumber} </span>
 						</a>
 					</td>
 					<td>${asset.assetMainType.mainType}</td>
@@ -77,8 +77,8 @@
 					<td>${asset.status}</td>
 					<td>${asset.description}</td>
 					<td>
-						<a id="ïssuedto_${asset.id}" onmouseover="showUserDetails(this, '${asset.assetIssue[0].issuedTo.username}');">
-							<c:out value="${asset.assetIssue[0].issuedTo.username}"/>
+						<a onmouseover="showUserDetails(this, '${asset.assetIssue[0].issuedTo.username}');">
+							<span id="ïssuedto_${asset.id}">${asset.assetIssue[0].issuedTo.username}</span>
 						</a>
 					</td>
 					<td>${asset.amc.id}</td>
@@ -203,9 +203,7 @@
 <script>
 	//When the document is ready
 $(function() {
-	
-	//var assetDetailList = $('#assetListId').html();
-	//console.log(assetDetailList);
+		
 	var selectedRow = 0;
 	var export_filename = 'asset';
 	var table = $('#assetTable').DataTable({
@@ -309,6 +307,9 @@ $(function() {
 		$('#assetTypeId').change();
 		generateBarcode();
 		
+		var htmlObject = $(selectedRow[10]);
+		selectedRow[10] = htmlObject.find('span').html();
+		
 		if(selectedRow[10].length > 0) {
 			$('#issuedToSection').show();
 			$('#returnDateSection').show();
@@ -410,6 +411,14 @@ function showAmcDetails(element, amcNumber, vendor, startDate, endDate, descript
 };
 
 function showUserDetails(element, username) {
+	/* var userDetailList1 = $('#userListId').html();
+	console.log($('#userListId')); */
+	/* var userDetailList = $(userDetailList1);
+	for(var i = 0; i < userDetailList.length; i++) {
+		console.log(userDetailList[i]);
+	} */
+	
+	
 	element.title = " User Details: \n ------------ \n Username: " 
 		+ username + "  \n " ;
 };
