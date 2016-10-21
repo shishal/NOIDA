@@ -202,7 +202,19 @@
 </div>
 <script>
 	//When the document is ready
+var userDetailList;
 $(function() {
+	userDetailList = new Object();
+	<c:forEach items="${userList}" var="user">
+	var userDetail =[];
+	userDetail.push("${user.username}");
+	userDetail.push("${user.firstName}");
+	userDetail.push("${user.lastName}");
+	userDetail.push("${user.empCode}");
+	userDetail.push("${user.department.name}");
+	userDetail.push("${user.contactNo}");
+	userDetailList["${user.username}"] = userDetail; 
+	</c:forEach>
 		
 	var selectedRow = 0;
 	var export_filename = 'asset';
@@ -391,35 +403,5 @@ $(function() {
 	}
 });//onload end
 
-function showPoDetails(element,poNum, vendor, poDate, description) {
-	
-	element.title = " PO Details: \n ------------ \n PO Number: " 
-		+ poNum + "  \n Vendor: " 
-		+ vendor + "  \n PO Date: "
-		+ poDate + "  \n Description: "
-		+ description + "  \n   ";
-    
-};
 
-function showAmcDetails(element, amcNumber, vendor, startDate, endDate, description) {
-	element.title = " AMC Details: \n ------------ \n AMC Number: " 
-		+ amcNumber + "  \n Vendor: " 
-		+ vendor + "  \n Start Date: "
-		+ startDate + "  \n End Date: "
-		+ endDate + "  \n Description: "
-		+ description + "  \n   ";
-};
-
-function showUserDetails(element, username) {
-	/* var userDetailList1 = $('#userListId').html();
-	console.log($('#userListId')); */
-	/* var userDetailList = $(userDetailList1);
-	for(var i = 0; i < userDetailList.length; i++) {
-		console.log(userDetailList[i]);
-	} */
-	
-	
-	element.title = " User Details: \n ------------ \n Username: " 
-		+ username + "  \n " ;
-};
 </script>

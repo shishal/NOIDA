@@ -102,4 +102,34 @@ function Popup(data) {
     };
 }
 
+function showPoDetails(element,poNum, vendor, poDate, description) {
+	
+	element.title = " PO Details: \n------------------------\n PO Number: " 
+		+ poNum + "  \n Vendor: " 
+		+ vendor + "  \n PO Date: "
+		+ poDate + "  \n Description: "
+		+ description + "  \n   ";
+    
+};
+
+function showAmcDetails(element, amcNumber, vendor, startDate, endDate, description) {
+	element.title = " AMC Details: \n------------------------\n AMC Number: " 
+		+ amcNumber + "  \n Vendor: " 
+		+ vendor + "  \n Start Date: "
+		+ startDate + "  \n End Date: "
+		+ endDate + "  \n Description: "
+		+ description + "  \n   ";
+};
+
+function showUserDetails(element, username) {
+	var userDetail = userDetailList[username];
+	
+	element.title = " User Details: \n------------------------\n First Name: " 
+		+ userDetail[1] + "  \n Last Name: " 
+		+ userDetail[2] + "  \n Emp Code: " 
+		+ userDetail[3] + "  \n Department: " 
+		+ userDetail[4] + "  \n Contact No: " 
+		+ userDetail[5] + "  \n " ;
+};
+
 
