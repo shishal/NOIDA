@@ -201,6 +201,9 @@ $(function() {
 		document.getElementById('assetTypeMenuLink').click();
 	}
 	$('#saveBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 			type : "POST",
 			url : "createAssetType",
@@ -208,12 +211,14 @@ $(function() {
 			success : function(data) {
 				if (data.status == 1) {
 					showSuccessMessage('createSuccessMessage','<spring:message code="asset.type.create.success" />');
-					resetModalForm();
+					document.getElementById("assetTypeForm").reset();
 				} else if (data.status == 0) {
 					showErrorMessage('createErrorMessage',data.message);//code to show error
 				} else {
 					showErrorMessage('createErrorMessage','Unknow error');
 				}
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			}//success end
 		});//ajax end
 	});//onclik end
@@ -227,6 +232,9 @@ $(function() {
 		$('#inputUpdateDesc').val(selectedRow[3])
 	});
 	$('#updateBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 		type : "POST",
 		url : "updateAssetType",
@@ -234,11 +242,16 @@ $(function() {
 		success : function(data) {
 			if (data.status == 1) {
 				showSuccessMessage('updateSuccessMessage','<spring:message code="asset.type.update.success" />');
-				resetModalForm();
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			} else if (data.status == 0) {
 				showErrorMessage('updateErrorMessage',data.message);//code to show error
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			} else {
 				showErrorMessage('updateErrorMessage','Unknow error');
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			}
 		}//success end
 	});//ajax end

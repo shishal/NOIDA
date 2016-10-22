@@ -159,6 +159,9 @@ $(function() {
 		reloadPOPage();
 	});
 	$('#saveBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 			type : "POST",
 			url : "createPO",
@@ -166,11 +169,14 @@ $(function() {
 			success : function(data) {
 				if (data.status == 1) {
 					showSuccessMessage('successMessage','<spring:message code="po.create.success" />');
+					document.getElementById("poForm").reset();
 				} else if (data.status == 0) {
 					showErrorMessage('errorMessage',data.message);//code to show error
 				} else {
 					showErrorMessage('errorMessage','Unknow error');
 				}
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			}//success end
 		});//ajax end
 	});//onclik end
@@ -188,6 +194,9 @@ $(function() {
 		$('#inputDesc').val(selectedRow[5]);
 	});
 	$('#updateBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 		type : "POST",
 		url : "updatePO",
@@ -200,6 +209,8 @@ $(function() {
 			} else {
 				showErrorMessage('errorMessage','Unknow error');
 			}
+			$.unblockUI();
+			$(_this).prop('disabled',false);
 		}//success end
 	});//ajax end
 	});

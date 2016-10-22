@@ -284,6 +284,9 @@ $(function() {
 		reloadAssetPage();
 	});
 	$('#saveBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 			type : "POST",
 			url : "createAsset",
@@ -291,11 +294,14 @@ $(function() {
 			success : function(data) {
 				if (data.status == 1) {
 					showSuccessMessage('successMessage','<spring:message code="asset.create.success" />');
+					document.getElementById("assetForm").reset();
 				} else if (data.status == 0) {
 					showErrorMessage('errorMessage',data.message);//code to show error
 				} else {
 					showErrorMessage('errorMessage','Unknow error');
 				}
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			}//success end
 		});//ajax end
 	});//onclik end
@@ -336,6 +342,9 @@ $(function() {
 		
 	});
 	$('#updateBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 		type : "POST",
 		url : "updateAsset",
@@ -348,6 +357,8 @@ $(function() {
 			} else {
 				showErrorMessage('errorMessage','Unknow error');
 			}
+			$.unblockUI();
+			$(_this).prop('disabled',false);
 		}//success end
 	});//ajax end
 	});

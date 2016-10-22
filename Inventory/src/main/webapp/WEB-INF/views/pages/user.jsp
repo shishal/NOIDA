@@ -87,8 +87,8 @@
 		<tbody>
 			<c:forEach items="${userList}" var="user" varStatus="row">
 				<tr onclick="">
-					<th scope="row">${row.index +1}</th>
-					<th>${user.username}</th>
+					<td scope="row">${row.index +1}</td>
+					<td>${user.username}</td>
 					<td>${user.firstName}</td>
 					<td>${user.lastName}</td>
 					<td>${user.empCode}</td>
@@ -411,20 +411,24 @@ $(function() {
 	}
 	
 	$('#saveBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 			type : "POST",
 			url : "createUser",
 			data : $("#userForm").serialize(),
 			success : function(data) {
-				console.log(data);
 				if (data.status == 1) {
 					showSuccessMessage('createSuccessMessage','<spring:message code="user.create.success" />');
-					resetModalForm();
+					document.getElementById("userForm").reset();
 				} else if (data.status == 0) {
 					showErrorMessage('createErrorMessage',data.message);//code to show error
 				} else {
 					showErrorMessage('createErrorMessage','Unknow error');
 				}
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			}//success end
 		});//ajax end
 	});//onclik end
@@ -450,7 +454,9 @@ $(function() {
 	});
 	
 	$('#updateBtn').click(function() {
-		console.log($("#updateUserForm").serialize());
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 		type : "POST",
 		url : "updateUser",
@@ -464,6 +470,8 @@ $(function() {
 			} else {
 				showErrorMessage('updateErrorMessage','Unknow error');
 			}
+			$.unblockUI();
+			$(_this).prop('disabled',false);
 		}//success end
 	});//ajax end
 	});

@@ -82,7 +82,7 @@
 					</div>
 					<div class="form-group">
 						<label for="inputMake">Make: </label> 
-						<input type="text" name="make" class="form-control" placeholder="Asset Sub Type" id="inputMake" />
+						<input type="text" name="make" class="form-control" placeholder="Manufacturer" id="inputMake" />
 					</div>
 					<div class="form-group">
 						<label for="inputDesc">Description: </label> 
@@ -216,6 +216,7 @@
 		function resetModalForm() {
 			$('#inputAssetSubType').val('').end();
 			$('#inputDesc').val('');
+			$('#inputMake').val('');
 		}
 		function resetModalAlerts() {
 			$('#successMessage').hide();
@@ -226,6 +227,9 @@
 			document.getElementById('assetSubTypeMenuLink').click();
 		}
 		$('#saveBtn').click(function() {
+			$.blockUI({baseZ: 2000});
+			var _this = this
+			$(this).prop('disabled',true);
 			$.ajax({
 				type : "POST",
 				url : "createAssetSubType",
@@ -233,12 +237,14 @@
 				success : function(data) {
 					if (data.status == 1) {
 						showSuccessMessage('createSuccessMessage','<spring:message code="asset.sub.type.create.success" />');
-						resetModalForm();
+						document.getElementById("assetSubTypeForm").reset();
 					} else if (data.status == 0) {
 						showErrorMessage('createErrorMessage',data.message);//code to show error
 					} else {
 						showErrorMessage('createErrorMessage','Unknow error');
 					}
+					$.unblockUI();
+					$(_this).prop('disabled',false);
 				}//success end
 			});//ajax end
 		});//onclik end
@@ -254,6 +260,9 @@
 			$('#inputUpdateDesc').val(selectedRow[6]);
 		});
 		$('#updateBtn').click(function() {
+			$.blockUI({baseZ: 2000});
+			var _this = this
+			$(this).prop('disabled',true);
 			$.ajax({
 			type : "POST",
 			url : "updateAssetSubType",
@@ -261,12 +270,13 @@
 			success : function(data) {
 				if (data.status == 1) {
 					showSuccessMessage('updateSuccessMessage','<spring:message code="asset.sub.type.update.success" />');
-					resetModalForm();
 				} else if (data.status == 0) {
 					showErrorMessage('updateErrorMessage',data.message);//code to show error
 				} else {
 					showErrorMessage('updateErrorMessage','Unknow error');
 				}
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			}//success end
 		});//ajax end
 		});

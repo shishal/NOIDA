@@ -43,9 +43,9 @@
 			<tbody>
 				<c:forEach items="${deptList}" var="dept" varStatus="row">
 				<tr onclick="">
-					<th scope="row">${row.index +1}</th>
-					<th>${dept.id}</th>
-					<th>${dept.name}</th>
+					<td scope="row">${row.index +1}</td>
+					<td>${dept.id}</td>
+					<td>${dept.name}</td>
 					<td>${dept.description}</td>
 				</tr>
 			</c:forEach>
@@ -70,11 +70,11 @@
 					<div class="form-group">
 						<label for="inputDeptName">Department Name: </label> <input
 							type="text" name="name" class="form-control"
-							id="inputDeptName" />
+							id="inputDeptName" placeholder="Department Name"/>
 					</div>
 					<div class="form-group">
 						<label for="inputDesc">Description:</label> <input type="text" name="description" 
-							class="form-control" id="inputDesc" />
+							class="form-control" id="inputDesc" placeholder="Description" />
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<div id="createErrorMessage" class="alert alert-danger" style="display: none;"></div>
@@ -215,6 +215,9 @@ $(function() {
 	}
 	
 	$('#saveBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 			type : "POST",
 			url : "createDepartment",
@@ -222,12 +225,14 @@ $(function() {
 			success : function(data) {
 				if (data.status == 1) {
 					showSuccessMessage('createSuccessMessage','<spring:message code="department.create.success" />');
-					resetModalForm();
+					document.getElementById("deptForm").reset();
 				} else if (data.status == 0) {
 					showErrorMessage('createErrorMessage',data.message);//code to show error
 				} else {
 					showErrorMessage('createErrorMessage','Unknow error');
 				}
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			}//success end
 		});//ajax end
 	});//onclik end
@@ -243,6 +248,9 @@ $(function() {
 	});
 	
 	$('#updateBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 		type : "POST",
 		url : "updateDepartment",
@@ -250,12 +258,13 @@ $(function() {
 		success : function(data) {
 			if (data.status == 1) {
 				showSuccessMessage('updateSuccessMessage','<spring:message code="department.update.success" />');
-				resetModalForm();
 			} else if (data.status == 0) {
 				showErrorMessage('updateErrorMessage',data.message);//code to show error
 			} else {
 				showErrorMessage('updateErrorMessage','Unknow error');
 			}
+			$.unblockUI();
+			$(_this).prop('disabled',false);
 		}//success end
 	});//ajax end
 	});

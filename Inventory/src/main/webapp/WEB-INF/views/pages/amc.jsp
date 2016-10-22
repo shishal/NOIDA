@@ -83,15 +83,15 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEndDate">Date</label>&nbsp;
+						<label for="inputEndDate">End Date</label>&nbsp;
 						<div id="inputDate" class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
-							<input type="text" class="form-control" name="endDate" id="endDate">
+							<input type="text" class="form-control" name="endDate" id="endDate" placeholder="End Date">
 							<div class="input-group-addon"> <span class="glyphicon glyphicon-th"></span></div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputDesc">Description: </label> 
-						<input type="text" name="desc" class="form-control" value="AMC for 4 months" id="desc" />
+						<input type="text" name="desc" class="form-control" id="desc" placeholder="Description"/>
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
@@ -167,6 +167,9 @@ $(function() {
 		reloadPOPage();
 	});
 	$('#saveBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 			type : "POST",
 			url : "createAMC",
@@ -174,11 +177,14 @@ $(function() {
 			success : function(data) {
 				if (data.status == 1) {
 					showSuccessMessage('successMessage','<spring:message code="amc.create.success" />');
+					document.getElementById("amcForm").reset();
 				} else if (data.status == 0) {
 					showErrorMessage('errorMessage',data.message);//code to show error
 				} else {
 					showErrorMessage('errorMessage','Unknow error');
 				}
+				$.unblockUI();
+				$(_this).prop('disabled',false);
 			}//success end
 		});//ajax end
 	});//onclik end
@@ -197,6 +203,9 @@ $(function() {
 		$('#desc').val(selectedRow[6]);
 	});
 	$('#updateBtn').click(function() {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		$.ajax({
 		type : "POST",
 		url : "updateAMC",
@@ -209,6 +218,8 @@ $(function() {
 			} else {
 				showErrorMessage('errorMessage','Unknow error');
 			}
+			$.unblockUI();
+			$(_this).prop('disabled',false);
 		}//success end
 	});//ajax end
 	});
