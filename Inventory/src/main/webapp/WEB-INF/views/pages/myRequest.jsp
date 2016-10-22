@@ -76,15 +76,7 @@ $(function() {
 		$(this).html('<input type="text" style="width:100%" placeholder="Search '+title+'" />');
 	});
 	// Apply the search
-	table.columns().every(function() {
-		var that = this;
-		$('input', this.footer()).on('keyup change',function() {
-			if (that.search() !== this.value) {
-				that.search(this.value).draw();
-			}
-		});
-	});
-	
+	enableSearch(table)
 });
 	
 </script>
