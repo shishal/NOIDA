@@ -11,4 +11,5 @@ import com.noida.util.RequestStatus;
 public interface RequestRepository extends CrudRepository<Request, Long>{
 	
 	List<Request> findByStatus(RequestStatus status);
+	List<Request> findAll();
 }

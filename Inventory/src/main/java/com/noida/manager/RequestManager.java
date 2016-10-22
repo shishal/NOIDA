@@ -17,4 +17,8 @@ public interface RequestManager {
 	public void rejectRequest(Long requestNumber, String remark);
 
 	public Map<String, Object> issueAsset(Long requestNumber, String[] barcodes, String remark);
+	
+	public List<Request> getAllRequest();
+	
+	public void revertRequest(Long requestNumber, String remark);
 }

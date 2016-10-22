@@ -55,6 +55,16 @@ public class ApproverController {
 	
 	@RequestMapping(value = { "/requests" }, method = RequestMethod.GET)
 	public String requestsPage(ModelMap model) {
+		model.put("requestList", reqMgr.getAllRequest());
 		return "requests";
+	}
+	
+	@RequestMapping(value={"revertRequest"}, method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> revertRequest(
+			@RequestParam Long requestNumber,
+			@RequestParam String remark){
+		reqMgr.revertRequest(requestNumber,remark);
+		return Util.toMap("status",Constants.SUCCESS);
 	}
 }

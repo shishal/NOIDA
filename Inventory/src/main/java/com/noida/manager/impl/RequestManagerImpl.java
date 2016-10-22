@@ -125,4 +125,19 @@ public class RequestManagerImpl implements RequestManager{
 		reqHistoryRepo.save(new RequestHistory(requestNumber, RequestStatus.ISSUED, loginUsername, remark, currentDate, currentDate));
 		return Util.toMap("status", Constants.SUCCESS);
 	}
+	@Override
+	public List<Request> getAllRequest() {
+		return reqRepo.findAll();
+	}
+	@Override
+	public void revertRequest(Long requestNumber, String remark) {
+		Date currentDate = new Date();
+		String loginUsername = Util.getLoggedInUsername();
+		Request request =reqRepo.findOne(requestNumber);
+		request.setDescription(remark);
+		request.setStatus(RequestStatus.PENDING);
+		request.setUpdatedTime(currentDate);
+		reqRepo.save(request);
+		reqHistoryRepo.save(new RequestHistory(requestNumber, RequestStatus.PENDING, loginUsername, remark, currentDate, currentDate));
+	}
 }

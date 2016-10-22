@@ -110,5 +110,10 @@ public class AssetManagerImpl implements AssetManager{
 		}
 		return null;
 	}
+
+	@Override
+	public List<AssetIssue> getAssetHistory(Long assetId) {
+		return assetIssueRepo.findByAsset(new Asset(assetId));
+	}
 	
 }

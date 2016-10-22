@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.noida.model.Asset;
+import com.noida.model.AssetIssue;
 import com.noida.util.AssetStatus;
 
 public interface AssetManager {
@@ -19,5 +20,7 @@ public interface AssetManager {
 	Integer getAssetAvailability(Long assetSubTypeId);
 	
 	List<Asset> getAssetByUsername(String username);
+	
+	List<AssetIssue> getAssetHistory(Long assetId);
 
 }

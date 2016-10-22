@@ -10,6 +10,7 @@
 		<a id="createAsset" href="#"><span title="Add New Asset" style="font-size: 20px;" data-toggle="modal" data-target="#assetModel" class="hidden-xs showopacity glyphicon glyphicon-plus"></span></a> &nbsp;&nbsp; 
 		<a id="updateAsset" href="#"><span title="Edit selected Asset" style="font-size: 20px;" data-toggle="modal" data-target="#assetModel" class="hidden-xs showopacity glyphicon glyphicon-edit"></span></a> &nbsp;&nbsp; 
 		<a id="deleteAsset" href="#"><span title="Delete selected Asset" style="font-size: 20px;" class="hidden-xs showopacity glyphicon glyphicon-trash"></span></a> &nbsp;&nbsp; 
+		<a id="assetHistory" href="#"><span title="Asset History" style="font-size: 20px;" data-toggle="modal" data-target="#" class="hidden-xs showopacity glyphicon glyphicon-dashboard"></span></a> &nbsp;&nbsp; 
 	</div>
 	
 	<div id="userListId" hidden="true">${userList}</div>
@@ -401,6 +402,28 @@ $(function() {
 	function reloadAssetPage() {
 		document.getElementById('assetMenuLink').click();
 	}
+	
+	$('#assetHistory').click(function(){
+		if(selectedRow == 0){
+			showAlertDialog('Please select row to view history.');
+			return false;
+		}
+		$.ajax({
+			type : "POST",
+			url : "getAssetHistory",
+			data : {id:selectedRow[1],${_csrf.parameterName}:'${_csrf.token}'},
+			success : function(data) {
+				if (data.status == 1) {
+					alert(data.status);
+					console.log(data);
+
+				} else {
+					showAlertDialog('Unknown error');
+				}
+			}//success end
+		});//ajax end
+	});
+	
 });//onload end
 
 

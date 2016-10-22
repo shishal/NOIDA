@@ -1,100 +1,159 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="row">
 	<div class="col-md-6">
-		<h4 style="padding-left: 2%; padding-top: 2%">Search Filter</h4>
-	</div>
-	<div class="col-md-6 text-right"
-		style="padding-right: 2%; padding-top: 2%">
-		<a href="#"><span title="Export" style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
-		&nbsp;&nbsp;
-		<a href="#"><span title="Print" style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
+		<h3 style="padding-left: 2%; padding-top: 2%">All Requests</h3>
 	</div>
 </div>
-<form class="form-inline" style="padding-left: 2%">
-	<div class="form-group">
-		<label for="requestNumber">Req No</label> <input type="text"
-			class="form-control" id="requestNumber">
-	</div>
-	<div class="form-group">
-		<label for="selectItemType">Asset Type</label> <select
-			class="form-control" id="selectItemType">
-			<option>Laptop</option>
-			<option>Desktop</option>
-			<option>Printer</option>
-			<option>PenDrive</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="selectItemSubType">Asset Sub Type</label> <select
-			class="form-control" id="selectItemSubType">
-			<option>MacBook Air</option>
-			<option>HP Pavilion</option>
-			<option>Dell Destro</option>
-			<option>MacBook Pro</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="selectRequestStatus">Status</label> <select
-			class="form-control" id="selectRequestStatus">
-			<option>All</option>
-			<option>Closed</option>
-			<option>Pending</option>
-			<option>Approved</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="fromDate">From</label>&nbsp;
-		<div id="fromDate" class="input-group date" data-provide="datepicker">
-			<input type="text" class="form-control">
-			<div class="input-group-addon">
-				<span class="glyphicon glyphicon-th"></span>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="toDate">To</label>&nbsp;
-		<div id="toDate" class="input-group date" data-provide="datepicker">
-			<input type="text" class="form-control">
-			<div class="input-group-addon">
-				<span class="glyphicon glyphicon-th"></span>
-			</div>
-		</div>
-	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
 <div class="table-responsive">
-<table class="table table-bordered">
-	<thead class="thead-inverse table-header" style="">
+	<table class="table table-bordered" id="requestTable">
+		<thead class="thead-inverse table-header" style="">
 		<tr>
-			<th>#</th>
 			<th>Request Number</th>
-			<th>Item Type</th>
-			<th>Item Sub Type</th>
+			<th>Asset Type</th>
+			<th>Asset Sub Type</th>
+			<th>Quantity</th>
 			<th>Raised By</th>
 			<th>Status</th>
+			<th>Action</th>
+			<th></th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<th>Request Number</th>
+			<th>Asset Type</th>
+			<th>Asset Sub Type</th>
+			<th>Quantity</th>
+			<th>Raised By</th>
+			<th>Status</th>
+			<th>Action</th>
+			<th></th>
+		</tr>
+	</tfoot>
 	<tbody>
+		<c:forEach items="${requestList}" var="request" varStatus="row">
 		<tr>
-			<th scope="row">1</th>
-			<td><button type="button" class="btn btn-link"
-					data-toggle="modal" data-target="#requestDetails">ABC123</button></td>
-			<td>Laptop</td>
-			<td>MacBook Air</td>
-			<td>Ravi</td>
-			<td>Pending</td>
+			<td>${request.id}</td>
+			<td>${request.assetMainType.mainType}</td>
+			<td>${request.assetSubType.subType}</td>
+			<td>${request.assetQuantity}</td>
+			<td>${request.requester.username}</td>
+			<td>${request.status}</td>
+			<td>
+				<c:if test="${request.status eq 'APPROVED'}">
+ 					<button type="button" class="btn btn-primary issueBtn" data-toggle="modal" data-target="#reverActionPopOver">Revert to Pending</button>
+				</c:if>
+			</td>
+			<td>${request.assetSubType.id}</td>
 		</tr>
-		<tr>
-			<th scope="row">2</th>
-			<td><button type="button" class="btn btn-link"
-					data-toggle="modal" data-target="#requestDetails">DEF123</button></td>
-			<td>Printer Toner</td>
-			<td>Samsung Color</td>
-			<td>R K Guptaa</td>
-			<td>Approved</td>
-		</tr>
+		</c:forEach>
 	</tbody>
-</table></div>
+</table>
+</div>
+
+<div class="modal fade" id="reverActionPopOver" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header app-modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Action</h4>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="modal-body app-modal-content bg-alt">
+				<form role="form" id="revertForm">
+					<div class="form-group">
+						<label for="remark">Enter Remarks</label> 
+						<input type="text" class="form-control" name="remark" id="remark" placeholder="Remarks" />
+					</div>
+					<input type="hidden" name="requestNumber" id="requestNumber"/>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</form>
+
+				<button id="revertBtn" type="button" class="btn btn-primary">Revert to Pending</button>
+				<button id="closeBtn" type="button" class="btn btn-primary">Close</button>
+				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+	//When the document is ready
+$(function() {
+	var selectedRow = 0;
+	var export_filename = 'All Request';
+	var table = $('#requestTable').DataTable({
+		dom : '<"top"B>rft<"bottom"lp><"clear">',
+		buttons : [
+			{
+				text : '',
+				extend : 'excel',
+				className : 'hidden-xs showopacity glyphicon glyphicon-export',
+				title : export_filename,
+				extension : '.xls'
+			},
+			{
+				text : '',
+				extend : 'print',
+				className : 'hidden-xs showopacity glyphicon glyphicon-print'
+			} 
+		],
+		columnDefs: [
+			{ "targets": [ 7 ], "visible": false, "searchable": false },
+		]
+	});
+	$('#requestTable tfoot th').each(function(index) {
+		var title = $(this).text();
+		$(this).html('<input type="text" style="width:100%" placeholder="Search '+title+'" />');
+	});
+	// Apply the search
+	table.columns().every(function() {
+		var that = this;
+		$('input', this.footer()).on('keyup change',function() {
+			if (that.search() !== this.value) {
+				that.search(this.value).draw();
+			}
+		});
+	});
+	
+	$('#reverActionPopOver').on('hidden.bs.modal', function(e) {
+		resetModalAlerts();
+		reloadRequestPage();
+	});
+	
+	$('#revertBtn').click(function(e) {
+		resetModalAlerts();
+		 $.ajax({
+			type : "POST",
+			url : "revertRequest",
+			data : $("#revertForm").serialize(),
+			success : function(data) {
+				if (data.status == 1) {
+					showSuccessMessage('successMessage','<spring:message code="request.revert.success" />');
+				}else {
+					showErrorMessage('errorMessage','Unknown error');
+				}
+			}//success end
+		});//ajax end 
+	});
+	
+});
+	
+function resetModalAlerts() {
+	$('#successMessage').hide();
+	$('#errorMessage').hide();
+}
+
+function reloadRequestPage() {
+	document.getElementById('requestMenuLink').click();
+}
+</script>

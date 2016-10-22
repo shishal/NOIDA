@@ -55,7 +55,7 @@
 
 				<sec:authorize access="hasAnyRole('APPROVER','ADMIN')">
 					<li>
-						<a href="${pageContext.request.contextPath}/approver/requests">Requests<span style="font-size: 20px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
+						<a id="requestMenuLink" href="${pageContext.request.contextPath}/approver/requests">Requests<span style="font-size: 20px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
 					</li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ADMIN')">
