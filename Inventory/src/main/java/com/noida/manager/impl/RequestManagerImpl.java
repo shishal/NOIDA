@@ -36,6 +36,8 @@ public class RequestManagerImpl implements RequestManager{
 	@Autowired AssetIssueRepository assetIssueRepo;
 	@Autowired AssetRepository assetRepo;
 	@Autowired MessageSource msgSource;
+	
+	@Transactional
 	@Override
 	public Request raiseNewRequest(Long assetTypeNo, Long assetSubTypeNo, String requester, int quantity, String desc){
 		
@@ -59,6 +61,8 @@ public class RequestManagerImpl implements RequestManager{
 	public List<Request> getRequestByStatus(RequestStatus status){
 		return reqRepo.findByStatus(status);
 	}
+	
+	@Transactional
 	@Override
 	public void approveRequest(Long requestNumber, int approvedQty, String remark) {
 		Date currentDate = new Date();
@@ -71,6 +75,8 @@ public class RequestManagerImpl implements RequestManager{
 		reqRepo.save(request);
 		reqHistoryRepo.save(new RequestHistory(requestNumber, RequestStatus.APPROVED, loginUsername, remark, currentDate, currentDate));
 	}
+	
+	@Transactional
 	@Override
 	public void rejectRequest(Long requestNumber, String remark) {
 		Date currentDate = new Date();
@@ -132,6 +138,8 @@ public class RequestManagerImpl implements RequestManager{
 	public List<Request> getAllRequest() {
 		return reqRepo.findAll();
 	}
+	
+	@Transactional
 	@Override
 	public void revertRequest(Long requestNumber, String remark) {
 		Date currentDate = new Date();
