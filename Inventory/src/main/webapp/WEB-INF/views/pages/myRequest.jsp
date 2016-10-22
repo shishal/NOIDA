@@ -1,45 +1,93 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <div class="row">
 	<div class="col-md-6">
 		<h3 style="padding-left: 2%; padding-top: 2%">My Requests</h3>
 	</div>
-	<div class="col-md-6 text-right"
-		style="padding-right: 2%; padding-top: 2%">
-		<a href="#"><span title="Export" style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-export"></span></a>
-		&nbsp;&nbsp;
-		<a href="#"><span title="Print" style="font-size: 20px;"
-			class="hidden-xs showopacity glyphicon glyphicon-print"></span></a>
-		&nbsp;&nbsp;
-	</div>
 </div>
+
 <div class="table-responsive">
-<table class="table table-bordered">
-	<thead class="thead-inverse table-header" style="">
+	<table class="table table-bordered" id="requestTable">
+		<thead class="thead-inverse table-header" style="">
 		<tr>
-			<th>#</th>
 			<th>Request Number</th>
-			<th>Item Type</th>
-			<th>Item Sub Type</th>
+			<th>Asset Type</th>
+			<th>Asset Sub Type</th>
+			<th>Quantity</th>
 			<th>Raised By</th>
 			<th>Status</th>
+			<th></th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<th>Request Number</th>
+			<th>Asset Type</th>
+			<th>Asset Sub Type</th>
+			<th>Quantity</th>
+			<th>Raised By</th>
+			<th>Status</th>
+			<th></th>
+		</tr>
+	</tfoot>
 	<tbody>
+		<c:forEach items="${requestList}" var="request" varStatus="row">
 		<tr>
-			<th scope="row">1</th>
-			<td><a href="#">ABC123</a></td>
-			<td>Laptop</td>
-			<td>MacBook Air</td>
-			<td>Ravi</td>
-			<td>Pending</td>
+			<td>${request.id}</td>
+			<td>${request.assetMainType.mainType}</td>
+			<td>${request.assetSubType.subType}</td>
+			<td>${request.assetQuantity}</td>
+			<td>${request.requester.username}</td>
+			<td>${request.status}</td>
+			<td>${request.assetSubType.id}</td>
 		</tr>
-		<tr>
-			<th scope="row">2</th>
-			<td><a href="#">DEF456</a></td>
-			<td>Printer Toner</td>
-			<td>Samsung Color</td>
-			<td>R K Gupta</td>
-			<td>Approved</td>
-		</tr>
+		</c:forEach>
 	</tbody>
-</table></div>
+</table>
+</div>
+
+
+<script>
+	//When the document is ready
+$(function() {
+	var selectedRow = 0;
+	var export_filename = 'All Request';
+	var table = $('#requestTable').DataTable({
+		dom : '<"top"B>rft<"bottom"lp><"clear">',
+		buttons : [
+			{
+				text : '',
+				extend : 'excel',
+				className : 'hidden-xs showopacity glyphicon glyphicon-export',
+				title : export_filename,
+				extension : '.xls'
+			},
+			{
+				text : '',
+				extend : 'print',
+				className : 'hidden-xs showopacity glyphicon glyphicon-print'
+			} 
+		],
+		columnDefs: [
+			{ "targets": [ 6 ], "visible": false, "searchable": false },
+		]
+	});
+	$('#requestTable tfoot th').each(function(index) {
+		var title = $(this).text();
+		$(this).html('<input type="text" style="width:100%" placeholder="Search '+title+'" />');
+	});
+	// Apply the search
+	table.columns().every(function() {
+		var that = this;
+		$('input', this.footer()).on('keyup change',function() {
+			if (that.search() !== this.value) {
+				that.search(this.value).draw();
+			}
+		});
+	});
+	
+});
+	
+</script>

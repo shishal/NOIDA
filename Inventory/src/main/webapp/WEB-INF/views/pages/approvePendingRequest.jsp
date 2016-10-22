@@ -86,6 +86,7 @@
 
 				<button id="approveBtn" type="button" class="btn btn-primary">Approve</button>
 				<button id="rejectBtn" type="button" class="btn btn-primary">Reject</button>
+				<button id="closeBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
 				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 			</div>

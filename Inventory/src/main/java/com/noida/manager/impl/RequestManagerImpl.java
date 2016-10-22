@@ -140,4 +140,8 @@ public class RequestManagerImpl implements RequestManager{
 		reqRepo.save(request);
 		reqHistoryRepo.save(new RequestHistory(requestNumber, RequestStatus.PENDING, loginUsername, remark, currentDate, currentDate));
 	}
+	@Override
+	public List<Request> getUserRequest(Users user) {
+		return reqRepo.findByRequester(user);
+	}
 }

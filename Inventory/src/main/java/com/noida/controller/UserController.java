@@ -44,6 +44,8 @@ public class UserController {
 
 	@RequestMapping(value = { "/myRequest" }, method = RequestMethod.GET)
 	public String myRequest(ModelMap model) {
+		String loginUsername = Util.getLoggedInUsername();
+		model.put("requestList", reqMrg.getUserRequest(new Users(loginUsername)));
 		return "myRequest";
 	}
 

@@ -45,7 +45,7 @@
 			<td>${request.status}</td>
 			<td>
 				<c:if test="${request.status eq 'APPROVED'}">
- 					<button type="button" class="btn btn-primary issueBtn" data-toggle="modal" data-target="#reverActionPopOver">Revert to Pending</button>
+ 					<button type="button" class="btn btn-primary revertReqBtn" data-toggle="modal" data-target="#reverActionPopOver">Revert to Pending</button>
 				</c:if>
 			</td>
 			<td>${request.assetSubType.id}</td>
@@ -76,8 +76,8 @@
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				</form>
 
-				<button id="revertBtn" type="button" class="btn btn-primary">Revert to Pending</button>
-				<button id="closeBtn" type="button" class="btn btn-primary">Close</button>
+				<button id="revertBtn" type="button" class="btn btn-primary">Revert</button>
+				<button id="closeBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
 				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 			</div>
@@ -128,6 +128,12 @@ $(function() {
 	$('#reverActionPopOver').on('hidden.bs.modal', function(e) {
 		resetModalAlerts();
 		reloadRequestPage();
+	});
+	
+	$('.revertReqBtn').click(function(e) {
+		var selectedRow = table.row( $(this).parent().parent() ).data();
+		var requestedNumber = selectedRow[0];
+		$('#requestNumber').val(requestedNumber);
 	});
 	
 	$('#revertBtn').click(function(e) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.noida.model.Request;
+import com.noida.model.Users;
 import com.noida.util.RequestStatus;
 
 public interface RequestManager {
@@ -21,4 +22,6 @@ public interface RequestManager {
 	public List<Request> getAllRequest();
 	
 	public void revertRequest(Long requestNumber, String remark);
+	
+	public List<Request> getUserRequest(Users user);
 }
