@@ -1,5 +1,6 @@
 package com.noida.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.manager.AssetManager;
 import com.noida.manager.RequestManager;
+import com.noida.manager.UserManager;
+import com.noida.model.Users;
 import com.noida.util.Constants;
 import com.noida.util.RequestStatus;
 import com.noida.util.Util;
@@ -21,9 +24,12 @@ import com.noida.util.Util;
 public class ApproverController {
 	@Autowired RequestManager reqMgr;
 	@Autowired AssetManager assetMgr;
+	@Autowired UserManager userMgr;
 
 	@RequestMapping(value = { "/", "/home" ,"/pendingRequest"}, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
+		List<Users> userList = userMgr.getAllUsers();
+		model.put("userList", userList);
 		model.put("requestList", reqMgr.getRequestByStatus(RequestStatus.PENDING));
 		return "approvePendingRequest";
 	}
@@ -55,6 +61,8 @@ public class ApproverController {
 	
 	@RequestMapping(value = { "/requests" }, method = RequestMethod.GET)
 	public String requestsPage(ModelMap model) {
+		List<Users> userList = userMgr.getAllUsers();
+		model.put("userList", userList);
 		model.put("requestList", reqMgr.getAllRequest());
 		return "requests";
 	}

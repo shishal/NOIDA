@@ -39,7 +39,12 @@
 			<td>${request.assetMainType.mainType}</td>
 			<td>${request.assetSubType.subType}</td>
 			<td>${request.assetQuantity}</td>
-			<td>${request.requester.username}</td>
+			<td>
+				<a onmouseover="showUserDetails(this, '${request.requester.username}');">
+						<span id="requester_${request.id}">${request.requester.username}</span>
+				</a>
+			</td>
+			<%-- <td>${request.requester.username}</td> --%>
 			<td>${request.status}</td>
 			<td><button type="button" class="btn btn-primary issueBtn" data-toggle="modal" data-target="#actionIssuerPopOver">Issue</button></td>
 			<td>${request.assetSubType.id}</td>
@@ -76,7 +81,7 @@
 				</form>
 				<br>
 				<button id="issueConfirmBtn" type="button" class="btn btn-primary">Issue</button>
-				<button id="rejectBtn" type="button" class="btn btn-primary">Cancel</button>
+				<button id="closeBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
 				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 			</div>
@@ -86,7 +91,20 @@
 </div>
 <script>
 	//When the document is ready
+var userDetailList;
 $(function() {
+	userDetailList = new Object();
+	<c:forEach items="${userList}" var="user">
+	var userDetail =[];
+	userDetail.push("${user.username}");
+	userDetail.push("${user.firstName}");
+	userDetail.push("${user.lastName}");
+	userDetail.push("${user.empCode}");
+	userDetail.push("${user.department.name}");
+	userDetail.push("${user.contactNo}");
+	userDetailList["${user.username}"] = userDetail; 
+	</c:forEach>
+	
 	var selectedRow = 0;
 	var export_filename = 'Approved Request';
 	var table = $('#requestTable').DataTable({
@@ -158,7 +176,7 @@ $(function() {
 			}//success end
 		});//ajax end 
 	});
-	$('#rejectBtn').click(function(e) {
+	/* $('#rejectBtn').click(function(e) {
 		resetModalAlerts();
 		 $.ajax({
 			type : "POST",
@@ -172,7 +190,7 @@ $(function() {
 				}
 			}//success end
 		});//ajax end 
-	});
+	}); */
 });
 function resetModalAlerts() {
 	$('#successMessage').hide();

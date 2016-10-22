@@ -41,7 +41,12 @@
 			<td>${request.assetMainType.mainType}</td>
 			<td>${request.assetSubType.subType}</td>
 			<td>${request.assetQuantity}</td>
-			<td>${request.requester.username}</td>
+			<td>
+				<a onmouseover="showUserDetails(this, '${request.requester.username}');">
+						<span id="requester_${request.id}">${request.requester.username}</span>
+				</a>
+			</td>
+			<%-- <td>${request.requester.username}</td> --%>
 			<td>${request.status}</td>
 			<td>
 				<c:if test="${request.status eq 'APPROVED'}">
@@ -88,7 +93,20 @@
 
 <script>
 	//When the document is ready
+var userDetailList;
 $(function() {
+	userDetailList = new Object();
+	<c:forEach items="${userList}" var="user">
+	var userDetail =[];
+	userDetail.push("${user.username}");
+	userDetail.push("${user.firstName}");
+	userDetail.push("${user.lastName}");
+	userDetail.push("${user.empCode}");
+	userDetail.push("${user.department.name}");
+	userDetail.push("${user.contactNo}");
+	userDetailList["${user.username}"] = userDetail; 
+	</c:forEach>
+	
 	var selectedRow = 0;
 	var export_filename = 'All Request';
 	var table = $('#requestTable').DataTable({

@@ -16,7 +16,6 @@
 			<th>Asset Type</th>
 			<th>Asset Sub Type</th>
 			<th>Quantity</th>
-			<th>Raised By</th>
 			<th>Status</th>
 			<th></th>
 		</tr>
@@ -27,7 +26,6 @@
 			<th>Asset Type</th>
 			<th>Asset Sub Type</th>
 			<th>Quantity</th>
-			<th>Raised By</th>
 			<th>Status</th>
 			<th></th>
 		</tr>
@@ -39,7 +37,6 @@
 			<td>${request.assetMainType.mainType}</td>
 			<td>${request.assetSubType.subType}</td>
 			<td>${request.assetQuantity}</td>
-			<td>${request.requester.username}</td>
 			<td>${request.status}</td>
 			<td>${request.assetSubType.id}</td>
 		</tr>
@@ -71,7 +68,7 @@ $(function() {
 			} 
 		],
 		columnDefs: [
-			{ "targets": [ 6 ], "visible": false, "searchable": false },
+			{ "targets": [ 5 ], "visible": false, "searchable": false },
 		]
 	});
 	$('#requestTable tfoot th').each(function(index) {

@@ -1,5 +1,6 @@
 package com.noida.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.noida.manager.RequestManager;
+import com.noida.manager.UserManager;
+import com.noida.model.Users;
 import com.noida.util.Constants;
 import com.noida.util.RequestStatus;
 import com.noida.util.Util;
@@ -23,9 +26,12 @@ public class IssuerController {
 	
 	@Autowired RequestManager reqMgr;
 	@Autowired MessageSource messageSource;
+	@Autowired UserManager userMgr;
 
 	@RequestMapping(value = { "/", "/home" ,"/approvedRequest"}, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
+		List<Users> userList = userMgr.getAllUsers();
+		model.put("userList", userList);
 		model.put("requestList", reqMgr.getRequestByStatus(RequestStatus.APPROVED));
 		return "approvedRequest";
 	}

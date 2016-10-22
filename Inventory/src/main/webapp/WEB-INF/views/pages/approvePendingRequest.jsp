@@ -41,7 +41,12 @@
 			<td>${request.assetMainType.mainType}</td>
 			<td>${request.assetSubType.subType}</td>
 			<td>${request.assetQuantity}</td>
-			<td>${request.requester.username}</td>
+			<td>
+				<a onmouseover="showUserDetails(this, '${request.requester.username}');">
+						<span id="requester_${request.id}">${request.requester.username}</span>
+				</a>
+			</td>
+			<%-- <td>${request.requester.username}</td> --%>
 			<td><fmt:formatDate type="date"  value="${request.createdTime}" pattern="dd-MM-yyyy" /></td>
 			<td>${request.status}</td>
 			<td><button type="button" class="btn btn-primary approveRejectBtn" data-toggle="modal" data-target="#actionPopOver">Approve /Reject</button></td>
@@ -96,7 +101,20 @@
 </div>
 <script>
 	//When the document is ready
+var userDetailList;
 $(function() {
+	userDetailList = new Object();
+	<c:forEach items="${userList}" var="user">
+	var userDetail =[];
+	userDetail.push("${user.username}");
+	userDetail.push("${user.firstName}");
+	userDetail.push("${user.lastName}");
+	userDetail.push("${user.empCode}");
+	userDetail.push("${user.department.name}");
+	userDetail.push("${user.contactNo}");
+	userDetailList["${user.username}"] = userDetail; 
+	</c:forEach>
+	
 	var selectedRow = 0;
 	var export_filename = 'PendingRequest';
 	var table = $('#requestTable').DataTable({
