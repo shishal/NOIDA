@@ -34,10 +34,10 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Raise Request <span class="caret"></span><span style="font-size: 20px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
 						<ul class="dropdown-menu forAnimate" role="menu">
 							<li>
-								<a href="${pageContext.request.contextPath}/user/raiseRequest">New Request<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span> </a>
+								<a href="${pageContext.request.contextPath}/user/raiseRequest">New Request<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span> </a>
 							</li>
 							<li>
-								<a href="${pageContext.request.contextPath}/user/raiseRepairRequest">Repair Request<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span> </a>
+								<a href="${pageContext.request.contextPath}/user/raiseRepairRequest">Repair Request<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span> </a>
 							</li>
 						</ul>
 					</li>
@@ -63,19 +63,19 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span><span style="font-size: 20px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
 						<ul class="dropdown-menu forAnimate" role="menu">
 							<li>
-								<a id="poMenuLink" href="${pageContext.request.contextPath}/admin/po">Purchase Order<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span> </a>
+								<a id="poMenuLink" href="${pageContext.request.contextPath}/admin/po">Purchase Order<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-file"></span> </a>
 							</li>
 							<li>
-								<a id="amcMenuLink" href="${pageContext.request.contextPath}/admin/amc">AMC<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
+								<a id="amcMenuLink" href="${pageContext.request.contextPath}/admin/amc">AMC<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-file"></span></a>
 							</li>
 							<li>
-								<a id="assetMenuLink" href="${pageContext.request.contextPath}/admin/asset">Asset<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
+								<a id="assetMenuLink" href="${pageContext.request.contextPath}/admin/asset">Asset<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-hdd"></span></a>
 							</li>
 							<li>
-								<a id="assetTypeMenuLink" href="${pageContext.request.contextPath}/admin/assetType">Asset Type<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span> </a>
+								<a id="assetTypeMenuLink" href="${pageContext.request.contextPath}/admin/assetType">Asset Type<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-modal-window"></span> </a>
 							</li>
 							<li>
-								<a id="assetSubTypeMenuLink" href="${pageContext.request.contextPath}/admin/assetSubType">Asset SubType<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span> </a>
+								<a id="assetSubTypeMenuLink" href="${pageContext.request.contextPath}/admin/assetSubType">Asset SubType<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-modal-window"></span> </a>
 							</li>
 							<li>
 								<a id="userMenuLink" href="${pageContext.request.contextPath}/admin/user">User<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
