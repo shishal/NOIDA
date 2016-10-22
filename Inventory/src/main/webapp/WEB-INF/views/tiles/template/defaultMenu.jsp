@@ -42,7 +42,7 @@
 						</ul>
 					</li>
 				</sec:authorize>
-				<sec:authorize access="hasAnyRole('APPROVER','ADMIN','ISSUER')">
+				<sec:authorize access="hasAnyRole('APPROVER','ADMIN','USER','ISSUER')">
 					<li>
 						<a href="${pageContext.request.contextPath}/user/myRequest">My Requests<span style="font-size: 20px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-inbox"></span> </a>
 					</li>
