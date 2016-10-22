@@ -258,7 +258,7 @@ DROP TABLE IF EXISTS `asset_issue`;
 CREATE TABLE `asset_issue` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `ASSET_ID` int(11) NOT NULL,
-  `ISSUE_TYPE` varchar(45) NOT NULL,
+  `ISSUE_TYPE` varchar(45) DEFAULT NULL,
   `REQUEST_ID` int(11) NOT NULL,
   `ISSUE_DATE` datetime NOT NULL,
   `RETURN_DATE` datetime DEFAULT NULL,

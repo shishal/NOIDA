@@ -15,7 +15,7 @@ public interface AssetIssueRepository extends CrudRepository<AssetIssue, Long>{
 	
 	List<AssetIssue> findByIssuedTo(Users issuedTo);
 	
-	List<AssetIssue> findByAssetAndReturnDateIsNotNull(Asset asset);
+	List<AssetIssue> findByAssetAndReturnDateIsNull(Asset asset);
 	
 	List<AssetIssue> findByAsset(Asset asset);
 	

@@ -81,7 +81,7 @@
 				</form>
 				<br>
 				<button id="issueConfirmBtn" type="button" class="btn btn-primary">Issue</button>
-				<button id="closeBtn" type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				<button id="cancelBtn" type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
 				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
 				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 			</div>

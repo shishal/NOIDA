@@ -6,10 +6,10 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
-import org.apache.tomcat.util.bcel.classfile.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.noida.dao.AssetIssueRepository;
 import com.noida.dao.AssetRepository;
@@ -91,17 +91,20 @@ public class RequestManagerImpl implements RequestManager{
 		for(String barcode:barcodes){
 			List<Asset> assetList = assetRepo.findByBarcode(barcode);
 			if(assetList.isEmpty()){
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 				return Util.toMap("status", Constants.FAIL,"msg",msgSource.getMessage("request.issue.fail.wrong.barcode", Util.toAttay(barcode), null));
 			}
 			Asset asset = null;
 			if(!assetList.isEmpty()){
 				asset = assetList.get(0);
 				if(asset.getAssetSubType().getId() != request.getAssetSubType().getId()){
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 					return Util.toMap("status", Constants.FAIL,"msg",msgSource.getMessage("request.issue.fail.wrong.asset.issue", null, null));
 				}
 			}
-			List<AssetIssue> assetIssueList = assetIssueRepo.findByAssetAndReturnDateIsNotNull(asset);
+			List<AssetIssue> assetIssueList = assetIssueRepo.findByAssetAndReturnDateIsNull(asset);
 			if(!assetIssueList.isEmpty()){
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 				return Util.toMap("status", Constants.FAIL,"msg",msgSource.getMessage("request.issue.fail.already.asset.issued", Util.toAttay(barcode,assetIssueList.get(0).getIssuedTo().getUsername()), null));
 			}
 			AssetIssue assetIssue = new AssetIssue(
