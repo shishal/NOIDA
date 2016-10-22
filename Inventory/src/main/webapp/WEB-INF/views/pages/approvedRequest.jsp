@@ -85,7 +85,6 @@
 				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
 				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 			</div>
-
 		</div>
 	</div>
 </div>

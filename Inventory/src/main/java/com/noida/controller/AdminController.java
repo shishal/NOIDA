@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -471,30 +472,11 @@ public class AdminController {
      webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
      }
 	
-	@ResponseBody
 	@RequestMapping(value = { "/getAssetHistory" }, method = RequestMethod.POST)
-	public Map<String,Object> getAssetHistory(
-			@RequestParam Long id ) {
-		List<AssetIssue> assetHistory = null;
-		try{
-			assetHistory = assetMgr.getAssetHistory(id);
-		}catch(InventoryException e){
-			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
-		}
-		int i =0;
-		for(i = 0; i < assetHistory.size(); i++) {
-			assetHistory.get(i).getAsset();
-			assetHistory.get(i).getAsset().getAmc();
-			assetHistory.get(i).getAsset().getAssetMainType();
-			assetHistory.get(i).getAsset().getAssetSubType();
-			assetHistory.get(i).getIssuedBy().getDepartment();
-			assetHistory.get(i).getIssuedBy().getUserRoles();
-			assetHistory.get(i).getIssuedBy().getDepartment();
-			assetHistory.get(i).getIssuedTo().getUserRoles();
-			assetHistory.get(i).getRequest().getAssetMainType();
-			assetHistory.get(i).getRequest().getAssetSubType();
-			assetHistory.get(i).getReturnedBy();
-		}
-		return Util.toMap("status",Constants.SUCCESS,"result", assetHistory);
+	public String getAssetHistory(
+			@RequestParam Long id ,Model model) {
+		List<AssetIssue> assetHistory = assetMgr.getAssetHistory(id);
+		model.addAttribute("assetHistory", assetHistory);
+		return "assetHistory";
 	}
 }
