@@ -37,12 +37,7 @@ public class UserController {
 	@Autowired MessageSource messageSource;
 	@Autowired AssetManager assetMgr;
 
-	@RequestMapping(value = { "/", "home" }, method = RequestMethod.GET)
-	public String homePage(ModelMap model) {
-		return "myRequest";
-	}
-
-	@RequestMapping(value = { "/myRequest" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "home","/myRequest" }, method = RequestMethod.GET)
 	public String myRequest(ModelMap model) {
 		String loginUsername = Util.getLoggedInUsername();
 		model.put("requestList", reqMrg.getUserRequest(new Users(loginUsername)));
