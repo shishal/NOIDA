@@ -179,12 +179,26 @@ $(function() {
 		});//ajax end 
 	});
 	$('#approveBtn').click(function(e) {
+		var _this = this
+		$('#rejectBtn').prop('disabled',true);
+		$('#approveBtn').prop('disabled',true);
+		$.blockUI({baseZ: 2000});
 		resetModalAlerts();
 		var approvedQty = $('#approvedQty').val();
 		var availableQty = $('#availableQty').text();
 		console.log(availableQty+' '+approvedQty)
 		if(availableQty < approvedQty){
 			showErrorMessage('errorMessage','<spring:message code="request.approve.alert" />');
+			$('#rejectBtn').prop('disabled',false);
+			$('#approveBtn').prop('disabled',false);
+			$.unblockUI();
+			return false;
+		}
+		if(availableQty <= 0){
+			showErrorMessage('errorMessage','<spring:message code="request.approve.alert.inventory.out" />');
+			$('#rejectBtn').prop('disabled',false);
+			$('#approveBtn').prop('disabled',false);
+			$.unblockUI();
 			return false;
 		}
 		 $.ajax({
@@ -196,12 +210,19 @@ $(function() {
 					showSuccessMessage('successMessage','<spring:message code="request.approve.success" />');
 				}else {
 					showErrorMessage('errorMessage','Unknow error');
+					$('#rejectBtn').prop('disabled',false);
+					$('#approveBtn').prop('disabled',false);
 				}
+				$.unblockUI();
 			}//success end
 		});//ajax end 
 	});
 	$('#rejectBtn').click(function(e) {
+		$.blockUI({baseZ: 2000});
 		resetModalAlerts();
+		var _this = this
+		$('#rejectBtn').prop('disabled',true);
+		$('#approveBtn').prop('disabled',true);
 		 $.ajax({
 			type : "POST",
 			url : "rejectRequest",
@@ -211,7 +232,10 @@ $(function() {
 					showSuccessMessage('successMessage','<spring:message code="request.reject.success" />');
 				}else {
 					showErrorMessage('errorMessage','Unknow error');
+					$('#rejectBtn').prop('disabled',false);
+					$('#approveBtn').prop('disabled',false);
 				}
+				$.unblockUI();
 			}//success end
 		});//ajax end 
 	});

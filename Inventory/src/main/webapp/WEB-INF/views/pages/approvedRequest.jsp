@@ -142,6 +142,7 @@ $(function() {
 	$('#actionIssuerPopOver').on('hidden.bs.modal', function(e) {
 		resetModalAlerts();
 		reloadPendingRequestPage();
+		$(_this).prop('disabled',false);
 	});
 	$('.issueBtn').click(function(e) {
 		$('.dynaBarcode').remove();
@@ -169,16 +170,16 @@ $(function() {
 			success : function(data) {
 				if (data.status == 1) {
 					showSuccessMessage('successMessage','<spring:message code="request.issue.success" />');
+					
 				}else if(data.status == 0){
 					showErrorMessage('errorMessage',data.msg);
-					$.unblockUI();
 					$(_this).prop('disabled',false);
 				}
 				else {
 					showErrorMessage('errorMessage','Unknow error');
-					$.unblockUI();
 					$(_this).prop('disabled',false);
 				}
+				$.unblockUI();
 			}//success end
 		});//ajax end 
 	});

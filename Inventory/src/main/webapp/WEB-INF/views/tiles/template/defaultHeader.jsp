@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div class="row" style="background-color: #343434; color: white;">
 	<div class="col-md-6">
 		<img
@@ -6,6 +7,9 @@
 	</div>
 	<div class="col-md-6 text-right">
 		<h2>IT Inventory Management System</h2>
+		<sec:authorize access="isAuthenticated()">
+		<h3>Welcome <sec:authentication property="principal.username" /></h3>
+		</sec:authorize>
 	</div>
 
 </div>
