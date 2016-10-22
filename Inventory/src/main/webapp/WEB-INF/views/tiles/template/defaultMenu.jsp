@@ -37,7 +37,7 @@
 								<a href="${pageContext.request.contextPath}/user/raiseRequest">New Request<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span> </a>
 							</li>
 							<li>
-								<a href="${pageContext.request.contextPath}/user/raiseRepairRequest">Repair Request<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span> </a>
+								<a href="#">Repair Request<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span> </a>
 							</li>
 						</ul>
 					</li>
