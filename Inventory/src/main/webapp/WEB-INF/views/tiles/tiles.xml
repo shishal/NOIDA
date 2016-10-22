@@ -24,6 +24,9 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />
 	</definition>
+	<definition name="ajax-definition"
+		template="/WEB-INF/views/tiles/layouts/ajaxLayout.jsp">
+	</definition>
 
 	<!-- Home Page -->
 	<definition name="userHome" extends="base-definition">
@@ -111,6 +114,9 @@
 		<put-attribute name="title" value="New Requests" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/approvePendingRequest.jsp" />
+	</definition>
+	<definition name="assetHistory" extends="ajax-definition">
+		<put-attribute name="body" value="/WEB-INF/views/pages/ajaxAssetHistory.jsp" />
 	</definition>
 
 	<!-- Login Page -->

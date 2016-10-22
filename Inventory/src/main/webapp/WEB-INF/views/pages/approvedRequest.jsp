@@ -85,7 +85,6 @@
 				<div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
 				<div id="successMessage" class="alert alert-success" style="display: none;"></div>
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -159,6 +158,9 @@ $(function() {
 		}
 	});
 	$('#issueConfirmBtn').click(function(e) {
+		$.blockUI({baseZ: 2000});
+		var _this = this
+		$(this).prop('disabled',true);
 		resetModalAlerts();
 		 $.ajax({
 			type : "POST",
@@ -169,9 +171,13 @@ $(function() {
 					showSuccessMessage('successMessage','<spring:message code="request.issue.success" />');
 				}else if(data.status == 0){
 					showErrorMessage('errorMessage',data.msg);
+					$.unblockUI();
+					$(_this).prop('disabled',false);
 				}
 				else {
 					showErrorMessage('errorMessage','Unknow error');
+					$.unblockUI();
+					$(_this).prop('disabled',false);
 				}
 			}//success end
 		});//ajax end 
