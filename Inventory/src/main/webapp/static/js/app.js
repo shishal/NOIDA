@@ -89,7 +89,7 @@ function generateBarcode() {
 	resetModalAlerts();
 	$("#barcodeImg").hide();
 	$('#barcode').val('');
-	var barCodeValue = initStr + "-" + idToBePrinted;
+	var barCodeValue = idToBePrinted;
 	if(barCodeValue == "" ){
 		showErrorMessage('errorMessage', "Serial Number can not be blank.")
 	}
