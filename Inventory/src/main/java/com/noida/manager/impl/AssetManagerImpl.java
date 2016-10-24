@@ -89,9 +89,12 @@ public class AssetManagerImpl implements AssetManager{
 				barcode,
 				desc,
 				new Date()));
-			 	AssetIssue issue = assetIssueRepo.findOne(assetIssuedToId);
-				issue.setReturnDate(returnDate);
-			 	assetIssueRepo.save(issue);
+			 	if(assetIssuedToId != null) {
+			 		AssetIssue issue = assetIssueRepo.findOne(assetIssuedToId);
+			 		if(returnDate != null)
+			 			issue.setReturnDate(returnDate);
+				 	assetIssueRepo.save(issue);
+			 	}
 		} catch (DataIntegrityViolationException e) {
 			throw new InventoryException(Message.DUPLICATE_ASSET, e);
 		}
