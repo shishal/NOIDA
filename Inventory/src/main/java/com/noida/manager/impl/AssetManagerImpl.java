@@ -3,6 +3,8 @@ package com.noida.manager.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -72,6 +74,7 @@ public class AssetManagerImpl implements AssetManager{
 		}
 	}
 
+	@Transactional
 	@Override
 	public void updateAsset(Long id, Long assetTypeId, Long assetSubTypeId, Long amcId, Long poId,
 			String serialNumber, String barcode, AssetStatus status, String desc, Date returnDate, Long assetIssuedToId) {
