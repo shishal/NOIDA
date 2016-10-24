@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class UserManagerImpl implements UserManager {
 	@Autowired
 	UserRoleRepository userRoleRepo;
 
+	@Transactional
 	@Override
 	public Users createUser(String empCode, String userName, String firstName, String lastName, 
 	String contactNo, boolean enabled, String password, Long deptId, Set<UserRoles> userRoles) {

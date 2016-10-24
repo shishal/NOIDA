@@ -365,14 +365,8 @@ $(function() {
 	    $(this).html('<input style="width:100%" type="text" placeholder="Search '+title+'" />');
 	});
 	// Apply the search
-	table.columns().every(function() {
-		var that = this;
-		$('input', this.footer()).on('keyup change',function() {
-			if (that.search() !== this.value) {
-				that.search(this.value).draw();
-			}
-		});
-	});
+	enableSearch(table)
+	
 	$('#addUser').on('shown.bs.modal', function(e) {
 		resetModalForm();
 		resetModalAlerts();

@@ -155,4 +155,15 @@ function showUserDetails(element, username) {
 		+ userDetail[5] + "  \n " ;
 };
 
+function enableSearch(datatable){
+	datatable.columns().every(function() {
+		var that = this;
+		$('input', this.footer()).on('keyup change',function() {
+			if (that.search() !== this.value) {
+				that.search(this.value).draw();
+			}
+		});
+	});
+}
+
 

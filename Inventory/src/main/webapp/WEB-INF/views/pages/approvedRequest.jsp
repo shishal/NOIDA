@@ -131,17 +131,12 @@ $(function() {
 		$(this).html('<input type="text" style="width:100%" placeholder="Search '+title+'" />');
 	});
 	// Apply the search
-	table.columns().every(function() {
-		var that = this;
-		$('input', this.footer()).on('keyup change',function() {
-			if (that.search() !== this.value) {
-				that.search(this.value).draw();
-			}
-		});
-	});
+	enableSearch(table)
+	
 	$('#actionIssuerPopOver').on('hidden.bs.modal', function(e) {
 		resetModalAlerts();
 		reloadPendingRequestPage();
+		$(_this).prop('disabled',false);
 	});
 	$('.issueBtn').click(function(e) {
 		$('.dynaBarcode').remove();
@@ -169,16 +164,16 @@ $(function() {
 			success : function(data) {
 				if (data.status == 1) {
 					showSuccessMessage('successMessage','<spring:message code="request.issue.success" />');
+					
 				}else if(data.status == 0){
 					showErrorMessage('errorMessage',data.msg);
-					$.unblockUI();
 					$(_this).prop('disabled',false);
 				}
 				else {
 					showErrorMessage('errorMessage','Unknow error');
-					$.unblockUI();
 					$(_this).prop('disabled',false);
 				}
+				$.unblockUI();
 			}//success end
 		});//ajax end 
 	});
