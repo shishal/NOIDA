@@ -86,8 +86,6 @@ function generateBarcode() {
 	else if(idToBePrinted < 100000){
 		idToBePrinted = "0" + idToBePrinted;
 	}
-	
-	var assetTypeToBePrinted = $('#assetTypeId').find(":selected").text();
 	resetModalAlerts();
 	$("#barcodeImg").hide();
 	$('#barcode').val('');
@@ -109,10 +107,13 @@ function printBarcodeImage(elem) {
 }
 
 function Popup(data) {
+	var assetTypeToBePrinted = $('#assetTypeId').find(":selected").text();
     var myWindow = window.open('', '', 'height=400,width=600');
     myWindow.document.write('<style>@page { size: auto;  margin: 0mm; }</style><html><head><title></title>');
     /*optional stylesheet*/ //myWindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
-    myWindow.document.write('</head><body >');
+    myWindow.document.write('</head><body ><div>NOIDA-');
+    myWindow.document.write(assetTypeToBePrinted);
+    myWindow.document.write('</div>');
     myWindow.document.write(data);
     myWindow.document.write('</body></html>');
     myWindow.document.close(); // necessary for IE >= 10
