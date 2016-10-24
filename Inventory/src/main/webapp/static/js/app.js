@@ -65,10 +65,33 @@ function showInfoDialog(msg) {
 }
 
 function generateBarcode() {
+	var initStr = "NDA";
+	var idToBePrinted = $('#id').val();
+	
+	if($('#id').val() == "")
+		idToBePrinted = Number(maxAssetId) + Number(1);
+	
+	if(idToBePrinted < 10){
+		idToBePrinted = "00000" + idToBePrinted;
+	}
+	else if(idToBePrinted < 100){
+		idToBePrinted = "0000" + idToBePrinted;
+	}
+	else if(idToBePrinted < 1000){
+		idToBePrinted = "000" + idToBePrinted;
+	}
+	else if(idToBePrinted < 10000){
+		idToBePrinted = "00" + idToBePrinted;
+	}
+	else if(idToBePrinted < 100000){
+		idToBePrinted = "0" + idToBePrinted;
+	}
+	
+	var assetTypeToBePrinted = $('#assetTypeId').find(":selected").text();
 	resetModalAlerts();
 	$("#barcodeImg").hide();
 	$('#barcode').val('');
-	var barCodeValue = $('#serialNumber').val();
+	var barCodeValue = initStr + "-" + idToBePrinted;
 	if(barCodeValue == "" ){
 		showErrorMessage('errorMessage', "Serial Number can not be blank.")
 	}

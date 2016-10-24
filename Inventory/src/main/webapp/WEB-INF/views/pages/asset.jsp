@@ -116,7 +116,7 @@
 						<label for="inputAssetBarCode">Asset BarCode: </label> 
 						<input type="text" class="form-control" placeholder="Bar Code" name="barcode" id="barcode" readonly/>
 						<br>
-						<div id="barcodeImgDiv"><img id="barcodeImg" style="width:300px; height:90px"></div>
+						<div id="barcodeImgDiv"><img id="barcodeImg" style="width:300px; height:60px"></div>
 						<br>
 						<button type="button" id="generateBarcodeBtn" class="btn btn-primary" onclick="generateBarcode()">Generate Barcode</button>
 						<button type="button" id="printBarcodeBtn" class="btn btn-primary" onclick="printBarcodeImage('#barcodeImgDiv')" disabled="disabled">Print Barcode</button>
@@ -203,6 +203,7 @@
 <script>
 	//When the document is ready
 var userDetailList;
+var maxAssetId = 0;
 $(function() {
 	userDetailList = new Object();
 	<c:forEach items="${userList}" var="user">
@@ -215,7 +216,11 @@ $(function() {
 	userDetail.push("${user.contactNo}");
 	userDetailList["${user.username}"] = userDetail; 
 	</c:forEach>
-		
+	
+	<c:forEach items="${assetList}" var="asset">
+		maxAssetId = "${asset.id}";
+	</c:forEach>
+	
 	var selectedRow = 0;
 	var export_filename = 'asset';
 	var table = $('#assetTable').DataTable({
@@ -295,6 +300,7 @@ $(function() {
 				if (data.status == 1) {
 					showSuccessMessage('successMessage','<spring:message code="asset.create.success" />');
 					document.getElementById("assetForm").reset();
+					maxAssetId = Number(maxAssetId) + Number(1);
 				} else if (data.status == 0) {
 					showErrorMessage('errorMessage',data.message);//code to show error
 				} else {
