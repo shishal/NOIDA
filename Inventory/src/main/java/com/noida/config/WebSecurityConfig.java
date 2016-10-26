@@ -48,11 +48,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		  .csrf();
 	}
 	
-	public static void main(String args[]) throws Exception {
+	/*public static void main(String args[]) throws Exception {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		System.out.println("admin: "+encoder.encode("admin"));
 		System.out.println("user: "+encoder.encode("user"));
 		System.out.println("issuer: "+encoder.encode("issuer"));
 		System.out.println("approver: "+encoder.encode("approver"));
-	}
+	}*/
 }
