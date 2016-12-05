@@ -33,6 +33,7 @@
 				<th></th>
 				<th></th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -48,6 +49,7 @@
 				<th>Status</th>
 				<th>Description</th>
 				<th>Issued To</th>
+				<th></th>
 				<th></th>
 				<th></th>
 				<th></th>
