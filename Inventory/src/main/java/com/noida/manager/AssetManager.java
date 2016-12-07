@@ -19,7 +19,7 @@ public interface AssetManager {
 
 	Integer getAssetAvailability(Long assetSubTypeId);
 	
-	List<Asset> getAssetByUsername(String username);
+	List<AssetIssue> getAssetByUsername(String username);
 	
 	List<AssetIssue> getAssetHistory(Long assetId);
 

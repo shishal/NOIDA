@@ -46,22 +46,22 @@
 		</tr>
 		</tfoot>
 	<tbody>
-			<c:forEach items="${assetList}" var="asset" varStatus="row">
+			<c:forEach items="${assetIssueList}" var="assetIssue" varStatus="row">
 				<tr onclick="">
 					<td scope="row">${row.index +1}</td>
-					<td>${asset.id}</td>
-					<td>${asset.barcode}</td>
-					<td>${asset.serialNo}</td>
-					<td>${asset.amc.amcNumber}</td>
-					<td>${asset.po.poNumber}</td>
-					<td>${asset.assetMainType.mainType}</td>
-					<td>${asset.assetSubType.subType}</td>
-					<td>${asset.status}</td>
-					<td>${asset.description}</td>
-					<td>${asset.amc.id}</td>
-					<td>${asset.po.id}</td>
-					<td>${asset.assetMainType.id}</td>
-					<td>${asset.assetSubType.id}</td>
+					<td>${assetIssue.asset.id}</td>
+					<td>${assetIssue.asset.barcode}</td>
+					<td>${assetIssue.asset.serialNo}</td>
+					<td>${assetIssue.asset.amc.amcNumber}</td>
+					<td>${assetIssue.asset.po.poNumber}</td>
+					<td>${assetIssue.asset.assetMainType.mainType}</td>
+					<td>${assetIssue.asset.assetSubType.subType}</td>
+					<td>${assetIssue.asset.status}</td>
+					<td>${assetIssue.asset.description}</td>
+					<td>${assetIssue.asset.amc.id}</td>
+					<td>${assetIssue.asset.po.id}</td>
+					<td>${assetIssue.asset.assetMainType.id}</td>
+					<td>${assetIssue.asset.assetSubType.id}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -75,7 +75,7 @@ public class UserController {
 				.getAuthentication();
 		User loggedUser = (User)auth.getPrincipal();
 		String username = loggedUser.getUsername();
-		model.put("assetList", assetMgr.getAssetByUsername(username));
+		model.put("assetIssueList", assetMgr.getAssetByUsername(username));
 		return "myAsset";
 	}
 	

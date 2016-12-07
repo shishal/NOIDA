@@ -108,13 +108,10 @@ public class AssetManagerImpl implements AssetManager{
 	}
 
 	@Override
-	public List<Asset> getAssetByUsername(String username) {
+	public List<AssetIssue> getAssetByUsername(String username) {
 		List<Users> user = userRepo.findByUsername(username);
-		List<AssetIssue> assetIssue = assetIssueRepo.findByIssuedTo(user.get(0));
-		if(assetIssue != null){
-			return Lists.newArrayList(assetRepo.findByAssetIssue(assetIssue));
-		}
-		return null;
+		return assetIssueRepo.findByIssuedTo(user.get(0));
+		
 	}
 
 	@Override
