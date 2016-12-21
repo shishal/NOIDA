@@ -50,7 +50,7 @@
 			<td>${request.status}</td>
 			<td>
 				<c:if test="${request.status eq 'APPROVED'}">
- 					<button type="button" class="btn btn-primary revertReqBtn" data-toggle="modal" data-target="#reverActionPopOver">Revert to Pending</button>
+ 					<button type="button" class="btn btn-primary revertReqBtn" onClick=setRequestId('${request.id}') data-toggle="modal" data-target="#reverActionPopOver">Revert to Pending</button>
 				</c:if>
 			</td>
 			<td>${request.assetSubType.id}</td>
@@ -141,12 +141,6 @@ $(function() {
 		reloadRequestPage();
 	});
 	
-	$('.revertReqBtn').click(function(e) {
-		var selectedRow = table.row( $(this).parent().parent() ).data();
-		var requestedNumber = selectedRow[0];
-		$('#requestNumber').val(requestedNumber);
-	});
-	
 	$('#revertBtn').click(function(e) {
 		resetModalAlerts();
 		 $.ajax({
@@ -164,6 +158,10 @@ $(function() {
 	});
 	
 });
+
+function setRequestId (requestId){
+	$('#requestNumber').val(requestId);
+}
 	
 function resetModalAlerts() {
 	$('#successMessage').hide();
