@@ -15,7 +15,7 @@
 	
 </div>
 <div class="table-responsive">
-	<table class="table table-bordered display compact" id="assetTable">
+	<table class="table table-bordered" id="assetTable">
 		<thead class="thead-inverse table-header" style="">
 			<tr>
 				<th>#</th>
@@ -316,7 +316,6 @@ $(function() {
 			showAlertDialog('Please select row to edit');
 			return false;
 		}
-		console.log(selectedRow);
 		$('#id').val(selectedRow[1]);
 		$('#barcode').val(selectedRow[2]);
 		$('#serialNumber').val(selectedRow[3]);
@@ -326,7 +325,7 @@ $(function() {
 		$('#poId').val(selectedRow[12]);
 		$('#assetTypeId').val(selectedRow[13]);
 		$('#assetTypeId').change();
-		displayAlreadyGeneratedBarcode(selectedRow[2]);
+		generateBarcode();
 		
 		var htmlObject = $(selectedRow[10]);
 		selectedRow[10] = htmlObject.find('span').html();

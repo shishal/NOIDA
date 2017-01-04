@@ -64,25 +64,6 @@ function showInfoDialog(msg) {
 	$('#appInfoDialog').modal('show');
 }
 
-function displayAlreadyGeneratedBarcode(barCode) {
-	var initStr = "NDA";
-	var idToBePrinted = barCode;
-	
-	resetModalAlerts();
-	$("#barcodeImg").hide();
-	$('#barcode').val('');
-	var barCodeValue = idToBePrinted;
-	if(barCodeValue == "" ){
-		showErrorMessage('errorMessage', "Serial Number can not be blank.")
-	}
-	else {
-		$("#barcodeImg").show();
-		$('#barcode').val(barCodeValue);
-		$('#barcodeImg').JsBarcode(barCodeValue,{width:3,height:30});
-		$('#printBarcodeBtn').attr("disabled", false);
-	}
-}
-
 function generateBarcode() {
 	var initStr = "NDA";
 	var idToBePrinted = $('#id').val();
