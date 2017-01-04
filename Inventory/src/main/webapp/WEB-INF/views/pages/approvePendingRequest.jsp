@@ -149,7 +149,7 @@ $(function() {
 		resetModalAlerts();
 		reloadPendingRequestPage();
 	});
-	$('.approveRejectBtn').click(function(e) {
+	$(document).on('click', '.approveRejectBtn', function() {
 		var selectedRow = table.row( $(this).parent().parent() ).data();
 		var requestedNumber = selectedRow[0]
 		var requestedQty = selectedRow[3]
