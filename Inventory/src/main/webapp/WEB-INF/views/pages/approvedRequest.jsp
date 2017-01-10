@@ -138,9 +138,10 @@ $(function() {
 		reloadPendingRequestPage();
 		$(_this).prop('disabled',false);
 	});
-	$('.issueBtn').click(function(e) {
+	$(document).on('click', '.issueBtn', function() {
 		$('.dynaBarcode').remove();
 		var selectedRow = table.row( $(this).parent().parent() ).data();
+		console.log(selectedRow)
 		var requestedNumber = selectedRow[0]
 		var requestedQty = selectedRow[3]
 		$('#requestNumber').val(requestedNumber);
@@ -198,6 +199,6 @@ function resetModalAlerts() {
 	$('#errorMessage').hide();
 }
 function reloadPendingRequestPage() {
-	document.getElementById('pendingRequestMenuLink').click();
+	document.getElementById('approvedRequestMenuLink').click();
 }
 </script>

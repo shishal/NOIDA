@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.noida.dao.AssetIssueRepository;
 import com.noida.dao.AssetRepository;
+import com.noida.dao.RequestRepository;
 import com.noida.dao.UserRepository;
 import com.noida.exception.InventoryException;
 import com.noida.manager.AssetManager;
@@ -21,9 +22,11 @@ import com.noida.model.AssetIssue;
 import com.noida.model.AssetMainType;
 import com.noida.model.AssetSubType;
 import com.noida.model.PO;
+import com.noida.model.Request;
 import com.noida.model.Users;
 import com.noida.util.AssetStatus;
 import com.noida.util.Message;
+import com.noida.util.RequestStatus;
 
 @Service
 public class AssetManagerImpl implements AssetManager{
@@ -36,6 +39,9 @@ public class AssetManagerImpl implements AssetManager{
 	
 	@Autowired
 	UserRepository userRepo;
+	
+	@Autowired
+	RequestRepository reqRepo;
 
 	@Override
 	public List<Asset> getAllAsset() {
@@ -104,7 +110,12 @@ public class AssetManagerImpl implements AssetManager{
 	public Integer getAssetAvailability(Long assetSubTypeId) {
 		List<Asset> assetList = assetRepo.findAssetByAssetSubType(new AssetSubType(assetSubTypeId));
 		List<AssetIssue> assetIssueList = assetIssueRepo.findAssetIssueByAssetAssetSubTypeAndReturnDateIsNull(new AssetSubType(assetSubTypeId));
-		return assetList.size() - assetIssueList.size();
+		List<Request> approvedRequest = reqRepo.findByAssetSubTypeAndStatus(new AssetSubType(assetSubTypeId), RequestStatus.APPROVED);
+		int totalApproved = 0;
+		for(Request req:approvedRequest){
+			totalApproved += req.getAssetQuantity();
+		}
+		return assetList.size() - assetIssueList.size() - totalApproved;
 	}
 
 	@Override

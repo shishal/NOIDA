@@ -181,14 +181,14 @@ $(function() {
 		var approvedQty = $('#approvedQty').val();
 		var availableQty = $('#availableQty').text();
 		console.log(availableQty+' '+approvedQty)
-		if(availableQty < approvedQty){
+		if(parseInt(availableQty) < parseInt(approvedQty)){
 			showErrorMessage('errorMessage','<spring:message code="request.approve.alert" />');
 			$('#rejectBtn').prop('disabled',false);
 			$('#approveBtn').prop('disabled',false);
 			$.unblockUI();
 			return false;
 		}
-		if(availableQty <= 0){
+		if(parseInt(availableQty) <= 0){
 			showErrorMessage('errorMessage','<spring:message code="request.approve.alert.inventory.out" />');
 			$('#rejectBtn').prop('disabled',false);
 			$('#approveBtn').prop('disabled',false);
