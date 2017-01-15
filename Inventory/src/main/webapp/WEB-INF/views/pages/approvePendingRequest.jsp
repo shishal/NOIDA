@@ -70,6 +70,14 @@
 			<div class="modal-body app-modal-content bg-alt">
 				<form role="form" id="approvalForm">
 					<div class="form-group">
+						<label for="assetTypeToBeApproved">Asset Type:</label>
+						<span id="assetTypeToBeApproved"></span>
+					</div>
+					<div class="form-group">
+						<label for="assetSubTypeToBeApproved">Asset SubType:</label>
+						<span id="assetSubTypeToBeApproved"></span>
+					</div>
+					<div class="form-group">
 						<label for="requestedQty">Requested Quantity:</label>
 						<span id="requestedQty"></span>
 					</div>
@@ -154,6 +162,8 @@ $(function() {
 		var requestedNumber = selectedRow[0]
 		var requestedQty = selectedRow[3]
 		var assetSubTypeId = selectedRow[8]
+		$('#assetTypeToBeApproved').text(selectedRow[1]);
+		$('#assetSubTypeToBeApproved').text(selectedRow[2]);
 		$('#requestedQty').text(requestedQty);
 		$('#requestNumber').val(requestedNumber)
 		$('#assetSubTypeId').val(assetSubTypeId)
