@@ -83,6 +83,9 @@
 							<li>
 								<a id="deptMenuLink" href="${pageContext.request.contextPath}/admin/department">Department<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
 							</li>
+							<li>
+								<a id="resetUserPwdMenuLink" href="${pageContext.request.contextPath}/admin/resetUserPassword">Reset User Password<span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-lock"></span></a>
+							</li>
 						</ul>
 					</li>
 				</sec:authorize>

@@ -79,6 +79,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/pages/department.jsp" />
 	</definition>
+	<definition name="resetUserPassword" extends="base-definition">
+		<put-attribute name="title" value="Reset User Password" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/pages/resetUserPassword.jsp" />
+	</definition>
 	<definition name="asset" extends="base-definition">
 		<put-attribute name="title" value="Assets" />
 		<put-attribute name="body" value="/WEB-INF/views/pages/asset.jsp" />

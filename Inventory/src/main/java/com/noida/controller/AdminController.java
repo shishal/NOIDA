@@ -479,4 +479,38 @@ public class AdminController {
 		model.addAttribute("assetHistory", assetHistory);
 		return "assetHistory";
 	}
+	
+	@RequestMapping(value = { "/resetUserPassword" }, method = RequestMethod.GET)
+	public String resetUserPassword(ModelMap model) {
+		return "resetUserPassword";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/updatePasswordForUser" }, method = RequestMethod.POST)
+	public Map<String,Object> updatePasswordForUser(
+			@RequestParam String userName,
+			@RequestParam String newPassword,
+			@RequestParam String repeatPassword) {
+			
+		try{
+			if(userName == null ||
+					newPassword == null ||
+					repeatPassword == null)
+				return Util.toMap("status",Constants.FAIL,"message","No fields can be empty.");
+			
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			List<Users> user = userMgr.getUser(userName);
+			if(user.size() <= 0)
+				return Util.toMap("status",Constants.FAIL,"message","Username is wrong.");
+			
+			if(!newPassword.equals(repeatPassword))
+				return Util.toMap("status",Constants.FAIL,"message","Mismatch in New and Confirm New password.");
+				
+			
+			userMgr.updateUser(userName, user.get(0).getEmpCode(), user.get(0).getFirstName(), user.get(0).getLastName(), user.get(0).getContactNo(), user.get(0).isEnabled(), encoder.encode(newPassword), user.get(0).getDepartment().getId(), user.get(0).getUserRoles());
+		}catch(InventoryException e){
+			return Util.toMap("status",Constants.FAIL,"message",e.getMessage());
+		}
+		return Util.toMap("status",Constants.SUCCESS);
+	}
 }
