@@ -29,12 +29,12 @@
 				<th>Status</th>
 				<th>Description</th>
 				<th>Issued To</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
 				<th>Department</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -50,12 +50,12 @@
 				<th>Status</th>
 				<th>Description</th>
 				<th>Issued To</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
 				<th>Department</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
 		</tr>
 		</tfoot>
 		<tbody>
@@ -84,7 +84,7 @@
 							<span id="ïssuedto_${asset.id}">${asset.assetIssue[0].issuedTo.username}</span>
 						</a>
 					</td>
-					<td>${asset.assetIssue[0].issuedTo.dept.name}</td>
+					
 					<td>${asset.amc.id}</td>
 					<td>${asset.po.id}</td>
 					<td>${asset.assetMainType.id}</td>
@@ -92,6 +92,7 @@
 					<td>
 					<c:out value="${asset.assetIssue[0].id}"/>
 					</td>
+					<td>${asset.assetIssue[0].issuedTo.dept.name}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -246,11 +247,11 @@ $(function() {
 		],
 		columnDefs: [
 			{ "targets": [ 1 ], "visible": false, "searchable": false },
+			{ "targets": [ 11 ], "visible": false, "searchable": false },
 			{ "targets": [ 12 ], "visible": false, "searchable": false },
 			{ "targets": [ 13 ], "visible": false, "searchable": false },
 			{ "targets": [ 14 ], "visible": false, "searchable": false },
-			{ "targets": [ 15 ], "visible": false, "searchable": false },
-			{ "targets": [ 16 ], "visible": false, "searchable": false }
+			{ "targets": [ 15 ], "visible": false, "searchable": false }
 		]
 	});
 				
