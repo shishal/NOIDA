@@ -320,7 +320,7 @@ $(function() {
 	var selectedRow = 0;
 	var export_filename = 'User';
 	var table = $('#userTable').DataTable({
-		dom : '<"top"B>rft<"bottom"lp><"clear">',
+		dom : '<"top"B>rft<"bottom"lip><"clear">',
 		buttons : [
 			{
 				text : '',

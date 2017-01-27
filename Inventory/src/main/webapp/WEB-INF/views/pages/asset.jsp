@@ -230,7 +230,7 @@ $(function() {
 	var selectedRow = 0;
 	var export_filename = 'asset';
 	var table = $('#assetTable').DataTable({
-		dom : '<"top"B>rft<"bottom"lp><"clear">',
+		dom : '<"top"B>rft<"bottom"lip><"clear">',
 		buttons : [
 			{
 				text : '',
