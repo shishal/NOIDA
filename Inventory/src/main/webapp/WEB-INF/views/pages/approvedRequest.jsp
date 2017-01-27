@@ -15,6 +15,7 @@
 			<th>Asset Sub Type</th>
 			<th>Quantity</th>
 			<th>Raised By</th>
+			<th>Department</th>
 			<th>Status</th>
 			<th>Action</th>
 			<th></th>
@@ -27,6 +28,7 @@
 			<th>Asset Sub Type</th>
 			<th>Quantity</th>
 			<th>Raised By</th>
+			<th>Department</th>
 			<th>Status</th>
 			<th>Action</th>
 			<th></th>
@@ -44,6 +46,7 @@
 						<span id="requester_${request.id}">${request.requester.username}</span>
 				</a>
 			</td>
+			<td>${request.requester.dept.name}</td>
 			<%-- <td>${request.requester.username}</td> --%>
 			<td>${request.status}</td>
 			<td><button type="button" class="btn btn-primary issueBtn" data-toggle="modal" data-target="#actionIssuerPopOver">Issue</button></td>
@@ -123,7 +126,7 @@ $(function() {
 			} 
 		],
 		columnDefs: [
-			{ "targets": [ 7 ], "visible": false, "searchable": false },
+			{ "targets": [ 8 ], "visible": false, "searchable": false },
 		]
 	});
 	$('#requestTable tfoot th').each(function(index) {

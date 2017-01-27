@@ -15,6 +15,7 @@
 			<th>Asset Sub Type</th>
 			<th>Quantity</th>
 			<th>Raised By</th>
+			<th>Department</th>
 			<th>Request Date</th>
 			<th>Status</th>
 			<th>Action</th>
@@ -28,6 +29,7 @@
 			<th>Asset Sub Type</th>
 			<th>Quantity</th>
 			<th>Raised By</th>
+			<th>Department</th>
 			<th>Request Date</th>
 			<th>Status</th>
 			<th>Action</th>
@@ -46,6 +48,7 @@
 						<span id="requester_${request.id}">${request.requester.username}</span>
 				</a>
 			</td>
+			<td>${request.requester.dept.name}</td>
 			<%-- <td>${request.requester.username}</td> --%>
 			<td><fmt:formatDate type="date"  value="${request.createdTime}" pattern="dd-MM-yyyy" /></td>
 			<td>${request.status}</td>
@@ -142,7 +145,7 @@ $(function() {
 			} 
 		],
 		columnDefs: [
-			{ "targets": [ 8 ], "visible": false, "searchable": false },
+			{ "targets": [ 9 ], "visible": false, "searchable": false },
 		]
 	});
 	$('#requestTable tfoot th').each(function(index) {
